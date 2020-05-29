@@ -3,13 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tic-Tac-Toe", "Tic-Tac-Toe\Tic-Tac-Toe.csproj", "{DF2C206A-5CC5-444F-830D-80E85A0DD52E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLayer", "DataLayer\DataLayer.csproj", "{340B6C3D-7233-4957-8569-4BF760B1B622}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{BAF795E0-DAE6-45CB-B698-3CAAD1429B6F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagrams", "Diagrams", "{1334AB6C-D70E-46DF-81D2-7C1A85C0822E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E2180338-6043-4718-9892-46BDF0C79EA0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mock-up", "Mock-up", "{7355D094-19C5-4CC6-8E03-9DA885D81380}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Mock-up\Tic-Tac-Toe - web - Mock-ups.png = Documentation\Mock-up\Tic-Tac-Toe - web - Mock-ups.png
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerAPI", "ServerAPI\ServerAPI.csproj", "{6FB2AF91-2D18-40C9-8CA0-7E5EF3ECF7FA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConectionTester", "ConectionTester\ConectionTester.csproj", "{9F75A8BB-15F0-442C-A4E5-E20C7BF8E2A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TicTacToeWPF", "TicTacToeWPF\TicTacToeWPF.csproj", "{D0AED592-06D6-49DE-9C15-31446DDE045C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,20 +26,26 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DF2C206A-5CC5-444F-830D-80E85A0DD52E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF2C206A-5CC5-444F-830D-80E85A0DD52E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF2C206A-5CC5-444F-830D-80E85A0DD52E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF2C206A-5CC5-444F-830D-80E85A0DD52E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{340B6C3D-7233-4957-8569-4BF760B1B622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{340B6C3D-7233-4957-8569-4BF760B1B622}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{340B6C3D-7233-4957-8569-4BF760B1B622}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{340B6C3D-7233-4957-8569-4BF760B1B622}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FB2AF91-2D18-40C9-8CA0-7E5EF3ECF7FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FB2AF91-2D18-40C9-8CA0-7E5EF3ECF7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FB2AF91-2D18-40C9-8CA0-7E5EF3ECF7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FB2AF91-2D18-40C9-8CA0-7E5EF3ECF7FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F75A8BB-15F0-442C-A4E5-E20C7BF8E2A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F75A8BB-15F0-442C-A4E5-E20C7BF8E2A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F75A8BB-15F0-442C-A4E5-E20C7BF8E2A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F75A8BB-15F0-442C-A4E5-E20C7BF8E2A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0AED592-06D6-49DE-9C15-31446DDE045C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0AED592-06D6-49DE-9C15-31446DDE045C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0AED592-06D6-49DE-9C15-31446DDE045C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0AED592-06D6-49DE-9C15-31446DDE045C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{BAF795E0-DAE6-45CB-B698-3CAAD1429B6F} = {E2180338-6043-4718-9892-46BDF0C79EA0}
 		{1334AB6C-D70E-46DF-81D2-7C1A85C0822E} = {BAF795E0-DAE6-45CB-B698-3CAAD1429B6F}
+		{7355D094-19C5-4CC6-8E03-9DA885D81380} = {BAF795E0-DAE6-45CB-B698-3CAAD1429B6F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A7EC06E-B5C7-4FA5-B3CF-3144A8C97A6E}
