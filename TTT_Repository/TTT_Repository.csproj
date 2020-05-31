@@ -4,4 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TTT_Models\TTT_Models.csproj" />
+  </ItemGroup>
+
 </Project>

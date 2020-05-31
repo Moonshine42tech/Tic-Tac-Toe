@@ -4,5 +4,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Server_Models\Server_Models.csproj" />
+    <ProjectReference Include="..\Server_Repository\Server_Repository.csproj" />
+  </ItemGroup>
+
 
 </Project>
