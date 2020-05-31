@@ -7,6 +7,69 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <!--#region Grid Colum Settings -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <!--#endregion-->
 
+        <!--#region Game Space-->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center">
+                <!-- Scoreboard -->
+                <TextBlock FontSize=" 18">
+                    <Label>Your Score: </Label>
+                    <Label>Win: </Label>
+                        <!--Bind winner score here -->
+                    <Label>Tie: </Label>
+                        <!--Bind Tie score here -->
+                    <Label>Lose: </Label>
+                        <!--Bind Loses score here -->
+                </TextBlock>
+
+                <!-- Players -->
+                <TextBlock FontSize=" 18" HorizontalAlignment="Center" Margin="0, 10, 0, 0">
+                    <Label>Player 1: </Label>
+                        <!--Bind Player 1 name here -->
+                    <Label>Player 2: </Label>
+                        <!--Bind Player 2 name here -->
+                </TextBlock>
+            </StackPanel>
+
+            <!--#region Game-->
+
+            <!--#endregion-->
+            
+            <!-- Give up button -->
+            <Button Grid.Column="0" Grid.Row="2" 
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Center" 
+                    Width="345">
+                You can always give up like a chikken!
+            </Button>
+
+        </Grid>
+        <!--#endregion-->
+
+        <!--#region Settings Space-->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+
+            <!--#region-->
+
+            <!--#endregion-->
+        </Grid>
+        <!--#endregion-->
     </Grid>
 </Window>
