@@ -8,6 +8,6 @@ namespace TTT_Models
     {
         public string DisplayName { get; set; }
         public bool SingleOrMultiPlayer { get; set; }
-        public int AmountOfGames { get; set; }
+        public string Symbol { get; set; }
     }
 }
