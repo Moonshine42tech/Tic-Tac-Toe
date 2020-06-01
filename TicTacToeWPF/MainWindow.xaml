@@ -189,10 +189,11 @@
 
             
             <!--Start a New Game / Check Game Room-->
-            <Button Grid.Column="1" Grid.Row="4" 
+            <Button x:Name="Button_NewGameOrGameRoom" Grid.Column="1" Grid.Row="4" 
                     Margin="10, 20, 10, 15"
                     BorderThickness="1"
-                    Background="Transparent">
+                    Background="Transparent"
+                    MouseDown="Button_StartGame">
 
                 Start A New Game
             </Button>

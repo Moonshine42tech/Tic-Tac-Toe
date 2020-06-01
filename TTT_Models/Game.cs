@@ -8,9 +8,13 @@ namespace TTT_Models
     {
         public Player Player1 { get; set; }
         public Player Player2 { get; set; }
-        public bool SingleOrMultiPlayer { get; set; }       // What type of game is selected
-        public int AmountOfGames { get; set; }              
+
+        public int AmountOfGames { get; set; }
+        public bool SingleOrMultiPlayer { get; set; }       // What type of game is selected           
+        
         public bool Player1Turn { get; set; } = true;       // Used to evaluate what players turn it is.
+        public bool isGameEnded { get; set; }               // GameStatus boolian
+        public GameSymbolTypes[] gameboardFilds { get; set; }
 
         /// <summary>
         /// Changes the turn between the players using a bool 'Player1Turn'

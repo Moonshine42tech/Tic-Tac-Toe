@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using TTT_Repository;
+
 
 namespace TicTacToeWPF
 {
@@ -20,10 +10,41 @@ namespace TicTacToeWPF
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        #region Private members
+
+        #endregion
+
+        #region Default constructor
+        /// <summary>
+        /// Default constructor
+        /// </summary>
         public MainWindow()
         {
             InitializeComponent();
         }
 
+
+        #endregion
+
+        private void Button_StartGame(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            try
+            {
+                if (true)
+                {
+
+                }
+                else
+                {
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
