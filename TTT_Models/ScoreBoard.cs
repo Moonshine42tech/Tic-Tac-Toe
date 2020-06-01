@@ -11,7 +11,8 @@ namespace TTT_Models
         public int Lose { get; set; }                   // Amount of Loses
 
         /// <summary>
-        /// Updates the game score on the scoreboard
+        /// Updates the game score on the scoreboard:
+        /// 1 = Win, 2 = Tie, 3 = Lose
         /// </summary>
         /// <param name="gameResult">The result of a single game</param>
         public void SetScore(int gameResult)
@@ -36,11 +37,11 @@ namespace TTT_Models
                         break;
                 }
             }
-            catch (NullReferenceException)
+            catch (NullReferenceException e)
             {
                 // Catches a null exeption if the 'gameResult' is null
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 // Catches most unacountet exeptions
             }
