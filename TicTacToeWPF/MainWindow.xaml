@@ -86,15 +86,15 @@
                 <!-- buttons -->
                 <Button x:Name="Button0_r0" Grid.Column="0" Grid.Row="0" FontSize="50" Content="X"/>
                 <Button x:Name="Button1_r0" Grid.Column="1" Grid.Row="0" FontSize="50" Content="O"/>
-                <Button x:Name="Button2_r0" Grid.Column="2" Grid.Row="0" FontSize="50" Content="3"/>
+                <Button x:Name="Button2_r0" Grid.Column="2" Grid.Row="0" FontSize="50" Content="O"/>
                                                                                    
-                <Button x:Name="Button0_r1" Grid.Column="0" Grid.Row="1" FontSize="50" Content="4"/>
-                <Button x:Name="Button1_r1" Grid.Column="1" Grid.Row="1" FontSize="50" Content="5"/>
-                <Button x:Name="Button2_r1" Grid.Column="2" Grid.Row="1" FontSize="50" Content="6"/>
+                <Button x:Name="Button0_r1" Grid.Column="0" Grid.Row="1" FontSize="50" Content=""/>
+                <Button x:Name="Button1_r1" Grid.Column="1" Grid.Row="1" FontSize="50" Content="X"/>
+                <Button x:Name="Button2_r1" Grid.Column="2" Grid.Row="1" FontSize="50" Content="O"/>
                                                                                    
-                <Button x:Name="Button0_r2" Grid.Column="0" Grid.Row="2" FontSize="50" Content="7"/>
-                <Button x:Name="Button1_r2" Grid.Column="1" Grid.Row="2" FontSize="50" Content="8"/>
-                <Button x:Name="Button2_r2" Grid.Column="2" Grid.Row="2" FontSize="50" Content="9"/>
+                <Button x:Name="Button0_r2" Grid.Column="0" Grid.Row="2" FontSize="50" Content=""/>
+                <Button x:Name="Button1_r2" Grid.Column="1" Grid.Row="2" FontSize="50" Content="O"/>
+                <Button x:Name="Button2_r2" Grid.Column="2" Grid.Row="2" FontSize="50" Content="X"/>
             </Grid>
             <!--#endregion-->
 

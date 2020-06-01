@@ -21,12 +21,13 @@ namespace TTT_Repository
             g.AmountOfGames = amountOfGames;
             g.Player1.DisplayName = playerDisplayName;
             g.Player2.DisplayName = playerDisplayName;
+            g.gameboardFilds = new GameSymbolTypes[9];                                  // New gameboard with 9 filds
 
             // Creates a new array and Sets all filds on the gameboard to free
-            ClearAllFildsOnGameboard(g.gameboardFilds = new GameSymbolTypes[9]);           
+            ClearAllFildsOnGameboard(g.gameboardFilds);           
 
 
-            
+
         }
 
         public void RunMultiPlayerGame(int amountOfGames)
@@ -38,10 +39,10 @@ namespace TTT_Repository
         /// Explisitly sets alle filds to free
         /// </summary>
         /// <param name="symbols">enum array of the type GameSymbolTypes</param>
-        public void ClearAllFildsOnGameboard(GameSymbolTypes[] symbols)
+        public void ClearAllFildsOnGameboard(GameSymbolTypes[] gameboardFilds)
         {
             // Explisitly sets alle filds to free
-            for (int i = 0; i<gameboardFilds.Length; i++)
+            for (int i = 0; i< gameboardFilds.Length; i++)
             {
                 gameboardFilds[i] = GameSymbolTypes.Free;
             }
