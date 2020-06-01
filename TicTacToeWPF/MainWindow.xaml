@@ -5,8 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TicTacToeWPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        ResizeMode="NoResize"
+        Title="Tic-Tac-Toe" 
+        Icon="/nordic_control_systems_logo_eMM_icon.ico"
+        Height="450" Width="800">
+
+    <!--Style settings for this whole window-->
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderThickness" Value="0.5"/>
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="16"/>
+        </Style>
+    </Window.Resources>
+    
     <Grid>
+        
         <!--#region Grid Colum Settings -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -17,59 +34,172 @@
         <!--#region Game Space-->
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="1.3*"/>
                 <RowDefinition Height="5*"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
+            <!--Scoreboard & Players-->
             <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center">
+                
                 <!-- Scoreboard -->
                 <TextBlock FontSize=" 18">
                     <Label>Your Score: </Label>
+                    
                     <Label>Win: </Label>
-                        <!--Bind winner score here -->
+                    <Label x:Name="Scoreboard_WinScore" Content="xx"></Label>
+                    
                     <Label>Tie: </Label>
-                        <!--Bind Tie score here -->
+                    <Label x:Name="Scoreboard_TieScore" Content="xx"></Label>
+                    
                     <Label>Lose: </Label>
-                        <!--Bind Loses score here -->
+                    <Label x:Name="Scoreboard_LoseScore" Content="xx"></Label>
+                    
                 </TextBlock>
 
                 <!-- Players -->
                 <TextBlock FontSize=" 18" HorizontalAlignment="Center" Margin="0, 10, 0, 0">
                     <Label>Player 1: </Label>
-                        <!--Bind Player 1 name here -->
+                    <Label x:Name="Player1_DisplayName" Content="xxx"></Label>
+                    
                     <Label>Player 2: </Label>
-                        <!--Bind Player 2 name here -->
+                    <Label x:Name="Player2_DisplayName" Content="xxx"></Label>
                 </TextBlock>
+                
             </StackPanel>
 
-            <!--#region Game-->
+            <!--#region Gameboard-->
+            <Grid x:Name="Gameboard"  Grid.Column="0" Grid.Row="1">
 
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- buttons -->
+                <Button x:Name="Button0_r0" Grid.Column="0" Grid.Row="0" FontSize="50" Content="X"/>
+                <Button x:Name="Button1_r0" Grid.Column="1" Grid.Row="0" FontSize="50" Content="O"/>
+                <Button x:Name="Button2_r0" Grid.Column="2" Grid.Row="0" FontSize="50" Content="3"/>
+                                                                                   
+                <Button x:Name="Button0_r1" Grid.Column="0" Grid.Row="1" FontSize="50" Content="4"/>
+                <Button x:Name="Button1_r1" Grid.Column="1" Grid.Row="1" FontSize="50" Content="5"/>
+                <Button x:Name="Button2_r1" Grid.Column="2" Grid.Row="1" FontSize="50" Content="6"/>
+                                                                                   
+                <Button x:Name="Button0_r2" Grid.Column="0" Grid.Row="2" FontSize="50" Content="7"/>
+                <Button x:Name="Button1_r2" Grid.Column="1" Grid.Row="2" FontSize="50" Content="8"/>
+                <Button x:Name="Button2_r2" Grid.Column="2" Grid.Row="2" FontSize="50" Content="9"/>
+            </Grid>
             <!--#endregion-->
-            
-            <!-- Give up button -->
-            <Button Grid.Column="0" Grid.Row="2" 
-                    HorizontalAlignment="Center" 
-                    VerticalAlignment="Center" 
-                    Width="345">
-                You can always give up like a chikken!
+
+            <!--Give up button-->
+            <Button x:Name="Button_GiveUp" Grid.Column="0" Grid.Row="2"
+                    Margin="15"
+                    Background="LightGray" 
+                    BorderThickness="0">
+
+                You can always give up here... like a chikken!
             </Button>
 
         </Grid>
         <!--#endregion-->
 
         <!--#region Settings Space-->
-        <Grid Grid.Column="1">
+        <Grid x:Name="Settings_Space" Grid.Column="1" Background="#083755">
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <!--#region-->
+            <!--Style settings for this whole Grid-->
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="16"/>
+                </Style>
+                <Style TargetType="RadioButton">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="14"/>
+                </Style>
+                <Style TargetType="Button">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="FontSize" Value="16"/>
+                </Style>
+            </Grid.Resources>
+            
+            
+            <!--Display Name-->
+            <StackPanel Grid.Column="1" Grid.Row="0">
+                <Label Margin="10, 0, 0, 0">
+                    Display Name
+                </Label>
 
-            <!--#endregion-->
+                <TextBox x:Name="DisplayName_User" 
+                         Margin="10, 5, 10, 5" 
+                         Height="30"
+                         FontSize="20"/>
+                
+            </StackPanel>
+
+            <!--Game Settings-->
+            <!--Singlepalyer / Multiplayer-->
+            <StackPanel Grid.Column="1" Grid.Row="1">
+                
+                <Label Margin="10, 0, 0, 10">Game Mode</Label>
+                
+                <TextBlock VerticalAlignment="Center" 
+                           HorizontalAlignment="Center">
+                    
+                    <RadioButton x:Name="Radiobutton_Singleplayer" GroupName="GameMode">Singleplayer</RadioButton>
+                    <RadioButton x:Name="Radiobutton_Multiplayer" GroupName="GameMode">Multiplayer</RadioButton>
+                </TextBlock>
+            </StackPanel>
+
+            <!--Amount of games-->
+            <StackPanel Grid.Column="1" Grid.Row="2">
+                
+                <Label Margin="10, 0, 0, 10">Amount of games</Label>
+                
+                <TextBlock VerticalAlignment="Center" 
+                           HorizontalAlignment="Center">
+                    
+                    <RadioButton x:Name="Radiobutton_SingleGame" GroupName="AmountOfGames">Single Game</RadioButton>
+                    <RadioButton x:Name="Radiobutton_BedstOfThreeGames" GroupName="AmountOfGames">Bedst Out Of Three</RadioButton>
+                </TextBlock>
+            </StackPanel>
+
+
+            <!--Ruels-->
+            <Button Grid.Column="1" Grid.Row="3" 
+                    Margin="10, 20, 10, 15"
+                    BorderThickness="1"
+                    Background="Transparent">
+
+                Read the ruels here!
+            </Button>
+
+            
+            <!--Start a New Game / Check Game Room-->
+            <Button Grid.Column="1" Grid.Row="4" 
+                    Margin="10, 20, 10, 15"
+                    BorderThickness="1"
+                    Background="Transparent">
+
+                Start A New Game
+            </Button>
+           
+
         </Grid>
         <!--#endregion-->
+        
     </Grid>
 </Window>

@@ -36,6 +36,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server_Repository", "Server
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server_Models", "Server_Models\Server_Models.csproj", "{4D53A707-C8D3-449F-B0A4-802FD5C266E4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{BEC8A287-0E97-4810-9E3D-E7725CB3D00B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Icons", "Icons", "{9BB5F623-0605-4CF2-A0CA-712FEF05B1C4}"
+	ProjectSection(SolutionItems) = preProject
+		Images\Icons\nordic_control_systems_logo_eMM_icon.ico = Images\Icons\nordic_control_systems_logo_eMM_icon.ico
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +91,8 @@ Global
 		{533B8871-3D7A-4615-B248-106898FF4F8A} = {78A44C06-3350-4EC7-AA9A-B0492F5D4A1C}
 		{0850EFE2-9335-40C0-8EFB-F06DCD444BB8} = {BD556912-BEDD-4AC9-AAA5-57AD9D82D505}
 		{4D53A707-C8D3-449F-B0A4-802FD5C266E4} = {BD556912-BEDD-4AC9-AAA5-57AD9D82D505}
+		{BEC8A287-0E97-4810-9E3D-E7725CB3D00B} = {E2180338-6043-4718-9892-46BDF0C79EA0}
+		{9BB5F623-0605-4CF2-A0CA-712FEF05B1C4} = {BEC8A287-0E97-4810-9E3D-E7725CB3D00B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A7EC06E-B5C7-4FA5-B3CF-3144A8C97A6E}
