@@ -8,6 +8,7 @@
         ResizeMode="NoResize"
         Title="Tic-Tac-Toe" 
         Icon="/nordic_control_systems_logo_eMM_icon.ico"
+        WindowStartupLocation="CenterScreen"
         Height="450" Width="800">
 
     <!--Style settings for this whole window-->
@@ -40,7 +41,7 @@
             </Grid.RowDefinitions>
 
             <!--Scoreboard & Players-->
-            <StackPanel Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center">
+            <StackPanel x:Name="Scoreboard_DisplayNames" Grid.Column="0" Grid.Row="0" HorizontalAlignment="Center">
                 
                 <!-- Scoreboard -->
                 <TextBlock FontSize=" 18">
@@ -84,17 +85,17 @@
                 </Grid.RowDefinitions>
 
                 <!-- buttons -->
-                <Button x:Name="Button0_r0" Grid.Column="0" Grid.Row="0" FontSize="50" Content="X"/>
-                <Button x:Name="Button1_r0" Grid.Column="1" Grid.Row="0" FontSize="50" Content="O"/>
-                <Button x:Name="Button2_r0" Grid.Column="2" Grid.Row="0" FontSize="50" Content="O"/>
-                                                                                   
-                <Button x:Name="Button0_r1" Grid.Column="0" Grid.Row="1" FontSize="50" Content=""/>
-                <Button x:Name="Button1_r1" Grid.Column="1" Grid.Row="1" FontSize="50" Content="X"/>
-                <Button x:Name="Button2_r1" Grid.Column="2" Grid.Row="1" FontSize="50" Content="O"/>
-                                                                                   
-                <Button x:Name="Button0_r2" Grid.Column="0" Grid.Row="2" FontSize="50" Content=""/>
-                <Button x:Name="Button1_r2" Grid.Column="1" Grid.Row="2" FontSize="50" Content="O"/>
-                <Button x:Name="Button2_r2" Grid.Column="2" Grid.Row="2" FontSize="50" Content="X"/>
+                <Button x:Name="Button0_r0" Grid.Column="0" Grid.Row="0" FontSize="50" Tag="1" Content="X" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button1_r0" Grid.Column="1" Grid.Row="0" FontSize="50" Tag="2" Content="O" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button2_r0" Grid.Column="2" Grid.Row="0" FontSize="50" Tag="3" Content="O" Click="Button_OnGameFild_Click"/>
+                                                                                      
+                <Button x:Name="Button0_r1" Grid.Column="0" Grid.Row="1" FontSize="50" Tag="4" Content="" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button1_r1" Grid.Column="1" Grid.Row="1" FontSize="50" Tag="5" Content="X" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button2_r1" Grid.Column="2" Grid.Row="1" FontSize="50" Tag="6" Content="O" Click="Button_OnGameFild_Click"/>
+                                                                                      
+                <Button x:Name="Button0_r2" Grid.Column="0" Grid.Row="2" FontSize="50" Tag="7" Content="" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button1_r2" Grid.Column="1" Grid.Row="2" FontSize="50" Tag="8" Content="O" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button2_r2" Grid.Column="2" Grid.Row="2" FontSize="50" Tag="9" Content="X" Click="Button_OnGameFild_Click"/>
             </Grid>
             <!--#endregion-->
 
@@ -102,7 +103,8 @@
             <Button x:Name="Button_GiveUp" Grid.Column="0" Grid.Row="2"
                     Margin="15"
                     Background="LightGray" 
-                    BorderThickness="0">
+                    BorderThickness="0" 
+                    Click="Button_GiveUp_Click">
 
                 You can always give up here... like a chikken!
             </Button>
@@ -159,7 +161,7 @@
                 <TextBlock VerticalAlignment="Center" 
                            HorizontalAlignment="Center">
                     
-                    <RadioButton x:Name="Radiobutton_Singleplayer" GroupName="GameMode">Singleplayer</RadioButton>
+                    <RadioButton x:Name="Radiobutton_Singleplayer" GroupName="GameMode" IsChecked="True">Singleplayer</RadioButton>
                     <RadioButton x:Name="Radiobutton_Multiplayer" GroupName="GameMode">Multiplayer</RadioButton>
                 </TextBlock>
             </StackPanel>
@@ -172,17 +174,18 @@
                 <TextBlock VerticalAlignment="Center" 
                            HorizontalAlignment="Center">
                     
-                    <RadioButton x:Name="Radiobutton_SingleGame" GroupName="AmountOfGames">Single Game</RadioButton>
+                    <RadioButton x:Name="Radiobutton_SingleGame" GroupName="AmountOfGames" IsChecked="True">Single Game</RadioButton>
                     <RadioButton x:Name="Radiobutton_BedstOfThreeGames" GroupName="AmountOfGames">Bedst Out Of Three</RadioButton>
                 </TextBlock>
             </StackPanel>
 
 
             <!--Ruels-->
-            <Button Grid.Column="1" Grid.Row="3" 
+            <Button x:Name="button_ReadTheRuelsHere" Grid.Column="1" Grid.Row="3" 
                     Margin="10, 20, 10, 15"
                     BorderThickness="1"
-                    Background="Transparent">
+                    Background="Transparent" 
+                    Click="button_ReadTheRuelsHere_Click">
 
                 Read the ruels here!
             </Button>
@@ -193,7 +196,7 @@
                     Margin="10, 20, 10, 15"
                     BorderThickness="1"
                     Background="Transparent"
-                    MouseDown="Button_StartGame">
+                    Click="Button_NewGameOrGameRoom_Click">
 
                 Start A New Game
             </Button>

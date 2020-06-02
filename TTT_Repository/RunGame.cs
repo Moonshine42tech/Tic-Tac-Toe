@@ -7,47 +7,10 @@ namespace TTT_Repository
 {
     public class RunGame
     {
-        #region Private Members
-        public RunGame()
-        {
+        #region Global 
+        Game game = new Game();
 
-        }
-
-        #endregion 
-
-        public void RunSinglePlayerGame(int amountOfGames, string playerDisplayName)
-        {
-            Game g = new Game();                                                        // Creates a new instance of a game
-            g.AmountOfGames = amountOfGames;
-            g.Player1.DisplayName = playerDisplayName;
-            g.Player2.DisplayName = playerDisplayName;
-            g.gameboardFilds = new GameSymbolTypes[9];                                  // New gameboard with 9 filds
-
-            // Creates a new array and Sets all filds on the gameboard to free
-            ClearAllFildsOnGameboard(g.gameboardFilds);           
-
-
-
-        }
-
-        public void RunMultiPlayerGame(int amountOfGames)
-        {
-            
-        }
-
-        /// <summary>
-        /// Explisitly sets alle filds to free
-        /// </summary>
-        /// <param name="symbols">enum array of the type GameSymbolTypes</param>
-        public void ClearAllFildsOnGameboard(GameSymbolTypes[] gameboardFilds)
-        {
-            // Explisitly sets alle filds to free
-            for (int i = 0; i< gameboardFilds.Length; i++)
-            {
-                gameboardFilds[i] = GameSymbolTypes.Free;
-            }
-}
-
+        #endregion
 
     }
 }
