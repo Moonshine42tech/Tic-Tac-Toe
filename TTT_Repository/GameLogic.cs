@@ -2,18 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 using TTT_Models;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows;
 
 namespace TTT_Repository
 {
-    public class Game
+    public class GameLogic
     {
-        //public bool CheckIfTheGameHasEnded()
-        //{
-        //    if (true)
-        //    {
-
-        //    }
-        //}
 
         /// <summary>
         /// Changes the turn between the players using a bool 'player1Turn'
@@ -71,53 +67,118 @@ namespace TTT_Repository
         {
             if (player1Turn == true)
             {
-                // PlayerModel 1 is always X
+                // Player 1 is always X
                 gameboardFildsArray[gameboardFildIndex] = GameSymbolTypes.Cross;
             }
             else
             {
-                // PlayerModel 2 is always O
+                // Player 2 is always O
                 gameboardFildsArray[gameboardFildIndex] = GameSymbolTypes.Cirkle;
             }
         }
 
+
+
+        /// <summary>
+        /// Manipulates a given list of WPF buttons
+        /// </summary>
+        /// <param name="buttons">A list of buttons using the 'PresentationFramework.dll' and 'PresentationCore.dll' Assemblies from WPF</param>
+        public void SetAllButtonsContent(List<System.Windows.Controls.Button> buttons)
+        {
+            try
+            {
+                foreach (var button in buttons)
+                {
+                    // Changes the content of alle buttons
+                    button.Content = "";
+
+                    // Changes color on both forground and background
+                    button.Background = Brushes.White;
+                    button.Foreground = Brushes.Blue;
+                }
+            }
+            catch (NullReferenceException e)
+            {
+
+            }
+            catch (Exception e)
+            {
+
+            }
+
+        }
+         
         /// <summary>
         /// Explisitly sets alle filds to free. 
         /// Used for clearing the gameboard between or after game(s).
         /// </summary>
         /// <param name="gameboardFildsArray">gameboard array fild(s)</param>
-        public void ClearAllFildsOnGameboard(GameSymbolTypes[] gameboardFildsArray)
+        public void SetAllSymbolTypesToFree(GameSymbolTypes[] gameboardFildsArray)
         {
-            // Explisitly sets alle filds to free
-            for (int i = 0; i < gameboardFildsArray.Length; i++)
+            try
             {
-                gameboardFildsArray[i] = GameSymbolTypes.Free;
+                // Explisitly sets alle filds to free
+                for (int i = 0; i < gameboardFildsArray.Length; i++)
+                {
+                    gameboardFildsArray[i] = GameSymbolTypes.Free;
+                }
             }
+            catch (NullReferenceException e)
+            {
+
+            }
+            catch (Exception e)
+            {
+
+            }
+
         }
 
         /// <summary>
         /// Chouse if you will make a new gameboard or just clear the gameboard
         /// </summary>
-        /// /// <param name="gameboardFildsArray">gameboard array fild(s)</param>
+        /// <param name="gameboardFildsArray">gameboard array fild(s)</param>
+        /// <param name="amountOfFilds">Amount of buttons/filds on the gameboard</param>
         /// <param name="newBoeardOrClearBoard"> true = new gameboard | false = clear gameboard)</param>
-        public void PrepareTheGameboard(GameSymbolTypes[] gameboardFildsArray, bool newBoeardOrClearBoard)
+        public void PrepareTheGameboardSymbols(GameSymbolTypes[] gameboardFildsArray, int amountOfFilds, bool newBoeardOrClearBoard)
         {
             try
             {
                 if (newBoeardOrClearBoard == true)
                 {
-                    gameboardFildsArray = new GameSymbolTypes[9];                       // creates a new black array with free filds
-                    ClearAllFildsOnGameboard(gameboardFildsArray);                      // Explisitly resets the array to start a new game
+                    gameboardFildsArray = new GameSymbolTypes[amountOfFilds];           // Creates a new object of GameSymbolTypes with default value 'free'
+                    SetAllSymbolTypesToFree(gameboardFildsArray);                       // Explisitly set all the fild sympols to 'Free'
+
                 }
                 else
                 {
-                    ClearAllFildsOnGameboard(gameboardFildsArray);                      // Explisitly resets the array to start a new game
+                    SetAllSymbolTypesToFree(gameboardFildsArray);                       // Explisitly set all the sympols to 'Free'
+
                 }
             }
-            catch (Exception)
+            catch (NullReferenceException e)
             {
 
             }
+            catch (Exception e)
+            {
+
+            }
+        }
+
+
+        /// <summary>
+        /// Makes a costum error message popup on the windows desktop
+        /// </summary>
+        /// <param name="msg">Costum error message</param>
+        public void ErrorMessageBoxPopup(string msg)
+        {
+            MessageBox.Show("Error: " + msg);
+        }
+
+        public void GenericMessageBoxPopup(string msg)
+        {
+            MessageBox.Show(msg);
         }
     }
 }

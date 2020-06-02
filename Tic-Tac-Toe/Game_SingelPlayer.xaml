@@ -50,11 +50,11 @@
             <Button x:Name="Button1_r0" Grid.Column="1" Grid.Row="0" Content="O" Click="Button_OnGameFild_Click"/>
             <Button x:Name="Button2_r0" Grid.Column="2" Grid.Row="0" Content="O" Click="Button_OnGameFild_Click"/>
 
-            <Button x:Name="Button0_r1" Grid.Column="0" Grid.Row="1" Content="" Click="Button_OnGameFild_Click"/>
+            <Button x:Name="Button0_r1" Grid.Column="0" Grid.Row="1" Content=" " Click="Button_OnGameFild_Click"/>
             <Button x:Name="Button1_r1" Grid.Column="1" Grid.Row="1" Content="X" Click="Button_OnGameFild_Click"/>
             <Button x:Name="Button2_r1" Grid.Column="2" Grid.Row="1" Content="O" Click="Button_OnGameFild_Click"/>
 
-            <Button x:Name="Button0_r2" Grid.Column="0" Grid.Row="2" Content="" Click="Button_OnGameFild_Click"/>
+            <Button x:Name="Button0_r2" Grid.Column="0" Grid.Row="2" Content=" " Click="Button_OnGameFild_Click"/>
             <Button x:Name="Button1_r2" Grid.Column="1" Grid.Row="2" Content="O" Click="Button_OnGameFild_Click"/>
             <Button x:Name="Button2_r2" Grid.Column="2" Grid.Row="2" Content="X" Click="Button_OnGameFild_Click"/>
         </Grid>
@@ -77,11 +77,11 @@
                     FontSize="22" Click="Close_Application_Click"
                     />
 
-            <Button x:Name="New_Game" 
+            <Button x:Name="NewGame" 
                     Grid.Column="2" Grid.Row="0"
                     Content="New Game" 
                     Margin="20, 20" 
-                    FontSize="22" Click="New_Game_Click"
+                    FontSize="22" Click="PlayANewGame_Click"
                     />
         </Grid>
     </Grid>

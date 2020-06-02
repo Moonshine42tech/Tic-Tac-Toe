@@ -78,7 +78,7 @@ namespace TicTacToeWPF
                         #endregion
 
                         // call singelplayer game
-                        ScoreBoardModel scoreboard = new ScoreBoardModel();
+                        ScoreBoard scoreboard = new ScoreBoard();
                         NewSingelPlayerGame(scoreboard, amountOfGames);
                     }
                     else
@@ -137,10 +137,10 @@ namespace TicTacToeWPF
         }
 
 
-        public void NewSingelPlayerGame(ScoreBoardModel scoreboard, int amountOfGames)
+        public void NewSingelPlayerGame(ScoreBoard scoreboard, int amountOfGames)
         {
-            GameModel gameModel = new GameModel();
-            Game game = new Game();
+            TTT_Models.GameModel gameModel = new TTT_Models.GameModel();
+            TTT_Repository.GameLogic game = new TTT_Repository.GameLogic();
 
             game.PrepareTheGameboard(gameModel.gameboardFildsArray, true);      // set up a empty gameboard 
 

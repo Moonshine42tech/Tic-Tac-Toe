@@ -21,4 +21,9 @@
     <Folder Include="ViewModels\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\TTT_Models\TTT_Models.csproj" />
+    <ProjectReference Include="..\TTT_Repository\TTT_Repository.csproj" />
+  </ItemGroup>
+
 </Project>

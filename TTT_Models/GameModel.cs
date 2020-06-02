@@ -6,15 +6,10 @@ namespace TTT_Models
 {
     public class GameModel
     {
-        public PlayerModel Player1 { get; set; }
-        public PlayerModel Player2 { get; set; }
-
-        public int AmountOfGames { get; set; }         
+        public bool hasGameEnded { get; set; } = false;                 // GameStatus boolian - false = game has NOT ended | true = game has ended
+        public bool Player1Turn { get; set; } = true;                   // Used to evaluate what players turn it is. (true meant player1 always starts the game).
         
-        public bool Player1Turn { get; set; } = true;       // Used to evaluate what players turn it is. (true meant player1 always starts the game).
-        public bool isGameEnded { get; set; } = false;      // GameStatus boolian
-
-        public GameSymbolTypes[] gameboardFildsArray { get; set; }
+        public GameSymbolTypes[] gameboardFildsArray { get; set; }      // An llist of Enum values. thise values is the three different states a fild on the gameboard can have
 
     }
 }

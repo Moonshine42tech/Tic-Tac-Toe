@@ -4,7 +4,7 @@ using System.Text;
 
 namespace TTT_Models
 {
-    public class ScoreBoardModel
+    public class ScoreBoard
     {
         public int Win { get; set; }                    // Amount of Wins
         public int Tie { get; set; }                    // Amount of Ties
