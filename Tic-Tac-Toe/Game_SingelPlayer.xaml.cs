@@ -53,9 +53,35 @@ namespace Tic_Tac_Toe
         /// <param name="e"></param>
         private void Button_OnGameFild_Click(object sender, RoutedEventArgs e)
         {
-            var button = (Button)sender;
+            try
+            {
+                // Gets the sender button
+                Button button = (Button)sender;
 
+                // Find the button position in the array
+                var colum = Grid.GetColumn(button);
+                var row = Grid.GetRow(button);
 
+                var indexOfButton = colum + (row * 3);
+
+                // Checks if the button is 'Free'
+                bool buttonCheck = gameLogic.CheckGameboardFildStatus(game.gameboardFildsArray, indexOfButton);
+                
+                if (buttonCheck == false)            // false means the button is NOT 'Free'
+                {
+                    return;
+                }
+
+                // Checks what players turn it is and sets a symbol. derafter the players turn changes.
+                gameLogic.SetAGameboardFildValue(game.gameboardFildsArray, indexOfButton, game.Player1Turn);
+
+                // Sets the context of the pressed button depending on what players turn it is.
+                gameLogic.SetButtonSymbol(button, game.Player1Turn);
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
 
@@ -92,7 +118,14 @@ namespace Tic_Tac_Toe
         /// <param name="e"></param>
         private void Close_Application_Click(object sender, RoutedEventArgs e)
         {
-            App.Current.Shutdown();
+            try
+            {
+                App.Current.Shutdown();
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
         #endregion
