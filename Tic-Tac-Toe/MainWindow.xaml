@@ -9,8 +9,71 @@
         Title="Tic-Tac-Toe" 
         Icon="/nordic_control_systems_logo_eMM_icon.ico"
         WindowStartupLocation="CenterScreen" 
-        Height="450" Width="800">
+        Height="240" Width="593">
+
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="22"/>
+        </Style>
+        <Style TargetType="Window">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+    </Window.Resources>
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
         
+        <!-- Game Title -->
+        <StackPanel Grid.Column="0" Grid.Row="0" 
+                    Margin="10, 0, 10, 10" 
+                    HorizontalAlignment="Center">
+
+            <Label Content="Tic-Tac-Toe The Game" 
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
+
+            <TextBlock Margin="0, 30, 0, 0" FontSize="16" 
+                       Text="Welcome to the fun and exiting lille game that is Tic-Tac-Toe."/>
+
+            <TextBlock FontSize="16" HorizontalAlignment="Center" 
+                       Text="Play agenst your finds on our litle Client server"/>
+        </StackPanel>
+
+        
+        <!-- Buttons -->
+        <Grid Grid.Column="0" Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Background" Value="White"/>
+                    <Setter Property="FontSize" Value="16"/>
+                </Style>
+            </Grid.Resources>
+
+
+            <Button x:Name="Button_Singelplayer" Grid.Column="0" Grid.Row="0"
+                    Margin="20, 10"
+                    Content="Singelplayer" Click="Button_Singelplayer_Click"
+                    />
+
+            <Button x:Name="Button_Multiplayer" Grid.Column="1" Grid.Row="0" 
+                    Margin="20, 10" 
+                    Content="Multiplayer" Click="Button_Multiplayer_Click"
+                    />
+        </Grid>
+
     </Grid>
 </Window>

@@ -24,5 +24,33 @@ namespace Tic_Tac_Toe
         {
             InitializeComponent();
         }
+
+        private void Button_Singelplayer_Click(object sender, RoutedEventArgs e)
+        {
+            #region manipulate windows
+
+            // Hides the current main window
+            App.Current.MainWindow.Hide();
+
+            // Opens a new instance of the singelplayer window
+            Game_SingelPlayer singelPlayerModeWindow = new Game_SingelPlayer();
+            singelPlayerModeWindow.Show();
+
+            #endregion
+        }
+
+        private void Button_Multiplayer_Click(object sender, RoutedEventArgs e)
+        {
+            #region manipulate windows
+
+            // Hides the current main window
+            App.Current.MainWindow.Hide();
+
+            // Opens a new instance of the singelplayer window
+            Game_Multiplayer multiPlayerModeWindow = new Game_Multiplayer();
+            multiPlayerModeWindow.Show();
+
+            #endregion
+        }
     }
 }
