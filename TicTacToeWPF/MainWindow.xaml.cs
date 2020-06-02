@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using TTT_Models;
 using TTT_Repository;
 
 
@@ -12,7 +13,7 @@ namespace TicTacToeWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        RunGame newGame = new RunGame();
+        
 
         #region Default constructor
         /// <summary>
@@ -26,8 +27,6 @@ namespace TicTacToeWPF
             Gameboard.IsEnabled = false;
             Button_GiveUp.IsEnabled = false; 
         }
-
-
         #endregion
 
         private void Button_NewGameOrGameRoom_Click(object sender, RoutedEventArgs e)
@@ -36,28 +35,27 @@ namespace TicTacToeWPF
             {
                 #region Shorten names from UI for a more easy to read code
                 // Shortend down for easy to read code futher down.
-                var sigelplayer = Radiobutton_Singleplayer.IsChecked;
-                var oneGame = Radiobutton_SingleGame.IsChecked;
+                bool? sigelplayer = Radiobutton_Singleplayer.IsChecked;
+                
+                #endregion
+
+                #region Sets the value of the amount of games selected
                 int amountOfGames;
+
+                if (Radiobutton_SingleGame.IsChecked == true)
+                {
+                    amountOfGames = 1;            // singel game
+                }
+                else
+{
+                    amountOfGames = 3;            // bedst out of three
+                }
 
                 #endregion
 
                 // If a game mode is selected then continue
                 if (sigelplayer == true || sigelplayer == false)
                 {
-                    #region Sets the value of the amount of games selected
-                    // Sets amount of games 
-                    if (oneGame == true)
-                    {
-                        amountOfGames = 1;
-                    }
-                    else
-                    {
-                        // oneGame == false
-                        amountOfGames = 3;
-                    }
-                    #endregion
-
                     #region Enable / Disaple Filds
 
                     // Enabels the game fild
@@ -72,10 +70,16 @@ namespace TicTacToeWPF
 
                     if (sigelplayer == true)
                     {
+                        #region Set displayNames
+
+                        Player1_DisplayName.Content = DisplayName_User.Text;
+                        Player2_DisplayName.Content = DisplayName_User.Text;
+
+                        #endregion
+
                         // call singelplayer game
-
-                        //newGame.PrepareTheGameboard(true);
-
+                        ScoreBoardModel scoreboard = new ScoreBoardModel();
+                        NewSingelPlayerGame(scoreboard, amountOfGames);
                     }
                     else
                     {
@@ -94,11 +98,21 @@ namespace TicTacToeWPF
             }
         }
 
+        /// <summary>
+        /// The ruels of the game goes here.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_ReadTheRuelsHere_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Hello World");
+            MessageBox.Show("Hello World"); 
         }
 
+        /// <summary>
+        /// The player pressing this button will give up, and loses the game
+        /// </summary>
+        /// <param name="sender">a button element</param>
+        /// <param name="e"></param>
         private void Button_GiveUp_Click(object sender, RoutedEventArgs e)
         {
             // Send a bool (false) to repository to end the current game
@@ -106,11 +120,31 @@ namespace TicTacToeWPF
 
         private void Button_OnGameFild_Click(object sender, RoutedEventArgs e)
         {
-            int gameboardFild = Convert.ToInt32(((Button)sender).Tag);
-            // newGame.CheckGameboardFildStatus(gameboardFild);
 
-            // Send 
-            // Update Array List 
+            var button = ((Button)sender);                  // the pressed button
+
+            // finds button position
+            var colum = Grid.GetColumn(button);
+            var row = Grid.GetRow(button);
+
+            var buttonIndex = colum + (row *  3);           // calculates the pressed buttons grid position
+
+            if (true)
+            {
+
+            }
+
+        }
+
+
+        public void NewSingelPlayerGame(ScoreBoardModel scoreboard, int amountOfGames)
+        {
+            GameModel gameModel = new GameModel();
+            Game game = new Game();
+
+            game.PrepareTheGameboard(gameModel.gameboardFildsArray, true);      // set up a empty gameboard 
+
+
 
         }
     }

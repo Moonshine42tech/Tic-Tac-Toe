@@ -85,17 +85,17 @@
                 </Grid.RowDefinitions>
 
                 <!-- buttons -->
-                <Button x:Name="Button0_r0" Grid.Column="0" Grid.Row="0" FontSize="50" Tag="1" Content="X" Click="Button_OnGameFild_Click"/>
-                <Button x:Name="Button1_r0" Grid.Column="1" Grid.Row="0" FontSize="50" Tag="2" Content="O" Click="Button_OnGameFild_Click"/>
-                <Button x:Name="Button2_r0" Grid.Column="2" Grid.Row="0" FontSize="50" Tag="3" Content="O" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button0_r0" Grid.Column="0" Grid.Row="0" FontSize="50" Content="X" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button1_r0" Grid.Column="1" Grid.Row="0" FontSize="50" Content="O" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button2_r0" Grid.Column="2" Grid.Row="0" FontSize="50" Content="O" Click="Button_OnGameFild_Click"/>
                                                                                       
-                <Button x:Name="Button0_r1" Grid.Column="0" Grid.Row="1" FontSize="50" Tag="4" Content="" Click="Button_OnGameFild_Click"/>
-                <Button x:Name="Button1_r1" Grid.Column="1" Grid.Row="1" FontSize="50" Tag="5" Content="X" Click="Button_OnGameFild_Click"/>
-                <Button x:Name="Button2_r1" Grid.Column="2" Grid.Row="1" FontSize="50" Tag="6" Content="O" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button0_r1" Grid.Column="0" Grid.Row="1" FontSize="50" Content="" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button1_r1" Grid.Column="1" Grid.Row="1" FontSize="50" Content="X" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button2_r1" Grid.Column="2" Grid.Row="1" FontSize="50" Content="O" Click="Button_OnGameFild_Click"/>
                                                                                       
-                <Button x:Name="Button0_r2" Grid.Column="0" Grid.Row="2" FontSize="50" Tag="7" Content="" Click="Button_OnGameFild_Click"/>
-                <Button x:Name="Button1_r2" Grid.Column="1" Grid.Row="2" FontSize="50" Tag="8" Content="O" Click="Button_OnGameFild_Click"/>
-                <Button x:Name="Button2_r2" Grid.Column="2" Grid.Row="2" FontSize="50" Tag="9" Content="X" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button0_r2" Grid.Column="0" Grid.Row="2" FontSize="50" Content="" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button1_r2" Grid.Column="1" Grid.Row="2" FontSize="50" Content="O" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button2_r2" Grid.Column="2" Grid.Row="2" FontSize="50" Content="X" Click="Button_OnGameFild_Click"/>
             </Grid>
             <!--#endregion-->
 
