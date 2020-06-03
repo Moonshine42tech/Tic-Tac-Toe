@@ -70,12 +70,16 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Button x:Name="Close_Application" 
-                    Grid.Column="0" Grid.Row="0"
-                    Content="Close" 
-                    Margin="20, 20" 
-                    FontSize="22" Click="Close_Application_Click"
-                    />
+
+
+            <Button Grid.Column="0" Grid.Row="0" 
+                        x:Name="Close_Application" 
+                        Content="Close" 
+                        FontSize="22"
+                        Margin="20, 20"
+                        Click="Close_Application_Click"
+                 />
+
 
             <StackPanel Grid.Column="1" Grid.Row="0">
                 <TextBlock FontSize="16"

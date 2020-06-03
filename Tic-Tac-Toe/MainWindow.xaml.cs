@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System;
 
 
 namespace Tic_Tac_Toe
@@ -17,15 +18,21 @@ namespace Tic_Tac_Toe
         /// <param name="e"></param>
         private void Button_Singelplayer_Click(object sender, RoutedEventArgs e)
         {
-            #region manipulate windows
+            try
+            {
+                #region manipulate windows
 
-            // Opens a new instance of the singelplayer window
-            Game_SingelPlayer singelPlayerModeWindow = new Game_SingelPlayer();
-            singelPlayerModeWindow.Show();
+                // Opens a new instance of the singelplayer window
+                Game_SingelPlayer singelPlayerModeWindow = new Game_SingelPlayer();
+                singelPlayerModeWindow.Show();
 
-            // Hides the current main window
-            App.Current.MainWindow.Close();
-            #endregion
+                // Hides the current main window
+                App.Current.MainWindow.Close();
+                #endregion
+            }
+            catch (Exception)
+            {
+            }
         }
 
         /// <summary>
@@ -35,16 +42,23 @@ namespace Tic_Tac_Toe
         /// <param name="e"></param>
         private void Button_Multiplayer_Click(object sender, RoutedEventArgs e)
         {
-            #region manipulate windows
+            try
+            {
+                #region manipulate windows
 
-            // Opens a new instance of the singelplayer window
-            Game_Multiplayer multiPlayerModeWindow = new Game_Multiplayer();
-            multiPlayerModeWindow.Show();
+                // Opens a new instance of the singelplayer window
+                Game_Multiplayer multiPlayerModeWindow = new Game_Multiplayer();
+                multiPlayerModeWindow.Show();
 
-            // Hides the current main window
-            App.Current.MainWindow.Close();
+                // Hides the current main window
+                App.Current.MainWindow.Close();
 
-            #endregion
+                #endregion
+            }
+            catch (Exception)
+            {
+
+            }
         }
     }
 }

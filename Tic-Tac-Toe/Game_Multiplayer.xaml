@@ -24,7 +24,6 @@
         </Style>
     </Window.Resources>
 
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -104,9 +103,19 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
-                <RowDefinition Height="15*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="9*"/>
             </Grid.RowDefinitions>
 
+            <!--Styling for this grid only-->
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="FontSize" Value="28"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </Grid.Resources>
+            
+            
             <!--Close Application-->
             <Grid Grid.Column="0" Grid.Row="0">
                 <Grid.ColumnDefinitions>
@@ -118,14 +127,65 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
+                <!--Close application button-->
                 <Button x:Name="Close_Application" 
                         Grid.Column="2" Grid.Row="0" 
                         Margin="5" 
                         Content="Close"
                         FontSize="16" Click="Close_Application_Click"
-                        />
+                />
+            </Grid>
+
+            
+            <!--Game banner text-->
+            <StackPanel Grid.Column="0" Grid.Row="1" 
+                        Margin="20">
+
+                <Label Content="Tic-Tac-Toe"/>
+                <Label Content="multiplayer Mode"/>
+            </StackPanel>
 
 
+            <!--Game Info-->
+            <Grid Grid.Column="0" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <!--Styling for this grid only-->
+                <Grid.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="FontSize" Value="22"/>
+                    </Style>
+                </Grid.Resources>
+
+                <!--Players-->
+                <StackPanel Grid.Column="0" Grid.Row="0" Margin="10, 0, 0, 0">
+
+                    <TextBlock Margin="0,0,0,10">
+                        <Label Content="Player 1: "/>
+                        
+                        <!--Player 1 game displayname-->
+                        <Label x:Name="Player1_DisplayName" Content=""/>
+                    </TextBlock>
+                    
+                    <TextBlock>
+                        <Label Content="Player 2: "/>
+                        
+                        <!--Player 1 game displayname-->
+                        <Label x:Name="Player2_DisplayName" Content=""/>
+                    </TextBlock>
+
+                </StackPanel>
+
+                <!--Game info-->
+                <StackPanel Grid.Column="0" Grid.Row="1">
+
+                </StackPanel>
             </Grid>
         </Grid>
     </Grid>
