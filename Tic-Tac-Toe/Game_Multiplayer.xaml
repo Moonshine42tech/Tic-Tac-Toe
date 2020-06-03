@@ -185,6 +185,7 @@
                 <!--Game info-->
                 <StackPanel Grid.Column="0" Grid.Row="1">
 
+                    
                 </StackPanel>
             </Grid>
         </Grid>
