@@ -11,6 +11,54 @@ namespace TTT_Repository
 {
     public class GameLogic
     {
+        #region Game status check
+
+        public bool CheckifGameHasEnded(GameSymbolTypes[] gameboardFildsArray, List<System.Windows.Controls.Button> buttons, bool hasGameEnded)
+        {
+            // Check for horisontal wins 
+            if (gameboardFildsArray[0] != GameSymbolTypes.Free && (gameboardFildsArray[0] & gameboardFildsArray[1] & gameboardFildsArray[2]) == gameboardFildsArray[0])
+            {
+                // Changes the color on the bittons that got three in a row (winning buttons).
+                List<Button> winningButtons = new List<Button>() { buttons[0], buttons[1], buttons[2] };
+                SetWinningColor(winningButtons);
+
+                // returns game state bool value
+                return hasGameEnded = true;
+            }
+
+            // check for vertical wins 
+
+            // Check for oblique wins
+
+            return false; // temp value
+        }
+
+        /// <summary>
+        /// Sets the background color of a given list of 'System.Windows.Controls.Button'
+        /// </summary>
+        /// <param name="winningButtons">three winning buttons</param>
+        public void SetWinningColor(List<System.Windows.Controls.Button> winningButtons)
+        {
+            try
+            {
+                // Sets the background color of alle the winning buttons.
+                foreach (var button in winningButtons)
+                {
+                    // Sets the Background color to 'light green'
+                    button.Background = Brushes.LightGreen;     
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        #endregion
+
+
+        #region change player turn
 
         /// <summary>
         /// Changes the turn between the players using a bool 'player1Turn'
@@ -38,6 +86,8 @@ namespace TTT_Repository
             }
         }
 
+        #endregion
+
 
         #region UI Bottons 
 
@@ -56,7 +106,6 @@ namespace TTT_Repository
 
                     // Changes color on both forground and background
                     button.Background = Brushes.White;
-                    button.Foreground = Brushes.Blue;
                 }
             }
             catch (NullReferenceException e)
@@ -76,11 +125,22 @@ namespace TTT_Repository
         /// </summary>
         /// <param name="button">A clicked button from the UI</param>
         /// <param name="isPlayer1Turn">a players turn</param>
-        public void SetButtonSymbol(System.Windows.Controls.Button button, bool isPlayer1Turn)
+        public bool SetButtonSymbol(System.Windows.Controls.Button button, bool isPlayer1Turn)
         {
             try
             {
-                button.Content = isPlayer1Turn ? "X" : "O";
+                button.Content = isPlayer1Turn ? "X" : "O";     // Sets the 'Content' on a button
+
+                if (isPlayer1Turn == true)
+                {
+                    button.Foreground = Brushes.Blue;
+                }
+                else
+                {
+                    button.Foreground = Brushes.Red;
+                }
+
+                return TurnChange(isPlayer1Turn);               // Changes the players turn
             }
             catch (Exception e)
             {
@@ -123,15 +183,11 @@ namespace TTT_Repository
             {
                 // Player 1 is always X
                 gameboardFildsArray[gameboardFildIndex] = GameSymbolTypes.Cross;
-
-                TurnChange(isPlayer1Turn);    // Changes the players turn
             }
             else
             {
                 // Player 2 is always O
                 gameboardFildsArray[gameboardFildIndex] = GameSymbolTypes.Cirkle;
-
-                TurnChange(isPlayer1Turn);    // Changes the players turn
             }
         }
 

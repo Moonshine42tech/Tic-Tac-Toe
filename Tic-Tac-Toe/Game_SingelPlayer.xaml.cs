@@ -24,6 +24,7 @@ namespace Tic_Tac_Toe
         public Game_SingelPlayer()
         {
             InitializeComponent();
+
             New_Game();
         }
         #endregion
@@ -34,7 +35,7 @@ namespace Tic_Tac_Toe
         /// </summary>
         private void New_Game()
         {
-            game = new GameModel();                                                   // new instance of my GameModel
+            game = new GameModel();                                                             // new instance of my GameModel
 
             gameLogic.PrepareTheGameboardSymbols(game.gameboardFildsArray, 9, true);            // Creates a new instance of GameSymbolTypes[9] and Explicitly sets all GameSymbolTypes to 'Free'.
 
@@ -73,10 +74,14 @@ namespace Tic_Tac_Toe
                 }
 
                 // Checks what players turn it is and sets a symbol. derafter the players turn changes.
-                gameLogic.SetAGameboardFildValue(game.gameboardFildsArray, indexOfButton, game.Player1Turn);
+                gameLogic.SetAGameboardFildValue(game.gameboardFildsArray, indexOfButton, game.isPlayer1Turn);
 
                 // Sets the context of the pressed button depending on what players turn it is.
-                gameLogic.SetButtonSymbol(button, game.Player1Turn);
+                game.isPlayer1Turn = gameLogic.SetButtonSymbol(button, game.isPlayer1Turn);
+
+                // Checks if the game has ended or not
+                game.hasGameEnded = gameLogic.CheckifGameHasEnded(game.gameboardFildsArray, Gameboard.Children.Cast<Button>().ToList(), game.hasGameEnded);
+
             }
             catch (Exception)
             {
