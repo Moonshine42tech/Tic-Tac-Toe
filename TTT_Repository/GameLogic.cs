@@ -15,130 +15,155 @@ namespace TTT_Repository
         #region Game status check
 
         /// <summary>
-        /// 
+        /// This method is validating if a player has won or if the game is a tie
         /// </summary>
-        /// <param name="gameboardFildsArray"></param>
-        /// <param name="buttons"></param>
-        /// <param name="hasGameEnded"></param>
+        /// <param name="gameboardFildsArray">Enum array of game symbols</param>
+        /// <param name="buttons">list of System.Windows.Controls.Button buttons</param>
+        /// <param name="hasGameEnded">Game status</param>
         /// <returns></returns>
         public bool CheckifGameHasEnded(GameSymbolTypes[] gameboardFildsArray, List<System.Windows.Controls.Button> buttons, bool hasGameEnded)
         {
-            #region Check for horisontal wins 
-            // Check for horisontal wins 
-            if (gameboardFildsArray[0] != GameSymbolTypes.Free && (gameboardFildsArray[0] & gameboardFildsArray[1] & gameboardFildsArray[2]) == gameboardFildsArray[0])
+            try
             {
-                hasGameEnded = true;
+                #region Check for horisontal wins 
+                // Check for horisontal wins 
+                if (gameboardFildsArray[0] != GameSymbolTypes.Free && (gameboardFildsArray[0] & gameboardFildsArray[1] & gameboardFildsArray[2]) == gameboardFildsArray[0])
+                {
+                    // Changes the color on the bittons that got three in a row (winning buttons).
+                    List<Button> winningButtons = new List<Button>() { buttons[0], buttons[1], buttons[2] };
+                    SetButtonColor(winningButtons, true);
 
-                // Changes the color on the bittons that got three in a row (winning buttons).
-                List<Button> winningButtons = new List<Button>() { buttons[0], buttons[1], buttons[2] };
-                SetWinningColor(winningButtons, true, hasGameEnded);
+                    // Disabels all remaining buttons on the fild.
+                    List<Button> disabelButtons = new List<Button>() { buttons[3], buttons[4], buttons[5], buttons[6], buttons[7], buttons[8] };
+                    DisabelsButtons(disabelButtons);
 
-                // returns game state bool value
-                return hasGameEnded;
+                    // returns game state bool value
+                    return hasGameEnded = true;
+                }
+                if (gameboardFildsArray[3] != GameSymbolTypes.Free && (gameboardFildsArray[3] & gameboardFildsArray[4] & gameboardFildsArray[5]) == gameboardFildsArray[3])
+                {
+                    // Changes the color on the bittons that got three in a row (winning buttons).
+                    List<Button> winningButtons = new List<Button>() { buttons[3], buttons[4], buttons[5] };
+                    SetButtonColor(winningButtons, true);
+
+                    // Disabels all remaining buttons on the fild.
+                    List<Button> disabelButtons = new List<Button>() { buttons[0], buttons[1], buttons[2], buttons[6], buttons[7], buttons[8] };
+                    DisabelsButtons(disabelButtons);
+
+                    // returns game state bool value
+                    return hasGameEnded = true;
+                }
+                if (gameboardFildsArray[6] != GameSymbolTypes.Free && (gameboardFildsArray[6] & gameboardFildsArray[7] & gameboardFildsArray[8]) == gameboardFildsArray[6])
+                {
+                    // Changes the color on the bittons that got three in a row (winning buttons).
+                    List<Button> winningButtons = new List<Button>() { buttons[6], buttons[7], buttons[8] };
+                    SetButtonColor(winningButtons, true);
+
+                    // Disabels all remaining buttons on the fild.
+                    List<Button> disabelButtons = new List<Button>() { buttons[0], buttons[1], buttons[2], buttons[3], buttons[4], buttons[5] };
+                    DisabelsButtons(disabelButtons);
+
+                    // returns game state bool value
+                    return hasGameEnded = true;
+                }
+                #endregion
+
+                #region check for vertical wins 
+                // check for vertical wins 
+                if (gameboardFildsArray[0] != GameSymbolTypes.Free && (gameboardFildsArray[0] & gameboardFildsArray[3] & gameboardFildsArray[6]) == gameboardFildsArray[0])
+                {
+                    // Changes the color on the bittons that got three in a row (winning buttons).
+                    List<Button> winningButtons = new List<Button>() { buttons[0], buttons[3], buttons[6] };
+                    SetButtonColor(winningButtons, true);
+
+                    // Disabels all remaining buttons on the fild.
+                    List<Button> disabelButtons = new List<Button>() { buttons[1], buttons[2], buttons[4], buttons[5], buttons[7], buttons[8] };
+                    DisabelsButtons(disabelButtons);
+
+                    // returns game state bool value
+                    return hasGameEnded = true;
+                }
+                if (gameboardFildsArray[1] != GameSymbolTypes.Free && (gameboardFildsArray[1] & gameboardFildsArray[4] & gameboardFildsArray[7]) == gameboardFildsArray[1])
+                {
+                    // Changes the color on the bittons that got three in a row (winning buttons).
+                    List<Button> winningButtons = new List<Button>() { buttons[1], buttons[4], buttons[7] };
+                    SetButtonColor(winningButtons, true);
+
+                    // Disabels all remaining buttons on the fild.
+                    List<Button> disabelButtons = new List<Button>() { buttons[0], buttons[2], buttons[3], buttons[5], buttons[6], buttons[8] };
+                    DisabelsButtons(disabelButtons);
+
+                    // returns game state bool value
+                    return hasGameEnded = true;
+                }
+                if (gameboardFildsArray[2] != GameSymbolTypes.Free && (gameboardFildsArray[2] & gameboardFildsArray[5] & gameboardFildsArray[8]) == gameboardFildsArray[2])
+                {
+                    // Changes the color on the bittons that got three in a row (winning buttons).
+                    List<Button> winningButtons = new List<Button>() { buttons[2], buttons[5], buttons[8] };
+                    SetButtonColor(winningButtons, true);
+
+                    // Disabels all remaining buttons on the fild.
+                    List<Button> disabelButtons = new List<Button>() { buttons[0], buttons[1], buttons[3], buttons[4], buttons[6], buttons[7] };
+                    DisabelsButtons(disabelButtons);
+
+                    // returns game state bool value
+                    return hasGameEnded = true;
+                }
+                #endregion
+
+                #region Check for oblique wins
+                // Check for oblique wins
+                if (gameboardFildsArray[0] != GameSymbolTypes.Free && (gameboardFildsArray[0] & gameboardFildsArray[4] & gameboardFildsArray[8]) == gameboardFildsArray[0])
+                {
+                    // Changes the color on the bittons that got three in a row (winning buttons).
+                    List<Button> winningButtons = new List<Button>() { buttons[0], buttons[4], buttons[8] };
+                    SetButtonColor(winningButtons, true);
+
+                    // Disabels all remaining buttons on the fild.
+                    List<Button> disabelButtons = new List<Button>() { buttons[1], buttons[2], buttons[3], buttons[5], buttons[6], buttons[7] };
+                    DisabelsButtons(disabelButtons);
+
+                    // returns game state bool value
+                    return hasGameEnded = true;
+                }
+                if (gameboardFildsArray[2] != GameSymbolTypes.Free && (gameboardFildsArray[2] & gameboardFildsArray[4] & gameboardFildsArray[6]) == gameboardFildsArray[2])
+                {
+                    // Changes the color on the bittons that got three in a row (winning buttons).
+                    List<Button> winningButtons = new List<Button>() { buttons[2], buttons[4], buttons[6] };
+                    SetButtonColor(winningButtons, true);
+
+                    // Disabels all remaining buttons on the fild.
+                    List<Button> disabelButtons = new List<Button>() { buttons[0], buttons[1], buttons[3], buttons[5], buttons[7], buttons[8] };
+                    DisabelsButtons(disabelButtons);
+
+                    // returns game state bool value
+                    return hasGameEnded = true;
+                }
+                #endregion
+
+                #region Check for no more game filds (Tie game)
+                // Check for no more game filds (Tie game)
+                if (!gameboardFildsArray.Any(result => result == GameSymbolTypes.Free))         // if there is no more free game filds
+                {
+                    // Changes the color on the bittons that got three in a row (winning buttons).
+                    List<Button> winningButtons = new List<Button>() { buttons[0], buttons[1], buttons[2], buttons[3], buttons[4], buttons[5], buttons[6], buttons[7], buttons[8] };
+                    SetButtonColor(winningButtons, false);
+
+                    // returns game state bool value
+                    return hasGameEnded = true;
+                }
+                #endregion
+
+                return false; // temp value
             }
-            if (gameboardFildsArray[3] != GameSymbolTypes.Free && (gameboardFildsArray[3] & gameboardFildsArray[4] & gameboardFildsArray[5]) == gameboardFildsArray[3])
+            catch (Exception)
             {
-                hasGameEnded = true;
 
-                // Changes the color on the bittons that got three in a row (winning buttons).
-                List<Button> winningButtons = new List<Button>() { buttons[3], buttons[4], buttons[5] };
-                SetWinningColor(winningButtons, true, hasGameEnded);
-
-                // returns game state bool value
-                return hasGameEnded;
+                throw;
             }
-            if (gameboardFildsArray[6] != GameSymbolTypes.Free && (gameboardFildsArray[6] & gameboardFildsArray[7] & gameboardFildsArray[8]) == gameboardFildsArray[6])
-            {
-                hasGameEnded = true;
 
-                // Changes the color on the bittons that got three in a row (winning buttons).
-                List<Button> winningButtons = new List<Button>() { buttons[6], buttons[7], buttons[8] };
-                SetWinningColor(winningButtons, true, hasGameEnded);
-
-                // returns game state bool value
-                return hasGameEnded;
-            }
-            #endregion
-
-            #region check for vertical wins 
-            // check for vertical wins 
-            if (gameboardFildsArray[0] != GameSymbolTypes.Free && (gameboardFildsArray[0] & gameboardFildsArray[3] & gameboardFildsArray[6]) == gameboardFildsArray[0])
-            {
-                hasGameEnded = true;
-
-                // Changes the color on the bittons that got three in a row (winning buttons).
-                List<Button> winningButtons = new List<Button>() { buttons[0], buttons[3], buttons[6] };
-                SetWinningColor(winningButtons, true, hasGameEnded);
-
-                // returns game state bool value
-                return hasGameEnded;
-            }
-            if (gameboardFildsArray[1] != GameSymbolTypes.Free && (gameboardFildsArray[1] & gameboardFildsArray[4] & gameboardFildsArray[7]) == gameboardFildsArray[1])
-            {
-                hasGameEnded = true;
-
-                // Changes the color on the bittons that got three in a row (winning buttons).
-                List<Button> winningButtons = new List<Button>() { buttons[1], buttons[4], buttons[7] };
-                SetWinningColor(winningButtons, true, hasGameEnded);
-
-                // returns game state bool value
-                return hasGameEnded;
-            }
-            if (gameboardFildsArray[2] != GameSymbolTypes.Free && (gameboardFildsArray[2] & gameboardFildsArray[5] & gameboardFildsArray[8]) == gameboardFildsArray[2])
-            {
-                hasGameEnded = true;
-
-                // Changes the color on the bittons that got three in a row (winning buttons).
-                List<Button> winningButtons = new List<Button>() { buttons[2], buttons[5], buttons[8] };
-                SetWinningColor(winningButtons, true, hasGameEnded);
-
-                // returns game state bool value
-                return hasGameEnded;
-            }
-            #endregion
-
-            #region Check for oblique wins
-            // Check for oblique wins
-            if (gameboardFildsArray[0] != GameSymbolTypes.Free && (gameboardFildsArray[0] & gameboardFildsArray[4] & gameboardFildsArray[8]) == gameboardFildsArray[0])
-            {
-                hasGameEnded = true;
-
-                // Changes the color on the bittons that got three in a row (winning buttons).
-                List<Button> winningButtons = new List<Button>() { buttons[0], buttons[4], buttons[8] };
-                SetWinningColor(winningButtons, true, hasGameEnded);
-
-                // returns game state bool value
-                return hasGameEnded;
-            }
-            if (gameboardFildsArray[2] != GameSymbolTypes.Free && (gameboardFildsArray[2] & gameboardFildsArray[4] & gameboardFildsArray[6]) == gameboardFildsArray[2])
-            {
-                hasGameEnded = true;
-
-                // Changes the color on the bittons that got three in a row (winning buttons).
-                List<Button> winningButtons = new List<Button>() { buttons[2], buttons[4], buttons[6] };
-                SetWinningColor(winningButtons, true, hasGameEnded);
-
-                // returns game state bool value
-                return hasGameEnded;
-            }
-            #endregion
-
-            #region Check for no more game filds (Tie game)
-            // Check for no more game filds (Tie game)
-            if (!gameboardFildsArray.Any(result => result == GameSymbolTypes.Free))         // if there is no more free game filds
-            {
-                hasGameEnded = true;
-
-                // Changes the color on the bittons that got three in a row (winning buttons).
-                List<Button> winningButtons = new List<Button>() { buttons[0], buttons[1], buttons[2], buttons[3], buttons[4], buttons[5], buttons[6], buttons[7], buttons[8] };
-                SetWinningColor(winningButtons, false, hasGameEnded);
-
-                // returns game state bool value
-                return hasGameEnded;
-            }
-            #endregion
-
-            return false; // temp value
+        
+            
         }
 
 
@@ -147,7 +172,7 @@ namespace TTT_Repository
         /// </summary>
         /// <param name="winningButtons">buttons to be colored</param>
         /// <param name="winningState">A bullian to control what color should be useed</param>
-        public void SetWinningColor(List<System.Windows.Controls.Button> winningButtons, bool winningState, bool hasGameEnded)
+        public void SetButtonColor(List<System.Windows.Controls.Button> winningButtons, bool winningState)
         {
             try
             {
