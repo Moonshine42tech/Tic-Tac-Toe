@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerAPI", "ServerAPI\Serv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConectionTester", "ConectionTester\ConectionTester.csproj", "{9F75A8BB-15F0-442C-A4E5-E20C7BF8E2A3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToeWPF", "TicTacToeWPF\TicTacToeWPF.csproj", "{D0AED592-06D6-49DE-9C15-31446DDE045C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToeWPF (First atempt)", "TicTacToeWPF\TicTacToeWPF (First atempt).csproj", "{D0AED592-06D6-49DE-9C15-31446DDE045C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server Side", "Server Side", "{BD556912-BEDD-4AC9-AAA5-57AD9D82D505}"
 EndProject
@@ -43,7 +43,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Icons", "Icons", "{9BB5F623
 		Images\Icons\nordic_control_systems_logo_eMM_icon.ico = Images\Icons\nordic_control_systems_logo_eMM_icon.ico
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tic-Tac-Toe", "Tic-Tac-Toe\Tic-Tac-Toe.csproj", "{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tic-Tac-Toe", "Tic-Tac-Toe\Tic-Tac-Toe.csproj", "{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerTester", "ServerTester\ServerTester.csproj", "{B2C92933-CEBC-4428-8385-F86EA121EE4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,10 @@ Global
 		{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2C92933-CEBC-4428-8385-F86EA121EE4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2C92933-CEBC-4428-8385-F86EA121EE4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2C92933-CEBC-4428-8385-F86EA121EE4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2C92933-CEBC-4428-8385-F86EA121EE4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
