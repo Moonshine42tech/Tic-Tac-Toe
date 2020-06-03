@@ -72,10 +72,21 @@
 
             <Button x:Name="Close_Application" 
                     Grid.Column="0" Grid.Row="0"
-                    Content="Cloase" 
+                    Content="Close" 
                     Margin="20, 20" 
                     FontSize="22" Click="Close_Application_Click"
                     />
+
+            <StackPanel Grid.Column="1" Grid.Row="0">
+                <TextBlock FontSize="16"
+                           HorizontalAlignment="Center">
+                    
+                    <Label Content="It is your turn: "/>
+                    <Label  x:Name="turnOfPlayerX" Content="Player 1"/>
+                </TextBlock>
+                
+            </StackPanel>
+            
 
             <Button x:Name="NewGame" 
                     Grid.Column="2" Grid.Row="0"

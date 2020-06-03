@@ -82,6 +82,17 @@ namespace Tic_Tac_Toe
                 // Checks if the game has ended or not
                 game.hasGameEnded = gameLogic.CheckifGameHasEnded(game.gameboardFildsArray, Gameboard.Children.Cast<Button>().ToList(), game.hasGameEnded);
 
+                if (game.hasGameEnded == true)
+                {
+                    gameLogic.DisabelsButtons(Gameboard.Children.Cast<Button>().ToList());
+                }
+
+                // Switches between what player name should displayed be on the UI
+                if (game.isPlayer1Turn == true)
+                    turnOfPlayerX.Content = "Player 1";         // writes to a label on the UI. 
+
+                else
+                    turnOfPlayerX.Content = "Player 2";         // writes to a label on the UI. 
             }
             catch (Exception)
             {
