@@ -1,0 +1,193 @@
+﻿<Window x:Name="MultiplayerWindow" 
+        x:Class="Tic_Tac_Toe.Game_Multiplayer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tic_Tac_Toe"
+        mc:Ignorable="d"
+        MouseDown="MultiplayerWindow_MouseDown" 
+        ResizeMode="NoResize"
+        AllowsTransparency="True" 
+        WindowStyle="None"
+        Icon="/nordic_control_systems_logo_eMM_icon.ico"
+        WindowStartupLocation="CenterScreen" 
+        Title="MultiPlayer Mode" 
+        Height="602" Width="581" >
+
+    <Window.Resources>
+        <Style TargetType="Label">
+            <Setter Property="FontSize" Value="20"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Game and server site-->
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <!--Server panel-->
+            <StackPanel x:Name="Server_Panel" Grid.Column="0" Grid.Row="0">
+
+                <Label Content="Connected:" Margin="10, 0, 0, 0"/>
+
+                <!--server game list box -->
+                <ListBox x:Name="HostetOnlineGames"
+                         Margin="10, 0" 
+                         Height="170" SelectionChanged="HostetOnlineGames_SelectionChanged">
+                </ListBox>
+
+                <!--display name and host button-->
+
+
+            </StackPanel>
+
+            <!--Gameboard-->
+            <Grid x:Name="Gameboard" Grid.Column="0" Grid.Row="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="White"/>
+                        <Setter Property="FontSize" Value="50"/>
+                    </Style>
+                </Grid.Resources>
+
+                <!-- buttons -->
+                <Button x:Name="Button0_r0" Grid.Column="0" Grid.Row="0" Content="X" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button1_r0" Grid.Column="1" Grid.Row="0" Content="O" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button2_r0" Grid.Column="2" Grid.Row="0" Content="O" Click="Button_OnGameFild_Click"/>
+
+                <Button x:Name="Button0_r1" Grid.Column="0" Grid.Row="1" Content=" " Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button1_r1" Grid.Column="1" Grid.Row="1" Content="X" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button2_r1" Grid.Column="2" Grid.Row="1" Content="O" Click="Button_OnGameFild_Click"/>
+
+                <Button x:Name="Button0_r2" Grid.Column="0" Grid.Row="2" Content=" " Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button1_r2" Grid.Column="1" Grid.Row="2" Content="O" Click="Button_OnGameFild_Click"/>
+                <Button x:Name="Button2_r2" Grid.Column="2" Grid.Row="2" Content="X" Click="Button_OnGameFild_Click"/>
+            </Grid>
+
+        </Grid>
+
+        <!--Game Info-->
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="9*"/>
+            </Grid.RowDefinitions>
+
+            <!--Styling for this grid only-->
+            <Grid.Resources>
+                <Style TargetType="Label">
+                    <Setter Property="FontSize" Value="28"/>
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </Grid.Resources>
+            
+            
+            <!--Close Application-->
+            <Grid Grid.Column="0" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="*"/>
+                    <ColumnDefinition  Width="*"/>
+                    <ColumnDefinition  Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!--Close application button-->
+                <Button x:Name="Close_Application" 
+                        Grid.Column="2" Grid.Row="0" 
+                        Margin="5" 
+                        Content="Close"
+                        FontSize="16" Click="Close_Application_Click"
+                />
+            </Grid>
+
+            
+            <!--Game banner text-->
+            <StackPanel Grid.Column="0" Grid.Row="1" 
+                        Margin="20">
+
+                <Label Content="Tic-Tac-Toe"/>
+                <Label Content="multiplayer Mode"/>
+            </StackPanel>
+
+
+            <!--Game Info-->
+            <Grid Grid.Column="0" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <!--Styling for this grid only-->
+                <Grid.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="FontSize" Value="22"/>
+                    </Style>
+                </Grid.Resources>
+
+                <!--Players-->
+                <StackPanel Grid.Column="0" Grid.Row="0" Margin="10, 0, 0, 0">
+
+                    <TextBlock Margin="0,0,0,10">
+                        <Label Content="Player 1: "/>
+                        
+                        <!--Player 1 game displayname-->
+                        <Label x:Name="Player1_DisplayName" Content=""/>
+                    </TextBlock>
+                    
+                    <TextBlock>
+                        <Label Content="Player 2: "/>
+                        
+                        <!--Player 1 game displayname-->
+                        <Label x:Name="Player2_DisplayName" Content=""/>
+                    </TextBlock>
+
+                </StackPanel>
+
+                <!--Game info-->
+                <StackPanel Grid.Column="0" Grid.Row="1">
+
+                    
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

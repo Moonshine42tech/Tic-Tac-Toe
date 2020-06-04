@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="nordic_control_systems_logo_eMM_icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TTT_Models\TTT_Models.csproj" />
+    <ProjectReference Include="..\TTT_Repository\TTT_Repository.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="nordic_control_systems_logo_eMM_icon.ico" />
+  </ItemGroup>
+
+</Project>
