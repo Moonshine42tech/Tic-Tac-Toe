@@ -29,6 +29,13 @@ namespace ConectionTester
         private void button1_Click(object sender, EventArgs e)
         {
             master.Send(Encoding.ASCII.GetBytes(Message.Text.ToString()));
+
+
+            int byteArraySize = (Message.Text.Length + 18);
+            byte[] piggybackMsgBuffer = new byte[byteArraySize];
+            master.Receive(piggybackMsgBuffer);
+
+            responseFromServer.Text = Encoding.ASCII.GetString(piggybackMsgBuffer);
         }
 
         private void disconnect_Click(object sender, EventArgs e)
@@ -55,12 +62,6 @@ namespace ConectionTester
 
         private void responseFromServer_TextChanged(object sender, EventArgs e)
         {
-            //int returnMagSize = (ipAddressBox.Text.Length + 18);
-            //byte[] piggybackMsgBuffer = new byte[returnMagSize];
-
-            //master.Receive(piggybackMsgBuffer);
-
-            //responseFromServer.Text = Encoding.ASCII.GetString(piggybackMsgBuffer);
         }
     }
 }

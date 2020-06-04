@@ -43,11 +43,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Icons", "Icons", "{9BB5F623
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tic-Tac-Toe", "Tic-Tac-Toe\Tic-Tac-Toe.csproj", "{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerTester", "ServerTester\ServerTester.csproj", "{B2C92933-CEBC-4428-8385-F86EA121EE4C}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConectionTester", "ConectionTester\ConectionTester.csproj", "{ECF5BA61-D1E5-464E-A5DA-7FF5D5E0C0AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServerMultiConnect", "ServerMultiConnect\ServerMultiConnect.csproj", "{9697BEFA-E5F5-4A1D-B556-DEBEE7B7E9F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerTest1SingelConnection", "ServerTest1SingelConnection\ServerTest1SingelConnection.csproj", "{BAFD0600-1F64-43EA-ACE8-A62E09FD82AD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerTest2MultiConnect", "ServerTest2MultiConnect\ServerTest2MultiConnect.csproj", "{1FCFEEFD-3D44-48BF-A12C-9CF14A12AE68}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,18 +83,18 @@ Global
 		{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B2C92933-CEBC-4428-8385-F86EA121EE4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B2C92933-CEBC-4428-8385-F86EA121EE4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B2C92933-CEBC-4428-8385-F86EA121EE4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B2C92933-CEBC-4428-8385-F86EA121EE4C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{ECF5BA61-D1E5-464E-A5DA-7FF5D5E0C0AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{ECF5BA61-D1E5-464E-A5DA-7FF5D5E0C0AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECF5BA61-D1E5-464E-A5DA-7FF5D5E0C0AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECF5BA61-D1E5-464E-A5DA-7FF5D5E0C0AF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9697BEFA-E5F5-4A1D-B556-DEBEE7B7E9F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9697BEFA-E5F5-4A1D-B556-DEBEE7B7E9F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9697BEFA-E5F5-4A1D-B556-DEBEE7B7E9F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9697BEFA-E5F5-4A1D-B556-DEBEE7B7E9F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAFD0600-1F64-43EA-ACE8-A62E09FD82AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAFD0600-1F64-43EA-ACE8-A62E09FD82AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAFD0600-1F64-43EA-ACE8-A62E09FD82AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAFD0600-1F64-43EA-ACE8-A62E09FD82AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FCFEEFD-3D44-48BF-A12C-9CF14A12AE68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FCFEEFD-3D44-48BF-A12C-9CF14A12AE68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FCFEEFD-3D44-48BF-A12C-9CF14A12AE68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FCFEEFD-3D44-48BF-A12C-9CF14A12AE68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
