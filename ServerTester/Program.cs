@@ -47,7 +47,7 @@ namespace ServerTester
                 Console.WriteLine(Encoding.ASCII.GetString(resivedData));
 
                 // piggyback data back to client
-                SocketClient.Send(Encoding.ASCII.GetBytes("your message was: " + resivedData));
+                // SocketClient.Send(Encoding.ASCII.GetBytes("your message was: " + resivedData));
 
             } while (readbyte > 0);
 

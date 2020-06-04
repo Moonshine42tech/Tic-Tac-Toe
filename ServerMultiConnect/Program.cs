@@ -34,9 +34,9 @@ namespace ServerMultiConnect
             int readbyte;
             do
             {
-                readbyte = SocketClient.Receive(buffer);             // the whole buffer (ca. 65.000 bytes) 
-                byte[] resivedData = new byte[readbyte];              // A new array with a lengt equal to the buffer right above
-                Array.Copy(buffer, resivedData, readbyte);            // copy only the amount of readbyte from buffer[] to resiveData[].
+                readbyte = SocketClient.Receive(buffer);                                        // the whole buffer (ca. 65.000 bytes) 
+                byte[] resivedData = new byte[readbyte];                                        // A new array with a lengt equal to the buffer right above
+                Array.Copy(buffer, resivedData, readbyte);                                      // copy only the amount of readbyte from buffer[] to resiveData[].
 
                 Console.WriteLine(Encoding.ASCII.GetString(resivedData));
             } while (readbyte > 0);

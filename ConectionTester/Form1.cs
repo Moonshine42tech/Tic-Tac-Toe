@@ -55,12 +55,12 @@ namespace ConectionTester
 
         private void responseFromServer_TextChanged(object sender, EventArgs e)
         {
-            int returnMagSize = (ipAddressBox.Text.Length + 18);
-            byte[] piggybackMsgBuffer = new byte[returnMagSize];
+            //int returnMagSize = (ipAddressBox.Text.Length + 18);
+            //byte[] piggybackMsgBuffer = new byte[returnMagSize];
 
-            master.Receive(piggybackMsgBuffer);
+            //master.Receive(piggybackMsgBuffer);
 
-            responseFromServer.Text = Encoding.ASCII.GetString(piggybackMsgBuffer);
+            //responseFromServer.Text = Encoding.ASCII.GetString(piggybackMsgBuffer);
         }
     }
 }
