@@ -49,13 +49,10 @@ namespace ServerTest1SingelConnection
                 // piggyback data back to client
                 SocketClient.Send(Encoding.ASCII.GetBytes("your message was: " + Encoding.ASCII.GetString(resivedData)));
 
-                Console.WriteLine();
             } while (readbyte > 0);
 
             Console.WriteLine("Client is disconected");
             Console.Read();
-
-
         }
     }
 }

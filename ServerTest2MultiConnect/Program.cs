@@ -34,11 +34,18 @@ namespace ServerTest2MultiConnect
             int readbyte;
             do
             {
+                // resive data
                 readbyte = SocketClient.Receive(buffer);                                        // the whole buffer (ca. 65.000 bytes) 
+
+                // Do stuff with data
                 byte[] resivedData = new byte[readbyte];                                        // A new array with a lengt equal to the buffer right above
                 Array.Copy(buffer, resivedData, readbyte);                                      // copy only the amount of readbyte from buffer[] to resiveData[].
 
                 Console.WriteLine(Encoding.ASCII.GetString(resivedData));
+
+                // piggyback data back to client
+                SocketClient.Send(Encoding.ASCII.GetBytes("your message was: " + Encoding.ASCII.GetString(resivedData)));
+
             } while (readbyte > 0);
 
             Console.WriteLine("Client is disconected");

@@ -49,6 +49,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerTest1SingelConnection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerTest2MultiConnect", "ServerTest2MultiConnect\ServerTest2MultiConnect.csproj", "{1FCFEEFD-3D44-48BF-A12C-9CF14A12AE68}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webSocketClient2Multiconnection", "webSocketClient2Multiconnection\webSocketClient2Multiconnection.csproj", "{260FCBCB-3815-47AF-ACD9-1CCD0E627D8E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{1FCFEEFD-3D44-48BF-A12C-9CF14A12AE68}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FCFEEFD-3D44-48BF-A12C-9CF14A12AE68}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FCFEEFD-3D44-48BF-A12C-9CF14A12AE68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{260FCBCB-3815-47AF-ACD9-1CCD0E627D8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{260FCBCB-3815-47AF-ACD9-1CCD0E627D8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{260FCBCB-3815-47AF-ACD9-1CCD0E627D8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{260FCBCB-3815-47AF-ACD9-1CCD0E627D8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
