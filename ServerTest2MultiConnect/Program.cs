@@ -5,7 +5,7 @@ using System.Net;
 
 
 // Video guide to learn about web sokets: https://www.youtube.com/watch?v=FYLMxrN5c6g
-
+// Video on Web socket server : https://www.youtube.com/watch?v=ycVgXe6v1VQ
 // this program can so far only take one connection.
 
 namespace ServerTest2MultiConnect

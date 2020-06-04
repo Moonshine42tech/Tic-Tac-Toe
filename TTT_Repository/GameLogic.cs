@@ -227,7 +227,7 @@ namespace TTT_Repository
                     return isPlayer1Turn;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 throw;
             }
@@ -280,11 +280,11 @@ namespace TTT_Repository
                     button.Background = Brushes.White;
                 }
             }
-            catch (NullReferenceException e)
+            catch (NullReferenceException)
             {
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -383,11 +383,11 @@ namespace TTT_Repository
                     gameboardFildsArray[i] = GameSymbolTypes.Free;
                 }
             }
-            catch (NullReferenceException e)
+            catch (NullReferenceException)
             {
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -416,11 +416,11 @@ namespace TTT_Repository
 
                 }
             }
-            catch (NullReferenceException e)
+            catch (NullReferenceException)
             {
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }

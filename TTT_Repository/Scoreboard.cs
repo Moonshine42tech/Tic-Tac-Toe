@@ -36,11 +36,11 @@ namespace TTT_Repository
                         break;
                 }
             }
-            catch (NullReferenceException e)
+            catch (NullReferenceException)
             {
                 // Catches a null exeption if the 'gameResult' is null
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 // Catches most unacountet exeptions
             }

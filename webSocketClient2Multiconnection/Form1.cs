@@ -9,8 +9,8 @@ namespace webSocketClient2Multiconnection
 {
     public partial class Form1 : Form
     {
-        string ip;                  // Server ip address
-        int port;                    // Server port
+        string ip;                      // Server ip address
+        int port;                       // Server port
 
         Socket master;
         IPEndPoint ipEnd;
@@ -25,11 +25,15 @@ namespace webSocketClient2Multiconnection
             master.Send(Encoding.ASCII.GetBytes(TextMessageBox.Text.ToString()));
 
 
-            int byteArraySize = (TextMessageBox.Text.Length + 18);
-            byte[] piggybackMsgBuffer = new byte[byteArraySize];
-            master.Receive(piggybackMsgBuffer);
+            //int byteArraySize = (TextMessageBox.Text.Length + 18);
+            //byte[] piggybackMsgBuffer = new byte[byteArraySize];
+            //master.Receive(piggybackMsgBuffer);
 
-            PiggybackMessageBox.Text = Encoding.ASCII.GetString(piggybackMsgBuffer);
+            //if (piggybackMsgBuffer != null)
+            //{
+            //    PiggybackMessageBox.Text = Encoding.ASCII.GetString(piggybackMsgBuffer);
+            //}
+
         }
 
         private void ConnectToServer_Click(object sender, EventArgs e)
