@@ -35,7 +35,7 @@ namespace WebSocketServer
                 else 
                 {
                     Console.WriteLine("hello from the 2rd request delegate.");
-                    await next();                                                   // whait for the next request
+                    await next();                                                               // whait for the next request
                 }
             });
 
