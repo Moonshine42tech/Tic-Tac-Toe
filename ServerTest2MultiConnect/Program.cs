@@ -2,6 +2,7 @@
 using System.Text;
 using System.Net.Sockets;
 using System.Net;
+using System.Threading;
 
 
 // Video guide to learn about web sokets: https://www.youtube.com/watch?v=FYLMxrN5c6g
@@ -19,35 +20,61 @@ namespace ServerTest2MultiConnect
         {
             Program p = new Program();
 
-            // listening  to new clients
+            // listening to new clients
             Socket socketListenner = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint ipEnd = new IPEndPoint(IPAddress.Parse(p.ip), p.port);                   // Ipadress and port number for the endpoint
 
             socketListenner.Bind(ipEnd);                                                        // Binds the endpint to the socket
-            socketListenner.Listen(0);                                                          // 
 
+            int clientId = 0;
 
+            while (true)
+            {
+                socketListenner.Listen(0);                                                          // Lisen to the socket socketListenner
+                Socket ClientSocket = socketListenner.Accept();                                     // Accept new incomming connections
+
+                Thread clientThread = new Thread(() => ClientConnection(ClientSocket, clientId));   // Calles a method on a new thread
+                clientThread.Start();
+
+                clientId++;
+            }
+        }
+
+        private static void ClientConnection(Socket clientSocket, int clientId)
+        {
             // Contains the socket connection when a connection to a client has been made
-            Socket SocketClient = socketListenner.Accept();
-            byte[] buffer = new byte[SocketClient.SendBufferSize];                              // sets the sise of the byte array to the size of the socketClient's buffersize
+            byte[] buffer = new byte[clientSocket.SendBufferSize];                              // sets the sise of the byte array to the size of the socketClient's buffersize
 
             int readbyte;
             do
             {
                 // resive data
-                readbyte = SocketClient.Receive(buffer);                                        // the whole buffer (ca. 65.000 bytes) 
+                readbyte = clientSocket.Receive(buffer);                                        // the whole buffer (ca. 65.000 bytes) 
 
                 // Do stuff with data
                 byte[] resivedData = new byte[readbyte];                                        // A new array with a lengt equal to the buffer right above
                 Array.Copy(buffer, resivedData, readbyte);                                      // copy only the amount of readbyte from buffer[] to resiveData[].
 
-                Console.WriteLine(Encoding.ASCII.GetString(resivedData));
+
+                if (resivedData.ToString() == "~#^42")
+                {
+                    break;
+                }
+
+
+                string clinentIdString = "<" + clientId.ToString() + "> "; 
+                Console.WriteLine(clinentIdString + Encoding.ASCII.GetString(resivedData));
 
                 // piggyback data back to client
-                SocketClient.Send(Encoding.ASCII.GetBytes("your message was: " + Encoding.ASCII.GetString(resivedData)));
+                clientSocket.Send(Encoding.ASCII.GetBytes("your message was: " + Encoding.ASCII.GetString(resivedData)));
 
             } while (readbyte > 0);
 
+            Thread.CurrentThread.Abort();
+            if (Thread.CurrentThread.IsAlive == true)
+            {
+                Console.WriteLine("Somthing went wrong: Connection did not close propperly");
+            }
             Console.WriteLine("Client is disconected");
             Console.Read();
         }

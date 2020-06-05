@@ -41,10 +41,17 @@ namespace webSocketClient2Multiconnection
             master = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             ipEnd = new IPEndPoint(IPAddress.Parse(ip), port);                   // Ipadress and port number for the Server
             master.Connect(ipEnd);
+
+            if (master.Connected == false)
+            {
+
+            }
         }
 
         private void DisconnectFromServer_Click(object sender, EventArgs e)
         {
+            string stopCode = "~#^42";
+            master.Send(Encoding.ASCII.GetBytes(stopCode));                 // Will close the server thread connection nicely
             master.Close();
         }
 
