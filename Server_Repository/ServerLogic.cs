@@ -12,7 +12,12 @@ namespace Server_Repository
     public class ServerLogic : IServerLogic
     {
         public List<AConnection> AllClients { get; set; }                                           // A list of all the the connected clients
+
+        #region Private members
         private static Random random = new Random();                                                // Used to generate a new random 'ClientId'
+        private readonly object LockObject = new object();                                          // A object used for a threadsafe lock
+        #endregion
+
 
         /// <summary>
         /// Makes a socket to lisen on a given ip addres and port number.
@@ -48,7 +53,7 @@ namespace Server_Repository
             }
 
         }
-
+         
 
         /// <summary>
         /// Makes a new thread for every new client connection
@@ -78,17 +83,19 @@ namespace Server_Repository
 
                 if (!string.IsNullOrEmpty(readbyte.ToString()) == true)
                 {
-                    // Makes a new client thread
-                    Thread newClientThread = new Thread(() => ClientReturnList(ClientSocket));    // Calles a method on a new thread
-                    newClientThread.Start();
-
+                    lock (LockObject)
+                    {
+                        // Makes a new client thread
+                        Thread newClientThread = new Thread(() => ClientReturnList(ClientSocket));    // Calles a method on a new thread
+                        newClientThread.Start();
+                    }
 
                     #region Adding the new client to the list 'AllClients'
 
                     string clientNumber = RandomString(64);                                             // Generates a random string with 64 characters in it
 
                     // Creating a new instance of 'AConnection'
-                    AConnection newClient = new AConnection() { ClientId = clientNumber, ClientThread = newClientThread, InGameStatus = false, ClientDisplayName = Encoding.ASCII.GetString(resivedData) };
+                    AConnection newClient = new AConnection() { ClientId = clientNumber, InGameStatus = false, ClientSocket = ClientSocket, ClientDisplayName = Encoding.ASCII.GetString(resivedData) };
 
                     AllClients.Add(newClient);                                                          // Adds 'newClient' to the list of all Clients 'AllClients'
 
@@ -133,10 +140,9 @@ namespace Server_Repository
                     string aClientAndConnection;
                     string clientId = Client.ClientId.ToString();
                     string ClientConnection = Client.ClientThread.ToString();
-                    string InGameStatus = Client.InGameStatus.ToString();
 
                     // Connects the clientId, InGameStatus and ClientConnection into one string (~ = end of one 'aClientAndConnection') 
-                    aClientAndConnection = clientId + "#" + InGameStatus + "#" + ClientConnection + "~";
+                    aClientAndConnection = clientId + "#" + ClientConnection + "~";
 
                     allClientConnections = allClientConnections + aClientAndConnection;         // Adds 'aClientAndConnection' to the string 'allClientConnections'
                 }
