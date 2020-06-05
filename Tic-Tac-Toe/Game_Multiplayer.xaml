@@ -330,7 +330,7 @@
                             Content="Learn how to connect and play!" 
                             Height="29" 
                             x:Name="HowToConnectAndPlay_Button_Click" 
-                            Click="HowToConnectAndPlay_Button_Click">
+                            >
                         
                     </Button>
                 </StackPanel>

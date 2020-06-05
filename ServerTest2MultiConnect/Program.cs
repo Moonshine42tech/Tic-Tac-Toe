@@ -3,6 +3,9 @@ using System.Text;
 using System.Net.Sockets;
 using System.Net;
 using System.Threading;
+using DTOs;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 
 
 // Video guide to learn about web sokets: https://www.youtube.com/watch?v=FYLMxrN5c6g
@@ -55,18 +58,19 @@ namespace ServerTest2MultiConnect
                 byte[] resivedData = new byte[readbyte];                                        // A new array with a lengt equal to the buffer right above
                 Array.Copy(buffer, resivedData, readbyte);                                      // copy only the amount of readbyte from buffer[] to resiveData[].
 
+                //string clinentIdString = "<" + clientId.ToString() + "> "; 
+                //Console.WriteLine(clinentIdString + Encoding.ASCII.GetString(resivedData));
 
-                if (resivedData.ToString() == "~#^42")
-                {
-                    break;
-                }
+                GameObject go = ByteTOGameObject(resivedData);
+                Console.WriteLine("DisplayName: " + go.DisplayName + "\n" + 
+                    "hasGameEnded: " + go.hasGameEnded + "\n" +
+                    "isPlayer1Turn: " + go.isPlayer1Turn + "\n" +
+                    "X_Score: " + go.X_Score + "\n" +
+                    "O_Score: " + go.O_Score + "\n" +
+                    "GameboardFildsArray: " + go.GameboardFildsArray + "\n");
 
-
-                string clinentIdString = "<" + clientId.ToString() + "> "; 
-                Console.WriteLine(clinentIdString + Encoding.ASCII.GetString(resivedData));
-
-                // piggyback data back to client
-                clientSocket.Send(Encoding.ASCII.GetBytes("your message was: " + Encoding.ASCII.GetString(resivedData)));
+                //// piggyback data back to client
+                //clientSocket.Send(Encoding.ASCII.GetBytes("your message was: " + Encoding.ASCII.GetString(resivedData)));
 
             } while (readbyte > 0);
 
@@ -77,6 +81,23 @@ namespace ServerTest2MultiConnect
             }
             Console.WriteLine("Client is disconected");
             Console.Read();
+        }
+
+        /// <summary>
+        /// Helper Method - Deserializes a byte[] array into a GameObject DTO
+        /// </summary>
+        /// <param name="inData">Serilized byte[] array</param>
+        /// <returns>A GameObject</returns>
+        private static DTOs.GameObject ByteTOGameObject(byte[] inData)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+
+            ms.Write(inData, 0, inData.Length);             // write to the memorystream
+            ms.Seek(0, SeekOrigin.Begin);                   // sets memorystream curser ack  to start (0)
+
+            object o = (object)bf.Deserialize(ms);
+            return (DTOs.GameObject)o;
         }
     }
 }

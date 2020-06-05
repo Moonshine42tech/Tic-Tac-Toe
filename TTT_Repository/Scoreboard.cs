@@ -10,7 +10,7 @@ namespace TTT_Repository
 
         /// <summary>
         /// Updates the game score on the scoreboard:
-        /// 1 = Win, 2 = Tie, 3 = Lose
+        /// 1 = X +1 Win, 2 = O +1 Win
         /// </summary>
         /// /// <param name="scoreboard">current scoreboard</param>
         /// <param name="gameResult">The result of a single game</param>
@@ -21,15 +21,11 @@ namespace TTT_Repository
                 switch (gameResult)
                 {
                     case 1:
-                        scoreboard.Win = (scoreboard.Win + 1);
+                        scoreboard.X_Score = (scoreboard.X_Score + 1);
                         break;
 
                     case 2:
-                        scoreboard.Tie = (scoreboard.Tie + 1);
-                        break;
-
-                    case 3:
-                        scoreboard.Lose = (scoreboard.Lose + 1);
+                        scoreboard.O_Score = (scoreboard.O_Score + 1);
                         break;
 
                     default:
@@ -54,9 +50,8 @@ namespace TTT_Repository
         /// <param name="scoreboard">current scoreboard</param>
         public void ResetScoreBoard(ScoreBoard scoreboard)
         {
-            scoreboard.Win = 0;
-            scoreboard.Tie = 0;
-            scoreboard.Lose = 0;
+            scoreboard.X_Score = 0;
+            scoreboard.O_Score = 0;
         }
 
     }

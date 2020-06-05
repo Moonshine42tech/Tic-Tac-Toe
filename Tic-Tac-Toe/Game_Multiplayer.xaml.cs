@@ -54,16 +54,16 @@ namespace Tic_Tac_Toe
         /// </summary>
         /// <param name="sender">Button</param>
         /// <param name="e"></param>
-        private void HowToConnectAndPlay_Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("" +
-                "1. type in the ip address and port number of the server \n   you want to play on.\n\n" + 
-                "2. Make a Display name.\n\n" +
-                "3. Press the 'Connect' button.\n\n" +
-                "4. Select an oponent from the list of available opponents.\n\n" +
-                "5. Press the 'Play' button to start the game.\n\n" +
-                "6. When you want to leve the game, simply press the button 'Close'.");
+        //private void HowToConnectAndPlay_Button_Click(object sender, RoutedEventArgs e)
+        //{
+        //    MessageBox.Show("" +
+        //        "1. type in the ip address and port number of the server \n   you want to play on.\n\n" + 
+        //        "2. Make a Display name.\n\n" +
+        //        "3. Press the 'Connect' button.\n\n" +
+        //        "4. Select an oponent from the list of available opponents.\n\n" +
+        //        "5. Press the 'Play' button to start the game.\n\n" +
+        //        "6. When you want to leve the game, simply press the button 'Close'.");
 
-        }
+        //}
     }
 }

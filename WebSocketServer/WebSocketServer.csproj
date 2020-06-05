@@ -16,6 +16,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="DTOs">
+      <HintPath>..\DTOs\bin\Debug\netcoreapp3.1\DTOs.dll</HintPath>
+    </Reference>
+    <Reference Include="TTT_Models">
+      <HintPath>..\DTOs\bin\Debug\netcoreapp3.1\TTT_Models.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="nordic_control_systems_logo_eMM_icon.ico" />
   </ItemGroup>
 
