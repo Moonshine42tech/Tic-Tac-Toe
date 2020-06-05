@@ -39,29 +39,27 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
 
             <!--Server panel-->
-            <StackPanel x:Name="Server_Panel" Grid.Column="0" Grid.Row="0">
+            <StackPanel Grid.Column="0" Grid.Row="0" 
+                        x:Name="Server_Panel">
 
-                <Label Content="Connected:" Margin="10, 0, 0, 0"/>
+                <Label Content="Available opponents:" Margin="10, 0, 0, 0"/>
 
                 <!--server game list box -->
                 <ListBox x:Name="HostetOnlineGames"
                          Margin="10, 0" 
-                         Height="170" SelectionChanged="HostetOnlineGames_SelectionChanged">
+                         Height="108" SelectionChanged="HostetOnlineGames_SelectionChanged" Width="270">
                 </ListBox>
-
-                <!--display name and host button-->
-
 
             </StackPanel>
 
             <!--Gameboard-->
-            <Grid x:Name="Gameboard" Grid.Column="0" Grid.Row="1">
-
+            <Grid x:Name="Gameboard" Grid.Column="0" Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
@@ -73,6 +71,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
 
+                <!--internal grid styling-->
                 <Grid.Resources>
                     <Style TargetType="Button">
                         <Setter Property="Background" Value="White"/>
@@ -102,12 +101,13 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
                 <RowDefinition Height="5*"/>
+                <RowDefinition Height="3*"/>
                 <RowDefinition Height="9*"/>
             </Grid.RowDefinitions>
 
-            <!--Styling for this grid only-->
+            <!--Internal grid styling-->
             <Grid.Resources>
                 <Style TargetType="Label">
                     <Setter Property="FontSize" Value="28"/>
@@ -143,11 +143,70 @@
 
                 <Label Content="Tic-Tac-Toe"/>
                 <Label Content="multiplayer Mode"/>
+                
             </StackPanel>
+
+            
+            <!--server/game Connection-->
+            <Grid Grid.Column="0" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!--internal grid styling-->
+                <Grid.Resources>
+                    <Style TargetType="Label">
+                        <Setter Property="FontSize" Value="12"/>
+                        <Setter Property="Margin" Value="5, 0"/>
+                    </Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Margin" Value="5, 0"/>
+                    </Style>
+                    <Style TargetType="TextBox">
+                        <Setter Property="Margin" Value="5, 0"/>
+                    </Style>
+                </Grid.Resources>
+
+                <!--Ip Address-->
+                <StackPanel Grid.Column="0" Grid.Row="0">
+
+                    <Label Content="Server Ip Address" />
+                    <TextBox x:Name="ServerIpAddress_TextBox" TextChanged="ServerIpAddress_TextBox_TextChanged"/>
+                </StackPanel>
+
+                <!--Port Number-->
+                <StackPanel Grid.Column="1" Grid.Row="0">
+
+                    <Label Content="Server Port Number" />
+                    <TextBox x:Name="ServerPortNumber_TextBox" TextChanged="ServerPortNumber_TextBox_TextChanged" />
+                </StackPanel>
+
+                <!--Server status label-->
+                <TextBlock Grid.Column="0" Grid.Row="1" 
+                           VerticalAlignment="Center">
+                    
+                    <Label Content="Server status:"/>
+                    <Label Content="Ofline" 
+                           x:Name="ConnectionStatus_Label"/>
+                </TextBlock>
+
+                <!--Connect to server button-->
+                <Button Grid.Column="1" Grid.Row="1" 
+                        Margin="10"
+                        Content="Connect to server" 
+                        x:Name="ConnectToServer" 
+                        Click="ConnectToServer_Click">
+                </Button>
+            </Grid>
 
 
             <!--Game Info-->
-            <Grid Grid.Column="0" Grid.Row="2">
+            <Grid Grid.Column="0" Grid.Row="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>

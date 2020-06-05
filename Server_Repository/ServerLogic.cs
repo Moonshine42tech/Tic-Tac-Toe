@@ -5,12 +5,14 @@ using System.Net.Sockets;
 using System.Net;
 using System.Threading;
 using Server_Models;
+using System.Linq;
 
 namespace Server_Repository
 {
     public class ServerLogic : IServerLogic
     {
-        public List<AConnection> AllClients { get; set; }                                        // A list of all the the connected clients
+        public List<AConnection> AllClients { get; set; }                                           // A list of all the the connected clients
+        private static Random random = new Random();                                                // Used to generate a new random 'ClientId'
 
         /// <summary>
         /// Tells a given web socket to lisen on a specific ip addres and port.
@@ -60,10 +62,19 @@ namespace Server_Repository
                 socketListenner.Listen(0);                                                          // Lisen to the incomming socket
                 Socket ClientSocket = socketListenner.Accept();                                     // Accept new incomming connections
 
-                Thread clientThread = new Thread(() => ClientConnection(ClientSocket));             // Calles a method on a new thread
-                clientThread.Start();
+                Thread newClientThread = new Thread(() => ClientConnection(ClientSocket));          // Calles a method on a new thread
+                newClientThread.Start();
 
-                AllThreads.Add(clientThread);
+                #region Adding the new client to the list 'AllClients'
+
+                string clientNumber = RandomString(64);                                             // Generates a random string with 64 characters in it
+
+                // Creating a new instance of 'AConnection'
+                AConnection newClient = new AConnection() { ClientId = clientNumber,  ClientThread = newClientThread, InGameStatus = false };
+
+                AllClients.Add(newClient);                                                          // Adds 'newClient' to the list of all Clients 'AllClients'
+
+                #endregion 
             }
             catch (Exception e)
             {
@@ -78,6 +89,12 @@ namespace Server_Repository
         /// <param name="clientSocket"></param>
         public void ClientConnection(Socket clientSocket)
         {
+            // 1. Send a list of all clients back to the client (For the game)
+
+
+
+
+
             // Contains the socket connection when a connection to a client has been made
             byte[] buffer = new byte[clientSocket.SendBufferSize];                              // sets the sise of the byte array to the size of the socketClient's buffersize
 
@@ -92,15 +109,25 @@ namespace Server_Repository
                 Array.Copy(buffer, resivedData, readbyte);                                      // copy only the amount of readbyte from buffer[] to resiveData[].
 
 
-                if (resivedData.ToString() == "~#^42")
+                //Console.WriteLine(Encoding.ASCII.GetString(resivedData));
+
+                // Send all Client connections to the Client as one big string
+                string allClientConnections = "";
+                foreach (var Client in AllClients)
                 {
-                    break;
+                    string aClientAndConnection;
+                    string clientId = Client.ClientId.ToString();
+                    string ClientConnection = Client.ClientThread.ToString();
+                    string InGameStatus = Client.InGameStatus.ToString();
+
+                    // Connects the clientId, InGameStatus and ClientConnection into one string (~ = end of one 'aClientAndConnection') 
+                    aClientAndConnection = clientId + "#" + InGameStatus + "#" + ClientConnection + "~";  
+
+                    allClientConnections = allClientConnections + aClientAndConnection;         // Adds 'aClientAndConnection' to the string 'allClientConnections'
                 }
 
-                Console.WriteLine(Encoding.ASCII.GetString(resivedData));
-
-                // piggyback data back to client
-                // clientSocket.Send(Encoding.ASCII.GetBytes("your message was: " + Encoding.ASCII.GetString(resivedData)));
+                // piggyback data back to client after the client have connected
+                clientSocket.Send(Encoding.ASCII.GetBytes(allClientConnections.ToString()));    // Sendsa list of AllClients in form of one big string 'allClientConnections'
 
             } while (readbyte > 0);
 
@@ -128,6 +155,22 @@ namespace Server_Repository
             #endregion
 
             Console.Read();
+        }
+
+
+        /// <summary>
+        /// Generates a random alphanumeric string
+        /// </summary>
+        /// <param name="length">length of the random alphanumeric string</param>
+        /// <returns>A string</returns>
+        public static string RandomString(int length)
+        {
+            // Credit: Liam & dtb
+            // Link: https://stackoverflow.com/a/1344242
+
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

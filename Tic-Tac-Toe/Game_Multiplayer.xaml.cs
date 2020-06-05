@@ -38,5 +38,20 @@ namespace Tic_Tac_Toe
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
         }
+
+        private void ServerPortNumber_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ServerIpAddress_TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void ConnectToServer_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
