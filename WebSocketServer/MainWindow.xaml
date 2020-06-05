@@ -93,11 +93,10 @@
 
                 <Border BorderThickness=".5" BorderBrush="black"
                         Margin="10, 5, 10, 10">
-                    <TextBlock x:Name="ConnectionList" 
+                    <ListBox x:Name="ConnectionList_ListBox" 
                         MaxHeight="148" Height="148">
-                    </TextBlock>
+                    </ListBox>
                 </Border>
-
             </StackPanel>
         </Grid>
     </Grid>

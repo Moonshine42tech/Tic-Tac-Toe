@@ -15,19 +15,18 @@ namespace Server_Repository
         private static Random random = new Random();                                                // Used to generate a new random 'ClientId'
 
         /// <summary>
-        /// Tells a given web socket to lisen on a specific ip addres and port.
+        /// Makes a socket to lisen on a given ip addres and port number.
         /// </summary>
-        /// <param name="socketListenner">a System.Net.Sockets socket </param>
         /// <param name="ipAddress">Ip Address</param>
         /// <param name="portNumber">Port Number</param>
         /// <returns>A socket bound to an Ip address and port number</returns>
         /// <exception cref="NullReferenceException">Returns a default connection to localhost on port 8888</exception>
-        public Socket StartLiseningForConnections(Socket socketListenner, string ipAddress, int portNumber)
+        public Socket StartLiseningForConnections(string ipAddress, int portNumber)
         {
             try
             {
                 // listening to new clients
-                socketListenner = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                Socket socketListenner = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 IPEndPoint ipEnd = new IPEndPoint(IPAddress.Parse(ipAddress), portNumber);          // Ipadress and port number for the endpoint
 
                 socketListenner.Bind(ipEnd);                                                        // Binds the endpint to the socket
@@ -80,7 +79,7 @@ namespace Server_Repository
                 if (!string.IsNullOrEmpty(readbyte.ToString()) == true)
                 {
                     // Makes a new client thread
-                    Thread newClientThread = new Thread(() => ClientConnection(ClientSocket));    // Calles a method on a new thread
+                    Thread newClientThread = new Thread(() => ClientReturnList(ClientSocket));    // Calles a method on a new thread
                     newClientThread.Start();
 
 
@@ -108,7 +107,7 @@ namespace Server_Repository
         /// Send the client back, a sorted list of all available Clients in form of a big string. 
         /// </summary>
         /// <param name="clientSocket">A pre bound System.Net.Sockets web socket</param>
-        public void ClientConnection(Socket clientSocket)
+        public void ClientReturnList(Socket clientSocket)
         {
             try
             {

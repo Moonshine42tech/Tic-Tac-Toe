@@ -5,13 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Net.Sockets;
+using System.Net;
 using Server_Models;
 using Server_Repository;
 
@@ -32,13 +28,33 @@ namespace WebSocketServer
 
         private void StopListeningOnIpAndPort_Click(object sender, RoutedEventArgs e)
         {
+            // Makes sure you can't see the list of clients if the Server is not connectet to an IPaddress and Port
+            foreach (var client in serverLogic.AllClients)
+            {
+                ConnectionList_ListBox.ItemsSource = "";
+            }
+
 
         }
 
 
         private void StartListeningOnIpAndPort_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                // Adds all DisplayNames in the 'AllClients' list to the the UI listbox 'ConnectionList_ListBox'
+                foreach (var client in serverLogic.AllClients)
+                {
+                    ConnectionList_ListBox.ItemsSource = client.ClientDisplayName;
+                }
 
+                // 
+                Socket liseningSocket = serverLogic.StartLiseningForConnections(ListenOnIPAddress.Text, Convert.ToInt32(ListenOnPortNumber.Text));
+            }
+            catch (Exception)
+            {
+
+            }
         }
 
 

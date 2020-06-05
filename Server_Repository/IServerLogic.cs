@@ -10,13 +10,13 @@ namespace Server_Repository
     public interface IServerLogic
     {
         /// <summary>
-        /// Tells a given web socket to lisen on a specific ip addres and port.
+        /// Makes a socket to lisen on a given ip addres and port number.
         /// </summary>
-        /// <param name="socketListenner">a System.Net.Sockets socket </param>
         /// <param name="ipAddress">Ip Address</param>
         /// <param name="portNumber">Port Number</param>
         /// <returns>A socket bound to an Ip address and port number</returns>
-        Socket StartLiseningForConnections(Socket socketListenner, string ipAddress, int portNumber);
+        /// <exception cref="NullReferenceException">Returns a default connection to localhost on port 8888</exception>
+        Socket StartLiseningForConnections(string ipAddress, int portNumber);
 
         /// <summary>
         /// Makes a new thread for every new client connection
@@ -25,9 +25,9 @@ namespace Server_Repository
         void NewClientThread(Socket socketListenner);
 
         /// <summary>
-        /// 
+        /// Send the client back, a sorted list of all available Clients in form of a big string. 
         /// </summary>
-        /// <param name="clientSocket"></param>
-        void ClientConnection(Socket clientSocket);
+        /// <param name="clientSocket">A pre bound System.Net.Sockets web socket</param>
+        void ClientReturnList(Socket clientSocket);
     }
 }
