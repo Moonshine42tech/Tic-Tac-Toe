@@ -54,27 +54,48 @@ namespace Server_Repository
         /// <summary>
         /// Makes a new thread for every new client connection
         /// </summary>
-        /// <param name="socketListenner">A pro bound System.Net.Sockets web socket</param>
+        /// <param name="socketListenner">A pre bound System.Net.Sockets web socket</param>
         public void NewClientThread(Socket socketListenner)
         {
             try
             {
-                socketListenner.Listen(0);                                                          // Lisen to the incomming socket
-                Socket ClientSocket = socketListenner.Accept();                                     // Accept new incomming connections
+                // Accepts incommeng client
+                socketListenner.Listen(0);                                                              // Lisen to the incomming socket
+                Socket ClientSocket = socketListenner.Accept();                                         // Accept new incomming connections
 
-                Thread newClientThread = new Thread(() => ClientConnection(ClientSocket));          // Calles a method on a new thread
-                newClientThread.Start();
 
-                #region Adding the new client to the list 'AllClients'
+                #region  Reads Display name, send by the client
+                
+                byte[] buffer = new byte[ClientSocket.SendBufferSize];                              // sets the sise of the byte array to the size of the socketClient's buffersize
+                
+                // resive data
+                int readbyte = ClientSocket.Receive(buffer);                                        // the whole buffer (ca. 65.000 bytes) 
 
-                string clientNumber = RandomString(64);                                             // Generates a random string with 64 characters in it
+                // Do stuff with data
+                byte[] resivedData = new byte[readbyte];                                            // A new array with a lengt equal to the buffer right above
+                Array.Copy(buffer, resivedData, readbyte);                                          // copy only the amount of readbyte from buffer[] to resiveData[].
 
-                // Creating a new instance of 'AConnection'
-                AConnection newClient = new AConnection() { ClientId = clientNumber,  ClientThread = newClientThread, InGameStatus = false };
+                #endregion
 
-                AllClients.Add(newClient);                                                          // Adds 'newClient' to the list of all Clients 'AllClients'
+                if (!string.IsNullOrEmpty(readbyte.ToString()) == true)
+                {
+                    // Makes a new client thread
+                    Thread newClientThread = new Thread(() => ClientConnection(ClientSocket));    // Calles a method on a new thread
+                    newClientThread.Start();
 
-                #endregion 
+
+                    #region Adding the new client to the list 'AllClients'
+
+                    string clientNumber = RandomString(64);                                             // Generates a random string with 64 characters in it
+
+                    // Creating a new instance of 'AConnection'
+                    AConnection newClient = new AConnection() { ClientId = clientNumber, ClientThread = newClientThread, InGameStatus = false, ClientDisplayName = Encoding.ASCII.GetString(resivedData) };
+
+                    AllClients.Add(newClient);                                                          // Adds 'newClient' to the list of all Clients 'AllClients'
+
+                    #endregion
+                }
+                else {}
             }
             catch (Exception e)
             {
@@ -84,36 +105,31 @@ namespace Server_Repository
 
 
         /// <summary>
-        /// 
+        /// Send the client back, a sorted list of all available Clients in form of a big string. 
         /// </summary>
-        /// <param name="clientSocket"></param>
+        /// <param name="clientSocket">A pre bound System.Net.Sockets web socket</param>
         public void ClientConnection(Socket clientSocket)
         {
-            // 1. Send a list of all clients back to the client (For the game)
-
-
-
-
-
-            // Contains the socket connection when a connection to a client has been made
-            byte[] buffer = new byte[clientSocket.SendBufferSize];                              // sets the sise of the byte array to the size of the socketClient's buffersize
-
-            int readbyte;
-            do
+            try
             {
-                // resive data
-                readbyte = clientSocket.Receive(buffer);                                        // the whole buffer (ca. 65.000 bytes) 
+                #region Sort what Clients is not currently in game
 
-                // Do stuff with data
-                byte[] resivedData = new byte[readbyte];                                        // A new array with a lengt equal to the buffer right above
-                Array.Copy(buffer, resivedData, readbyte);                                      // copy only the amount of readbyte from buffer[] to resiveData[].
-
-
-                //Console.WriteLine(Encoding.ASCII.GetString(resivedData));
-
-                // Send all Client connections to the Client as one big string
-                string allClientConnections = "";
+                List<AConnection> AllSortedClients = new List<AConnection>();
                 foreach (var Client in AllClients)
+                {
+                    if (Client.InGameStatus == false)
+                    {
+                        AllSortedClients.Add(Client);
+                    }
+                    else {}
+                }
+
+                #endregion
+
+                #region piggyback data: Sends all sorted Client connections back to the Client as one big string
+
+                string allClientConnections = "";
+                foreach (var Client in AllSortedClients)
                 {
                     string aClientAndConnection;
                     string clientId = Client.ClientId.ToString();
@@ -121,7 +137,7 @@ namespace Server_Repository
                     string InGameStatus = Client.InGameStatus.ToString();
 
                     // Connects the clientId, InGameStatus and ClientConnection into one string (~ = end of one 'aClientAndConnection') 
-                    aClientAndConnection = clientId + "#" + InGameStatus + "#" + ClientConnection + "~";  
+                    aClientAndConnection = clientId + "#" + InGameStatus + "#" + ClientConnection + "~";
 
                     allClientConnections = allClientConnections + aClientAndConnection;         // Adds 'aClientAndConnection' to the string 'allClientConnections'
                 }
@@ -129,32 +145,12 @@ namespace Server_Repository
                 // piggyback data back to client after the client have connected
                 clientSocket.Send(Encoding.ASCII.GetBytes(allClientConnections.ToString()));    // Sendsa list of AllClients in form of one big string 'allClientConnections'
 
-            } while (readbyte > 0);
-
-
-            Console.WriteLine("Client is disconected");
-
-            #region Thread Cleanup and Closes current thread
-
-            foreach (var aThread in AllClients) 
-            {
-                if (aThread.ClientThread == Thread.CurrentThread)        // Removes the client and the current Thread from the list 'AllClients'
-                {
-                    AllClients.Remove(aThread);
-                } 
-                else {}
+                #endregion
             }
-
-            Thread.CurrentThread.Abort();                   // Close current thread
-
-            if (Thread.CurrentThread.IsAlive == true)       // Check if current thread is still alive
+            catch (Exception e)
             {
-                Console.WriteLine("Somthing went wrong: Connection did not close propperly");
+                throw e;
             }
-
-            #endregion
-
-            Console.Read();
         }
 
 

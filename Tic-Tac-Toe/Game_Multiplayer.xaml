@@ -15,6 +15,7 @@
         Title="MultiPlayer Mode" 
         Height="602" Width="581" >
 
+    <!--Internal window styling-->
     <Window.Resources>
         <Style TargetType="Label">
             <Setter Property="FontSize" Value="20"/>
@@ -26,8 +27,8 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.1*"/>
+            <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -39,8 +40,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="1*"/>
                 <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
 
@@ -53,11 +54,72 @@
                 <!--server game list box -->
                 <ListBox x:Name="HostetOnlineGames"
                          Margin="10, 0" 
-                         Height="108" SelectionChanged="HostetOnlineGames_SelectionChanged" Width="270">
+                         Height="182" 
+                         Width="285"
+                         SelectionChanged="HostetOnlineGames_SelectionChanged">
                 </ListBox>
 
             </StackPanel>
 
+            <Grid Grid.Column="0" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!--Internal grid styling-->
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="5, 5, 10, 5"/>
+                        <Setter Property="Background" Value="White"/>
+                    </Style>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                    </Style>
+                    <Style TargetType="Label">
+                        <Setter Property="FontSize" Value="16"/>
+                        <Setter Property="Margin" Value="10, 0, 0, 0"/>
+                    </Style>
+                </Grid.Resources>
+                
+                <!--Selected Opponent-->
+                <StackPanel Grid.Column="0" Grid.Row="0">
+
+                    <TextBlock>
+                        <Label Content="Selected:"/>
+                        <Label x:Name="SelectedOponentName_Label" Content="N/A"/>
+                    </TextBlock>
+                </StackPanel>
+
+                <!--Player Display Name-->
+                <StackPanel Grid.Column="0" Grid.Row="1">
+
+                    <TextBlock>
+                        <Label Content="Your Name:"/>
+                        <TextBox x:Name="PlayerDisplayName_Label"  
+                                 Width="122" 
+                                 Height="26"
+                                 FontSize="14"/>
+                    </TextBlock>
+                </StackPanel>
+
+                <!--Play - Start playing agenst an opponent-->
+                <Button Grid.Column="1" Grid.Row="0" 
+                        Content="Play"
+                        x:Name="Play_Button">
+                </Button>
+
+                <!--Connect to server-->
+                <Button Grid.Column="1" Grid.Row="1" 
+                        Content="Connect"
+                        x:Name="ConnectToServer_Button">
+                </Button>
+            </Grid>
+            
             <!--Gameboard-->
             <Grid x:Name="Gameboard" Grid.Column="0" Grid.Row="2">
                 <Grid.ColumnDefinitions>
@@ -101,7 +163,7 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
+                <RowDefinition Height="1.2*"/>
                 <RowDefinition Height="5*"/>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="9*"/>
@@ -187,21 +249,14 @@
                 </StackPanel>
 
                 <!--Server status label-->
-                <TextBlock Grid.Column="0" Grid.Row="1" 
-                           VerticalAlignment="Center">
+                <TextBlock Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" 
+                           VerticalAlignment="Center" 
+                           HorizontalAlignment="Center">
                     
                     <Label Content="Server status:"/>
-                    <Label Content="Ofline" 
+                    <Label Content="Currently not Connectet" 
                            x:Name="ConnectionStatus_Label"/>
                 </TextBlock>
-
-                <!--Connect to server button-->
-                <Button Grid.Column="1" Grid.Row="1" 
-                        Margin="10"
-                        Content="Connect to server" 
-                        x:Name="ConnectToServer" 
-                        Click="ConnectToServer_Click">
-                </Button>
             </Grid>
 
 
@@ -218,33 +273,66 @@
                 <!--Styling for this grid only-->
                 <Grid.Resources>
                     <Style TargetType="Label">
-                        <Setter Property="FontSize" Value="22"/>
+                        <Setter Property="FontSize" Value="18"/>
+                        <Setter Property="Margin" Value="5, 0"/>
+                    </Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Margin" Value="0, 0, 0, 10"/>
                     </Style>
                 </Grid.Resources>
 
+                
                 <!--Players-->
-                <StackPanel Grid.Column="0" Grid.Row="0" Margin="10, 0, 0, 0">
+                <StackPanel Grid.Column="0" Grid.Row="0" 
+                            VerticalAlignment="Center">
 
-                    <TextBlock Margin="0,0,0,10">
+                    <TextBlock>
                         <Label Content="Player 1: "/>
                         
                         <!--Player 1 game displayname-->
-                        <Label x:Name="Player1_DisplayName" Content=""/>
+                        <Label x:Name="Player1_DisplayName" Content="N/A"/>
                     </TextBlock>
-                    
+
                     <TextBlock>
                         <Label Content="Player 2: "/>
                         
                         <!--Player 1 game displayname-->
-                        <Label x:Name="Player2_DisplayName" Content=""/>
+                        <Label x:Name="Player2_DisplayName" Content="N/A"/>
                     </TextBlock>
-
                 </StackPanel>
 
+                
                 <!--Game info-->
-                <StackPanel Grid.Column="0" Grid.Row="1">
+                <StackPanel Grid.Column="0" Grid.Row="1" 
+                            VerticalAlignment="Center">
 
+                    <!--Current Players tun-->
+                    <TextBlock>
+
+                        <Label Content="Current Player: "/>
+                        <Label Content="N/A:"/>
+                    </TextBlock>
+
+                    <!--Scoreboard-->
+                    <TextBlock>
+
+                        <Label Content="X-Score: "/>
+                        <Label Content="N/A:"/>
+                    </TextBlock>
+                    <TextBlock>
+
+                        <Label Content="O-Score: "/>
+                        <Label Content="N/A:"/>
+                    </TextBlock>
                     
+                    <!--How to Play guide-->
+                    <Button Margin="10, 0" 
+                            Content="Learn how to connect and play!" 
+                            Height="29" 
+                            x:Name="HowToConnectAndPlay_Button_Click" 
+                            Click="HowToConnectAndPlay_Button_Click">
+                        
+                    </Button>
                 </StackPanel>
             </Grid>
         </Grid>
