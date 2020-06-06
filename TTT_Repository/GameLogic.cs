@@ -7,6 +7,10 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Documents;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
+using System.Net.Sockets;
+using System.Net;
 
 namespace TTT_Repository
 {
@@ -450,5 +454,150 @@ namespace TTT_Repository
         }
 
         #endregion
+
+
+        #region Multiblayer specific methods
+
+        #region Serilize and Deserilize
+
+        /// <summary>
+        /// Serializes Game data into a byte[] array
+        /// </summary>
+        /// <param name="DisplayName">String from UI</param>
+        /// <param name="hasGameEnded">TTT_Models.GameModel</param>
+        /// <param name="isPlayer1Turn">TTT_Models.GameModel</param>
+        /// <param name="gameboard">TTT_Models.GameModel</param>
+        /// <returns>byte[] Array</returns>
+        public byte[] ConvertDataToByteArray(int serverMethosCallNumber, string DisplayName, bool hasGameEnded, bool isPlayer1Turn, GameSymbolTypes[] gameboard)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+
+            // Make one big datastring
+            string dataString = (serverMethosCallNumber + "~" + DisplayName + "~" + hasGameEnded + "~" + isPlayer1Turn + "~" + gameboard);
+
+            // Serialize the dataString and returns is in form of a array 
+            bf.Serialize(ms, dataString);
+            return ms.ToArray();
+        }
+
+        /// <summary>
+        /// Serializes Game data into a byte[] array
+        /// </summary>
+        /// <param name="serverMethosCallNumber">int</param>
+        /// <param name="hasGameEnded">TTT_Models.GameModel</param>
+        /// <param name="isPlayer1Turn">TTT_Models.GameModel</param>
+        /// <param name="gameboard">TTT_Models.GameModel</param>
+        /// <returns>byte[] Array</returns>
+        public byte[] ConvertDataToByteArray(int serverMethosCallNumber, bool hasGameEnded, bool isPlayer1Turn, GameSymbolTypes[] gameboard)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+
+            // Make one big datastring
+            string dataString = (serverMethosCallNumber + "~" + hasGameEnded + "~" + isPlayer1Turn + "~" + gameboard);
+
+            // Serialize the dataString and returns is in form of a array 
+            bf.Serialize(ms, dataString);
+            return ms.ToArray();
+        }
+
+        /// <summary>
+        /// Serializes Game data into a byte[] array
+        /// </summary>
+        /// <param name="serverMethosCallNumber">int</param>
+        /// <returns>byte[] Array</returns>
+        public byte[] ConvertDataToByteArray(int serverMethosCallNumber)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+
+            // Make one big datastring
+            string dataString = serverMethosCallNumber.ToString();
+
+            // Serialize the dataString and returns is in form of a array 
+            bf.Serialize(ms, dataString);
+            return ms.ToArray();
+        }
+
+
+        /// <summary>
+        /// Deserializees a serialized string
+        /// </summary>
+        /// <param name="serializedDataString">A Serialize string in form of a byte[] array</param>
+        /// <returns>A deserialized string</returns>
+        public object ConvertByteArrayToData(byte[] serializedDataString)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+
+            // Deserialize the dataString and returns is to a string
+            ms.Write(serializedDataString, 0, serializedDataString.Length);         // Insert 'serializedDataString' into the memoryStream
+            ms.Seek(0, SeekOrigin.Begin);                                           // sets memoryStream start point to '0'
+            object obj = (object)bf.Deserialize(ms);                                // Deserialize the memoryStream
+
+            return obj;                                                  // returns the Deserialized memoryStream as a string
+        }
+
+        #endregion 
+
+
+        #region Connect and send to Server
+
+        /// <summary>
+        /// Makes a connection request to the server
+        /// </summary>
+        /// <param name="master">A socket using System.Net</param>
+        /// <param name="ip">string</param>
+        /// <param name="port">int</param>
+        public void ConnectToServer(Socket master, string ip, int port)
+        {
+            try
+            {
+                master = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);   // make a new instance of a socet
+                IPEndPoint ipEnd = new IPEndPoint(IPAddress.Parse(ip), port);                           // Ipadress and port number for the Server
+                master.Connect(ipEnd);                                                                  // Aim at server
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+        /// <summary>
+        /// // Send a data in form of a byte[] array to a socket connection.
+        /// </summary>
+        /// <param name="master">a websocket using System.Net.Sockets</param>
+        /// <param name="SeriliesedDataString"></param>
+        public void SendDataToServer(Socket master, byte[] SeriliesedDataString)
+        {
+            try
+            {
+                // Send a data in form of a byte[] array
+                master.Send(Encoding.ASCII.GetBytes(SeriliesedDataString.ToString()));
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+        /// <summary>
+        /// Alarms the server that a player has left the game
+        /// </summary>
+        /// <param name="master">a websocket using System.Net.Sockets</param>
+        public void SendCloseApplicationNotisToServer(Socket master)
+        {
+            byte[] methodCall = ConvertDataToByteArray(2);                  // Selects the Method you want to trigger
+            master.Send(Encoding.ASCII.GetBytes(methodCall.ToString()));    // Send message to server
+        }
+
+
+        #endregion
+
+        #endregion
+
     }
 }

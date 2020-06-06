@@ -52,11 +52,11 @@
                 <Label Content="Available opponents:" Margin="10, 0, 0, 0"/>
 
                 <!--server game list box -->
-                <ListBox x:Name="HostetOnlineGames"
+                <ListBox x:Name="FreeOnlinePlayersList"
                          Margin="10, 0" 
                          Height="182" 
                          Width="285"
-                         SelectionChanged="HostetOnlineGames_SelectionChanged">
+                         SelectionChanged="FreeOnlinePlayersList_SelectionChanged">
                 </ListBox>
 
             </StackPanel>
@@ -100,7 +100,7 @@
 
                     <TextBlock>
                         <Label Content="Your Name:"/>
-                        <TextBox x:Name="PlayerDisplayName_Label"  
+                        <TextBox x:Name="PlayerDisplayName_textbox"  
                                  Width="122" 
                                  Height="26"
                                  FontSize="14"/>
@@ -110,13 +110,13 @@
                 <!--Play - Start playing agenst an opponent-->
                 <Button Grid.Column="1" Grid.Row="0" 
                         Content="Play"
-                        x:Name="Play_Button">
+                        x:Name="Play_Button" Click="Play_Button_Click">
                 </Button>
 
                 <!--Connect to server-->
                 <Button Grid.Column="1" Grid.Row="1" 
                         Content="Connect"
-                        x:Name="ConnectToServer_Button">
+                        x:Name="ConnectToServer_Button" Click="ConnectToServer_Button_Click">
                 </Button>
             </Grid>
             
@@ -310,7 +310,7 @@
                     <TextBlock>
 
                         <Label Content="Current Player: "/>
-                        <Label Content="N/A:"/>
+                        <Label x:Name="TurnOfPlayerX" Content="N/A:"/>
                     </TextBlock>
 
                     <!--Scoreboard-->
@@ -329,9 +329,8 @@
                     <Button Margin="10, 0" 
                             Content="Learn how to connect and play!" 
                             Height="29" 
-                            x:Name="HowToConnectAndPlay_Button_Click" 
-                            >
-                        
+                            x:Name="HowToConnectAndPlay_Button" 
+                            Click="HowToConnectAndPlay_Button_Click" >
                     </Button>
                 </StackPanel>
             </Grid>

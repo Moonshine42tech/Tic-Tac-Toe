@@ -3,7 +3,6 @@ using System.Text;
 using System.Net.Sockets;
 using System.Net;
 using System.Threading;
-using DTOs;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
@@ -61,13 +60,7 @@ namespace ServerTest2MultiConnect
                 //string clinentIdString = "<" + clientId.ToString() + "> "; 
                 //Console.WriteLine(clinentIdString + Encoding.ASCII.GetString(resivedData));
 
-                GameObject go = ByteTOGameObject(resivedData);
-                Console.WriteLine("DisplayName: " + go.DisplayName + "\n" + 
-                    "hasGameEnded: " + go.hasGameEnded + "\n" +
-                    "isPlayer1Turn: " + go.isPlayer1Turn + "\n" +
-                    "X_Score: " + go.X_Score + "\n" +
-                    "O_Score: " + go.O_Score + "\n" +
-                    "GameboardFildsArray: " + go.GameboardFildsArray + "\n");
+               
 
                 //// piggyback data back to client
                 //clientSocket.Send(Encoding.ASCII.GetBytes("your message was: " + Encoding.ASCII.GetString(resivedData)));

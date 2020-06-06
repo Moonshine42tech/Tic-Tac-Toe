@@ -28,6 +28,6 @@ namespace Server_Repository
         /// Send the client back, a sorted list of all available Clients in form of a big string. 
         /// </summary>
         /// <param name="clientSocket">A pre bound System.Net.Sockets web socket</param>
-        void ClientReturnList(Socket clientSocket);
+        void ReturnClientList(Socket clientSocket);
     }
 }

@@ -14,7 +14,7 @@ namespace TTT_Repository
         /// </summary>
         /// /// <param name="scoreboard">current scoreboard</param>
         /// <param name="gameResult">The result of a single game</param>
-        public void SetScore(ScoreBoard scoreboard, int gameResult)
+        public void SetScore(ScoreBoardScore scoreboard, int gameResult)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace TTT_Repository
         /// Set all values in the scoreboard to 0
         /// </summary>
         /// <param name="scoreboard">current scoreboard</param>
-        public void ResetScoreBoard(ScoreBoard scoreboard)
+        public void ResetScoreBoard(ScoreBoardScore scoreboard)
         {
             scoreboard.X_Score = 0;
             scoreboard.O_Score = 0;

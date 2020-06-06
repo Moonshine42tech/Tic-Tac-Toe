@@ -20,12 +20,21 @@ namespace WebSocketServer
     {
         LisenOn lisenOn = new LisenOn();
         ServerLogic serverLogic = new ServerLogic();
+        private static Socket masterSocket;
 
         public MainWindow()
         {
             InitializeComponent();
+            StopListeningOnIpAndPort.IsEnabled = false;
         }
 
+        #region START / STOP SERVER
+
+        /// <summary>
+        /// Stops the server socket
+        /// </summary>
+        /// <param name="sender">Button</param>
+        /// <param name="e"></param>
         private void StopListeningOnIpAndPort_Click(object sender, RoutedEventArgs e)
         {
             // Makes sure you can't see the list of clients if the Server is not connectet to an IPaddress and Port
@@ -34,12 +43,20 @@ namespace WebSocketServer
                 ConnectionList_ListBox.ItemsSource = "";
             }
 
-
+            // Make A stop server method
+            serverLogic.StopServerConnection(masterSocket);
         }
 
 
+        /// <summary>
+        /// Starts the server.
+        /// </summary>
+        /// <param name="sender">Button</param>
+        /// <param name="e"></param>
         private void StartListeningOnIpAndPort_Click(object sender, RoutedEventArgs e)
         {
+            StopListeningOnIpAndPort.IsEnabled = true;
+
             try
             {
                 // Adds all DisplayNames in the 'AllClients' list to the the UI listbox 'ConnectionList_ListBox'
@@ -48,8 +65,10 @@ namespace WebSocketServer
                     ConnectionList_ListBox.ItemsSource = client.ClientDisplayName;
                 }
 
-                // 
+                // Makes a web socket that can be lisend on
                 Socket liseningSocket = serverLogic.StartLiseningForConnections(ListenOnIPAddress.Text, Convert.ToInt32(ListenOnPortNumber.Text));
+
+                masterSocket = liseningSocket;
             }
             catch (Exception)
             {
@@ -57,6 +76,10 @@ namespace WebSocketServer
             }
         }
 
+        #endregion
+
+
+        #region SERVER SETTINGS
 
         /// <summary>
         /// Sets the given port number to lisenOn.PortNumber
@@ -80,5 +103,8 @@ namespace WebSocketServer
             // Sets the given Ip address to lisenOn.IpAddress
             lisenOn.IpAddress = ListenOnIPAddress.Text;
         }
+
+        #endregion 
+
     }
 }
