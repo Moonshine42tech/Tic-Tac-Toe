@@ -38,6 +38,8 @@ namespace Tic_Tac_Toe
         /// </summary>
         private void New_Game()
         {
+            PlayerDisplayName_textbox.IsEnabled = true;                                         // Enabels the users DisplayName input
+
             mpGame = new MultiplayerGameModel();                                                // new instance of my GameModel
 
             gameLogic.PrepareTheGameboardSymbols(mpGame.GameboardFildsArray, 9, true);          // Creates a new instance of GameSymbolTypes[9] and Explicitly sets all GameSymbolTypes to 'Free'.
@@ -131,6 +133,8 @@ namespace Tic_Tac_Toe
         private void Play_Button_Click(object sender, RoutedEventArgs e)
         {
             ConnectToServer_Button.IsEnabled = false;       // so the user don't connect to the server again while in game
+            PlayerDisplayName_textbox.IsEnabled = false;    // Disabels the users DisplayName input
+
 
             // Somthing More
         }
@@ -253,11 +257,12 @@ namespace Tic_Tac_Toe
                         //int serverMethosCallNumber, hasGameEnded
 
                         mpGame.HasGameEnded = Convert.ToBoolean(clientDataString[1]);
+
+                        // Nitify the user.
                         MessageBox.Show("The oponent left... You Win");
-                        
-                        DialogResult.
+
                         // Sleep thred for x amount of time, so the user can read the messagebox. 
-                        Thread.Sleep(10000);
+                        Thread.Sleep(5000);         // 5 sec.
 
                         // Kill the connection the the server.
                         killLoop = false;
