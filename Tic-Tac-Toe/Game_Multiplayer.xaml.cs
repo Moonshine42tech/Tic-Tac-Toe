@@ -128,8 +128,12 @@ namespace Tic_Tac_Toe
             }
         }
 
-        #endregion
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender">Button</param>
+        /// <param name="e"></param>
         private void Play_Button_Click(object sender, RoutedEventArgs e)
         {
             ConnectToServer_Button.IsEnabled = false;       // so the user don't connect to the server again while in game
@@ -137,7 +141,11 @@ namespace Tic_Tac_Toe
 
 
             // Somthing More
+
+            // Send request to server with OponentId
         }
+
+        #endregion
 
 
         #region Connect to server
@@ -202,8 +210,12 @@ namespace Tic_Tac_Toe
 
         #endregion
 
+
         #region Lisen to Server 
 
+        /// <summary>
+        /// Lisens for messages from the server
+        /// </summary>
         public void LisenToServerMessage()
         {
             Socket socketLisener = mpGame.ClientSocket;
@@ -230,7 +242,7 @@ namespace Tic_Tac_Toe
                 clientDataString.Split('~');
                 switch (clientDataString[0])
                 {
-                    #region case 0: update gameboard
+                    #region case 0: update gameboard data
                     case '0':   // update gameboard
 
                         // variabels neded: 
@@ -251,7 +263,8 @@ namespace Tic_Tac_Toe
                         }
                         break;
                     #endregion
-                        
+
+                    #region case 1: Oponent left message & action
                     case '1':   // Oponent left
                         // variabels neded: 
                         //int serverMethosCallNumber, hasGameEnded
@@ -273,6 +286,15 @@ namespace Tic_Tac_Toe
                         App.Current.Shutdown();
 
                         break;
+                    #endregion
+
+                    #region case 2: 
+                    case '2':
+
+                        // do somthing 
+
+                        break;
+                    #endregion
 
                     default:
                         break;
@@ -283,8 +305,15 @@ namespace Tic_Tac_Toe
         #endregion
 
 
+        /// <summary>
+        /// Displays a list of oponents
+        /// </summary>
+        /// <param name="sender">ListBox</param>
+        /// <param name="e"></param>
         private void FreeOnlinePlayersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
+            // Set oponent equal to selection
 
         }
 

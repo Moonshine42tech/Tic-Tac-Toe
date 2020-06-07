@@ -304,7 +304,8 @@
                 
                 <!--Game info-->
                 <StackPanel Grid.Column="0" Grid.Row="1" 
-                            VerticalAlignment="Center">
+                            VerticalAlignment="Bottom" 
+                            Margin="0, 0, 0, 10">
 
                     <!--Current Players tun-->
                     <TextBlock>
@@ -313,18 +314,6 @@
                         <Label x:Name="TurnOfPlayerX" Content="N/A:"/>
                     </TextBlock>
 
-                    <!--Scoreboard-->
-                    <TextBlock>
-
-                        <Label Content="X-Score: "/>
-                        <Label Content="N/A:"/>
-                    </TextBlock>
-                    <TextBlock>
-
-                        <Label Content="O-Score: "/>
-                        <Label Content="N/A:"/>
-                    </TextBlock>
-                    
                     <!--How to Play guide-->
                     <Button Margin="10, 0" 
                             Content="Learn how to connect and play!" 

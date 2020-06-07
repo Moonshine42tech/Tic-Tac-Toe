@@ -25,7 +25,7 @@ namespace Tic_Tac_Toe
         {
             InitializeComponent();
 
-            New_Game();
+            New_Game();                                 // Makes a new game ready on startup
         }
         #endregion
 
@@ -139,6 +139,23 @@ namespace Tic_Tac_Toe
             }
         }
 
+
+        /// <summary>
+        /// Shows a popup with the ruels of the game.
+        /// </summary>
+        /// <param name="sender">Button</param>
+        /// <param name="e"></param>
+        private void ReadTheRuelsOfTheGame_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("" +
+                "The object of Tic Tac Toe is to get three in a row. " +
+                "You play on a three by three game board. " +
+                "The first player is known as X and the second is O. " +
+                "Players alternate placing X’s and O’s on the game board until either opponent " +
+                "has three in a row or all nine squares are filled."
+                );
+        }
+
         #endregion
 
 
@@ -154,17 +171,6 @@ namespace Tic_Tac_Toe
 
             if (e.ChangedButton == MouseButton.Left)
                 this.DragMove();
-        }
-
-        private void ReadTheRuelsOfTheGame_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show("" +
-                "The object of Tic Tac Toe is to get three in a row. " +
-                "You play on a three by three game board. " +
-                "The first player is known as X and the second is O. " +
-                "Players alternate placing X’s and O’s on the game board until either opponent " +
-                "has three in a row or all nine squares are filled."
-                );
         }
     }
 }
