@@ -6,10 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{BAF795E0-DAE6-45CB-B698-3CAAD1429B6F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagrams", "Diagrams", "{1334AB6C-D70E-46DF-81D2-7C1A85C0822E}"
-	ProjectSection(SolutionItems) = preProject
-		Documentation\Diagrams\Class Diagram\Tic-Tac-Toe - Class Diagram.png = Documentation\Diagrams\Class Diagram\Tic-Tac-Toe - Class Diagram.png
-		Documentation\Diagrams\Flowchart\Tic-Tac-Toe - Flowchart.png = Documentation\Diagrams\Flowchart\Tic-Tac-Toe - Flowchart.png
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E2180338-6043-4718-9892-46BDF0C79EA0}"
 EndProject
@@ -44,6 +40,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webSocketClient2Multiconnection", "webSocketClient2Multiconnection\webSocketClient2Multiconnection.csproj", "{260FCBCB-3815-47AF-ACD9-1CCD0E627D8E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSocketServer", "WebSocketServer\WebSocketServer.csproj", "{8B786ED3-83E6-49A7-9C64-8A8142A5F2E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client Site", "Client Site", "{13F7E483-B3C2-4EC2-A70A-0AA630BD8BD6}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Diagrams\Class Diagram\Client Site\Tic-Tac-Toe - Client Site - Class Diagram.png = Documentation\Diagrams\Class Diagram\Client Site\Tic-Tac-Toe - Client Site - Class Diagram.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server Site", "Server Site", "{752C1BEA-F240-4B4D-99FA-CE7A8DCF6857}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -99,6 +102,8 @@ Global
 		{9BB5F623-0605-4CF2-A0CA-712FEF05B1C4} = {BEC8A287-0E97-4810-9E3D-E7725CB3D00B}
 		{A3B37B5D-7D6A-4E14-9DEF-3037A139848A} = {78A44C06-3350-4EC7-AA9A-B0492F5D4A1C}
 		{8B786ED3-83E6-49A7-9C64-8A8142A5F2E2} = {BD556912-BEDD-4AC9-AAA5-57AD9D82D505}
+		{13F7E483-B3C2-4EC2-A70A-0AA630BD8BD6} = {1334AB6C-D70E-46DF-81D2-7C1A85C0822E}
+		{752C1BEA-F240-4B4D-99FA-CE7A8DCF6857} = {1334AB6C-D70E-46DF-81D2-7C1A85C0822E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A7EC06E-B5C7-4FA5-B3CF-3144A8C97A6E}

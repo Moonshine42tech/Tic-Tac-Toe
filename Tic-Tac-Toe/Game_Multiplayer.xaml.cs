@@ -272,7 +272,7 @@ namespace Tic_Tac_Toe
                         mpGame.HasGameEnded = Convert.ToBoolean(clientDataString[1]);
 
                         // Nitify the user.
-                        MessageBox.Show("The oponent left... You Win");
+                        gameLogic.GenericMessageBoxPopup("The oponent left... You Win");
 
                         // Sleep thred for x amount of time, so the user can read the messagebox. 
                         Thread.Sleep(5000);         // 5 sec.
