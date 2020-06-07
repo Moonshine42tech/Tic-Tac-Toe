@@ -169,6 +169,7 @@ namespace Tic_Tac_Toe
                 // Send a connection request to the server
                 gameLogic.ConnectToServer(mpGame.ClientSocket, mpGame.IpAddress, mpGame.PortNumber);
 
+
                 // Serilize all necessary data to byte[] 
                 byte[] serilizedDataString_ToServer = gameLogic.ConvertDataToByteArray(0, mpGame.DisplayName = PlayerDisplayName_textbox.Text, mpGame.HasGameEnded, mpGame.IsPlayer1Turn, mpGame.GameboardFildsArray); 
 

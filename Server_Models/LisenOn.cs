@@ -10,10 +10,5 @@ namespace Server_Models
     {
         public string IpAddress { get; set; }                   // Listening for a connection on this ip address
         public int PortNumber { get; set; }                     // Listening for a connection on this Port Number
-
-        public Socket SocketListenner { get; set; }
-        public IPEndPoint IpEnd { get; set; }
-
-        public byte[] Buffer { get; set; }
     }
 }

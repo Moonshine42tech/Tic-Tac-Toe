@@ -554,7 +554,6 @@ namespace TTT_Repository
         {
             try
             {
-                master = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);   // make a new instance of a socet
                 IPEndPoint ipEnd = new IPEndPoint(IPAddress.Parse(ip), port);                           // Ipadress and port number for the Server
                 master.Connect(ipEnd);                                                                  // Aim at server
             }

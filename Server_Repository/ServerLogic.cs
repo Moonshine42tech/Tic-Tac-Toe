@@ -12,7 +12,7 @@ using System.Windows;
 
 namespace Server_Repository
 {
-    public class ServerLogic : IServerLogic
+    public class ServerLogic 
     {
         public List<AClientConnection> AllClients { get; set; }                                     // A list of all the the connected clients
 
@@ -29,6 +29,7 @@ namespace Server_Repository
 
         /// <summary>
         /// Makes a socket to lisen on a given ip addres and port number.
+        /// Makes a new thread for every new client connection
         /// </summary>
         /// <param name="ipAddress">Ip Address</param>
         /// <param name="portNumber">Port Number</param>
@@ -39,12 +40,42 @@ namespace Server_Repository
             try
             {
                 // listening to new clients
-                Socket socketListenner = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                Socket master = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 IPEndPoint ipEnd = new IPEndPoint(IPAddress.Parse(ipAddress), portNumber);          // Ipadress and port number for the endpoint
+                master.Bind(ipEnd);                                                                 // Binds the endpint to the socket
 
-                socketListenner.Bind(ipEnd);                                                        // Binds the endpint to the socket
+                // Accepts incommeng client
+                master.Listen(0);                                                                   // Lisen to the incomming socket. On the Main thread
+                Socket ClientSocket = master.Accept();                                              // Accept new incomming connections
 
-                masterSocket = socketListenner;                                                     
+
+                #region  Reads data, send by the client
+
+                byte[] buffer = new byte[ClientSocket.SendBufferSize];                              // sets the sise of the byte array to the size of the socketClient's buffersize
+
+                // resive data
+                int readbyte = ClientSocket.Receive(buffer);                                        // the whole buffer (ca. 65.000 bytes) 
+
+                // Do stuff with data
+                byte[] resivedData = new byte[readbyte];                                            // A new array with a lengt equal to the buffer right above
+                Array.Copy(buffer, resivedData, readbyte);                                          // copy only the amount of readbyte from buffer[] to resiveData[].
+
+                #endregion
+
+                
+                if (!string.IsNullOrEmpty(readbyte.ToString()) == true)
+                {
+                    lock (LockObject)
+                    {
+                        // Makes a new client on a new thread
+                        Thread newClientThread = new Thread(() => ClientMethodCalls(ClientSocket, resivedData));        // Calles a method on a new thread
+                        newClientThread.Start();                                                                        // Start the newly made thread
+                    }
+                }
+                else { }
+
+
+                masterSocket = master;                                                                                  // Used for when the server should be stoped                                                
             }
             catch (NullReferenceException e)
             {
@@ -83,50 +114,6 @@ namespace Server_Repository
 
         #region Client Logic
 
-        /// <summary>
-        /// Makes a new thread for every new client connection
-        /// </summary>
-        public void NewClientThread()
-        {
-            try
-            {
-                // Accepts incommeng client
-                masterSocket.Listen(0);                                         // Lisen to the incomming socket. On the Main thread
-                masterSocket.Accept();                                          // Accept new incomming connections
-
-
-                #region  Reads data, send by the client
-
-                byte[] buffer = new byte[masterSocket.SendBufferSize];                              // sets the sise of the byte array to the size of the socketClient's buffersize
-
-                // resive data
-                int readbyte = masterSocket.Receive(buffer);                                        // the whole buffer (ca. 65.000 bytes) 
-
-                // Do stuff with data
-                byte[] resivedData = new byte[readbyte];                                            // A new array with a lengt equal to the buffer right above
-                Array.Copy(buffer, resivedData, readbyte);                                          // copy only the amount of readbyte from buffer[] to resiveData[].
-
-                #endregion
-
-
-                if (!string.IsNullOrEmpty(readbyte.ToString()) == true)
-                {
-                    lock (LockObject)
-                    {
-                        // Makes a new client on a new thread
-                        Thread newClientThread = new Thread(() => ClientMethodCalls(masterSocket, resivedData));        // Calles a method on a new thread
-                        newClientThread.Start();                                                                        // Start the newly made thread
-                    }
-                }
-                else { }
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-        }
-
-        
         /// <summary>
         /// Uses the first index in the data from the client to Call methods
         /// </summary>
@@ -287,7 +274,7 @@ namespace Server_Repository
 
             #endregion
 
-            #region piggyback data: Sends all sorted Client list back to the Client as one big string
+            #region Sends all sorted Client list back to the Client as one big string
 
             string allClientConnections = "";
             foreach (var Client in AllSortedClients)

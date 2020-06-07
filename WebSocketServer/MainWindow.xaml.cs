@@ -10,6 +10,7 @@ using System.Net.Sockets;
 using System.Net;
 using Server_Models;
 using Server_Repository;
+using System.Threading;
 
 namespace WebSocketServer
 {
@@ -26,7 +27,7 @@ namespace WebSocketServer
             InitializeComponent();
             StopListeningOnIpAndPort.IsEnabled = false;
         }
-
+        
 
         #region START / STOP SERVER
 
@@ -100,16 +101,27 @@ namespace WebSocketServer
                     // dont show anything on the listBox if the client list id null or empty
                 }
 
-                // Makes a web socket that can be lisend on
-                serverLogic.StartLiseningForConnections(ListenOnIPAddress.Text, Convert.ToInt32(ListenOnPortNumber.Text));
+                if (!string.IsNullOrEmpty(ListenOnPortNumber.Text) || !string.IsNullOrEmpty(ListenOnIPAddress.Text))
+                {
+                    string ip = ListenOnIPAddress.Text;
+                    int port = Convert.ToInt32(ListenOnPortNumber.Text);
+
+                    // Calles a method on a new thread
+                    Thread newClientThread = new Thread(() => serverLogic.StartLiseningForConnections(ip, port));        
+                    newClientThread.Start();
+                }
+                else
+                {
+                    // Do nothing
+                }
             }
             catch (NullReferenceException)
             {
                 ConnectionList_ListBox.ItemsSource = "";
             }
-            catch (Exception)
+            catch (Exception x)
             {
-
+                
             }
         }
 
