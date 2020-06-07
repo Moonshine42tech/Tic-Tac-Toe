@@ -39,7 +39,9 @@ namespace WebSocketServer
         /// <exception cref="NullReferenceException">Sets ListBox.ItemsSource to ""</exception>
         private void StopListeningOnIpAndPort_Click(object sender, RoutedEventArgs e)
         {
-            ServerStatus.Content = "Not Running";                   // Label on the UI
+            StopListeningOnIpAndPort.IsEnabled = false;                     // Alowes you to stop the server
+            StartListeningOnIpAndPort.IsEnabled = true;                     // you can't click start if the server is running already
+            ServerStatus.Content = "Not Running";                           // Label on the UI
 
             try
             {

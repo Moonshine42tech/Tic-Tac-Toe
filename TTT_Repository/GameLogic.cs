@@ -588,10 +588,24 @@ namespace TTT_Repository
         /// Alarms the server that a player has left the game
         /// </summary>
         /// <param name="master">a websocket using System.Net.Sockets</param>
+        /// <exception cref="SocketException">Does not send anything is the socket is not connected</exception>
         public void SendCloseApplicationNotisToServer(Socket master)
         {
-            byte[] methodCall = ConvertDataToByteArray(2);                  // Selects the Method you want to trigger
-            master.Send(Encoding.ASCII.GetBytes(methodCall.ToString()));    // Send message to server
+            try
+            {
+                byte[] methodCall = ConvertDataToByteArray(2);                  // Selects the Method you want to trigger
+                master.Send(Encoding.ASCII.GetBytes(methodCall.ToString()));    // Send message to server
+            }
+            catch(SocketException)
+            {
+                // Don't send anything is the socket if not connected
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            
         }
 
 

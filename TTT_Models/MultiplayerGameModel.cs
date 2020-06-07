@@ -16,7 +16,9 @@ namespace TTT_Models
 
         public GameSymbolTypes[] GameboardFildsArray { get; set; } = new GameSymbolTypes[9];    // An llist of Enum values. thise values is the three different states a fild on the gameboard can have
 
-        public Socket ClientSocket { get; set; }                                                // Used for sending and resiving data to and from the server
+        // Used for sending and resiving data to and from the server
+        public Socket ClientSocket { get; set; } = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp); 
+
         public AvailableOpponent Oponent { get; set; }                                          // A selected oponent
 
         public int RequestedMethod { get; set; }                                                // Used in a switch case on the server to select what method should be used
