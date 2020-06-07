@@ -20,14 +20,13 @@ namespace Server_Repository
         /// <param name="portNumber">Port Number</param>
         /// <returns>A socket bound to an Ip address and port number</returns>
         /// <exception cref="NullReferenceException">Returns a default connection to localhost on port 8888</exception>
-        Socket StartLiseningForConnections(string ipAddress, int portNumber);
+        void StartLiseningForConnections(string ipAddress, int portNumber);
 
 
         /// <summary>
         /// Stops the Server socket lisener
         /// </summary>
-        /// <param name="master">Socket</param>
-        void StopServerConnection(Socket master);
+        void StopServerConnection();
 
         #endregion
 
@@ -37,8 +36,7 @@ namespace Server_Repository
         /// <summary>
         /// Makes a new thread for every new client connection
         /// </summary>
-        /// <param name="socketListenner">A pre bound System.Net.Sockets web socket</param>
-        void NewClientThread(Socket socketListenner);
+        void NewClientThread();
 
 
 

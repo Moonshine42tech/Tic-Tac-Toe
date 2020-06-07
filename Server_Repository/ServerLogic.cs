@@ -17,6 +17,9 @@ namespace Server_Repository
         public List<AClientConnection> AllClients { get; set; }                                     // A list of all the the connected clients
 
         #region Private members
+        // New empty socket
+        private static Socket masterSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
         private static Random random = new Random();                                                // Used to generate a new random 'ClientId'
         private readonly object LockObject = new object();                                          // A object used for a threadsafe lock
         #endregion
@@ -31,7 +34,7 @@ namespace Server_Repository
         /// <param name="portNumber">Port Number</param>
         /// <returns>A socket bound to an Ip address and port number</returns>
         /// <exception cref="NullReferenceException">Returns a default connection to localhost on port 8888</exception>
-        public Socket StartLiseningForConnections(string ipAddress, int portNumber)
+        public void StartLiseningForConnections(string ipAddress, int portNumber)
         {
             try
             {
@@ -41,7 +44,7 @@ namespace Server_Repository
 
                 socketListenner.Bind(ipEnd);                                                        // Binds the endpint to the socket
 
-                return socketListenner;                                                             // Returns the new bound socket
+                masterSocket = socketListenner;                                                     
             }
             catch (NullReferenceException e)
             {
@@ -50,6 +53,7 @@ namespace Server_Repository
             }
             catch (Exception e)
             {
+                MessageBox.Show("Ops!. Somthing went wrong. \nPlease restart the application and try again.");
                 throw e;
             }
 
@@ -60,12 +64,12 @@ namespace Server_Repository
         /// Stops the Server socket lisener
         /// </summary>
         /// <param name="master">Socket</param>
-        public void StopServerConnection(Socket master)
+        public void StopServerConnection()
         {
             try
             {
-                master.Disconnect(false);               // Disconnects the active socket
-                master.Dispose();                       // Kills the socket
+                masterSocket.Disconnect(false);               // Disconnects the active socket
+                masterSocket.Dispose();                       // Kills the socket
             }
             catch (Exception e)
             {
@@ -82,22 +86,21 @@ namespace Server_Repository
         /// <summary>
         /// Makes a new thread for every new client connection
         /// </summary>
-        /// <param name="socketListenner">A pre bound System.Net.Sockets web socket</param>
-        public void NewClientThread(Socket socketListenner)
+        public void NewClientThread()
         {
             try
             {
                 // Accepts incommeng client
-                socketListenner.Listen(0);                                                              // Lisen to the incomming socket. On the Main thread
-                Socket ClientSocket = socketListenner.Accept();                                         // Accept new incomming connections
+                masterSocket.Listen(0);                                         // Lisen to the incomming socket. On the Main thread
+                masterSocket.Accept();                                          // Accept new incomming connections
 
 
                 #region  Reads data, send by the client
 
-                byte[] buffer = new byte[ClientSocket.SendBufferSize];                              // sets the sise of the byte array to the size of the socketClient's buffersize
+                byte[] buffer = new byte[masterSocket.SendBufferSize];                              // sets the sise of the byte array to the size of the socketClient's buffersize
 
                 // resive data
-                int readbyte = ClientSocket.Receive(buffer);                                        // the whole buffer (ca. 65.000 bytes) 
+                int readbyte = masterSocket.Receive(buffer);                                        // the whole buffer (ca. 65.000 bytes) 
 
                 // Do stuff with data
                 byte[] resivedData = new byte[readbyte];                                            // A new array with a lengt equal to the buffer right above
@@ -111,7 +114,7 @@ namespace Server_Repository
                     lock (LockObject)
                     {
                         // Makes a new client on a new thread
-                        Thread newClientThread = new Thread(() => ClientMethodCalls(ClientSocket, resivedData));        // Calles a method on a new thread
+                        Thread newClientThread = new Thread(() => ClientMethodCalls(masterSocket, resivedData));        // Calles a method on a new thread
                         newClientThread.Start();                                                                        // Start the newly made thread
                     }
                 }

@@ -20,7 +20,6 @@ namespace WebSocketServer
     {
         LisenOn lisenOn = new LisenOn();
         ServerLogic serverLogic = new ServerLogic();
-        private static Socket masterSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
         public MainWindow()
         {
@@ -61,7 +60,7 @@ namespace WebSocketServer
 
 
                 // Make A stop server method
-                serverLogic.StopServerConnection(masterSocket);
+                serverLogic.StopServerConnection();
             }
             catch (NullReferenceException)
             {
@@ -102,9 +101,7 @@ namespace WebSocketServer
                 }
 
                 // Makes a web socket that can be lisend on
-                Socket liseningSocket = serverLogic.StartLiseningForConnections(ListenOnIPAddress.Text, Convert.ToInt32(ListenOnPortNumber.Text));
-
-                masterSocket = liseningSocket;
+                serverLogic.StartLiseningForConnections(ListenOnIPAddress.Text, Convert.ToInt32(ListenOnPortNumber.Text));
             }
             catch (NullReferenceException)
             {
