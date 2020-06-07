@@ -35,10 +35,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Icons", "Icons", "{9BB5F623
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tic-Tac-Toe", "Tic-Tac-Toe\Tic-Tac-Toe.csproj", "{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerTest2MultiConnect", "ServerTest2MultiConnect\ServerTest2MultiConnect.csproj", "{1FCFEEFD-3D44-48BF-A12C-9CF14A12AE68}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "webSocketClient2Multiconnection", "webSocketClient2Multiconnection\webSocketClient2Multiconnection.csproj", "{260FCBCB-3815-47AF-ACD9-1CCD0E627D8E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSocketServer", "WebSocketServer\WebSocketServer.csproj", "{8B786ED3-83E6-49A7-9C64-8A8142A5F2E2}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client Site", "Client Site", "{13F7E483-B3C2-4EC2-A70A-0AA630BD8BD6}"
@@ -47,6 +43,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client Site", "Client Site"
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server Site", "Server Site", "{752C1BEA-F240-4B4D-99FA-CE7A8DCF6857}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Diagrams\Class Diagram\Server Site\Tic-Tac-Toe - Server Site - Class Diagram.png = Documentation\Diagrams\Class Diagram\Server Site\Tic-Tac-Toe - Server Site - Class Diagram.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Class Diagrams", "Class Diagrams", "{CD101457-1484-4326-8101-374DC9F12538}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Flowscharts", "Flowscharts", "{E9254CC7-B04F-4AC5-97C0-44B980BBD716}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Singelplayer", "Singelplayer", "{B1CB1A91-E8ED-4FC4-97BB-9824BC9368C1}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Diagrams\Flowchart\Singelplayer\Tic-Tac-Toe - Flowchart.png = Documentation\Diagrams\Flowchart\Singelplayer\Tic-Tac-Toe - Flowchart.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Multiplayer", "Multiplayer", "{CD5004D0-0F71-4C42-B197-CA175AB0A0CA}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Diagrams\Flowchart\Multiplayer\Tic-Tac-Toe - Multiplayer - Flowchart Diagram.png = Documentation\Diagrams\Flowchart\Multiplayer\Tic-Tac-Toe - Multiplayer - Flowchart Diagram.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -74,14 +87,6 @@ Global
 		{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1FCFEEFD-3D44-48BF-A12C-9CF14A12AE68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1FCFEEFD-3D44-48BF-A12C-9CF14A12AE68}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1FCFEEFD-3D44-48BF-A12C-9CF14A12AE68}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1FCFEEFD-3D44-48BF-A12C-9CF14A12AE68}.Release|Any CPU.Build.0 = Release|Any CPU
-		{260FCBCB-3815-47AF-ACD9-1CCD0E627D8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{260FCBCB-3815-47AF-ACD9-1CCD0E627D8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{260FCBCB-3815-47AF-ACD9-1CCD0E627D8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{260FCBCB-3815-47AF-ACD9-1CCD0E627D8E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8B786ED3-83E6-49A7-9C64-8A8142A5F2E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8B786ED3-83E6-49A7-9C64-8A8142A5F2E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B786ED3-83E6-49A7-9C64-8A8142A5F2E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -102,8 +107,12 @@ Global
 		{9BB5F623-0605-4CF2-A0CA-712FEF05B1C4} = {BEC8A287-0E97-4810-9E3D-E7725CB3D00B}
 		{A3B37B5D-7D6A-4E14-9DEF-3037A139848A} = {78A44C06-3350-4EC7-AA9A-B0492F5D4A1C}
 		{8B786ED3-83E6-49A7-9C64-8A8142A5F2E2} = {BD556912-BEDD-4AC9-AAA5-57AD9D82D505}
-		{13F7E483-B3C2-4EC2-A70A-0AA630BD8BD6} = {1334AB6C-D70E-46DF-81D2-7C1A85C0822E}
-		{752C1BEA-F240-4B4D-99FA-CE7A8DCF6857} = {1334AB6C-D70E-46DF-81D2-7C1A85C0822E}
+		{13F7E483-B3C2-4EC2-A70A-0AA630BD8BD6} = {CD101457-1484-4326-8101-374DC9F12538}
+		{752C1BEA-F240-4B4D-99FA-CE7A8DCF6857} = {CD101457-1484-4326-8101-374DC9F12538}
+		{CD101457-1484-4326-8101-374DC9F12538} = {1334AB6C-D70E-46DF-81D2-7C1A85C0822E}
+		{E9254CC7-B04F-4AC5-97C0-44B980BBD716} = {1334AB6C-D70E-46DF-81D2-7C1A85C0822E}
+		{B1CB1A91-E8ED-4FC4-97BB-9824BC9368C1} = {E9254CC7-B04F-4AC5-97C0-44B980BBD716}
+		{CD5004D0-0F71-4C42-B197-CA175AB0A0CA} = {E9254CC7-B04F-4AC5-97C0-44B980BBD716}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A7EC06E-B5C7-4FA5-B3CF-3144A8C97A6E}

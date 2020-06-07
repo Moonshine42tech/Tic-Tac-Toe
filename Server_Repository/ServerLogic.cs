@@ -91,7 +91,7 @@ namespace Server_Repository
             try
             {
                 // Accepts incommeng client
-                socketListenner.Listen(0);                                                              // Lisen to the incomming socket
+                socketListenner.Listen(0);                                                              // Lisen to the incomming socket. On the Main thread
                 Socket ClientSocket = socketListenner.Accept();                                         // Accept new incomming connections
 
 
@@ -113,9 +113,9 @@ namespace Server_Repository
                 {
                     lock (LockObject)
                     {
-                        // Makes a new client thread
-                        Thread newClientThread = new Thread(() => ClientMethodCalls(ClientSocket, resivedData));      // Calles a method on a new thread
-                        newClientThread.Start();
+                        // Makes a new client on a new thread
+                        Thread newClientThread = new Thread(() => ClientMethodCalls(ClientSocket, resivedData));        // Calles a method on a new thread
+                        newClientThread.Start();                                                                        // Start the newly made thread
                     }
                 }
                 else { }
@@ -143,8 +143,20 @@ namespace Server_Repository
                     clientDataString.Split('~');
                     switch (clientDataString[0])
                     {
-                        #region case 0: Make a new client
-                        case '0':   // Make a new client
+                        #region case 0: kill connection
+                        case '0':  // kill connection
+
+                            clientSocket.Disconnect(false);
+                            clientSocket.Dispose();
+                             
+                            // TODO:
+                            // • Kill currect tread
+
+                            break;
+                        #endregion
+
+                        #region case 1: Make a new client
+                        case '1':   // Make a new client
                             AClientConnection newClient = new AClientConnection();
 
                             #region Data from the client
@@ -186,8 +198,8 @@ namespace Server_Repository
                             break;
                         #endregion
 
-                        #region case 1: Connect two players 
-                        case '1':       
+                        #region case 2: Connect two players 
+                        case '2':       
                             // Takes two values:
                             // 1, oponentId
 
@@ -222,35 +234,27 @@ namespace Server_Repository
                             break;
                         #endregion
 
-                        #region case 2:
-                        case '2': // 
+                        #region case 3: Update oponent HasGameEnded status
+                        case '3': // Update oponent HasGameEnded status
 
-                            AClientConnection myself = new AClientConnection();                         // a placholder for my own client object
+                            AClientConnection myself = new AClientConnection();                 // A placholder for my own client object
 
-                            AllClients.ForEach(o =>                                                     // Finding my own client object
+                            // Finding my own client object in the AllClients list
+                            AllClients.ForEach(o => 
                             {
                                 if (o.ClientId == myself.ClientId)
                                 {
                                     myself = o;
                                 }
                             });
-
-                            // Sets
-                            myself.Oponent.HasGameEnded = true;
+                 
+                            myself.Oponent.HasGameEnded = true;                                 // Sets the oponent HasGameEnded to true
+                            // Send the HasGameEnded status to the oponent
                             myself.Oponent.ClientSocket.Send(Encoding.ASCII.GetBytes(ConvertDataToByteArray(myself.Oponent.HasGameEnded).ToString()));
                             break;
                         #endregion
 
-                        #region case 3:
-                        case '3':  
-
-
-                            break;
-                        #endregion
-
-                        default:    // kill connection
-                            clientSocket.Disconnect(false);
-                            clientSocket.Dispose();
+                        default: 
                             break;
                     }
                 }
@@ -331,11 +335,9 @@ namespace Server_Repository
         /// <param name="DisplayName">String from UI</param>
         /// <param name="hasGameEnded">TTT_Models.GameModel</param>
         /// <param name="isPlayer1Turn">TTT_Models.GameModel</param>
-        /// <param name="X_Score">TTT_Models.ScoreBoard</param>
-        /// <param name="O_Score">TTT_Models.ScoreBoard</param>
         /// <param name="gameboard">TTT_Models.GameModel</param>
         /// <returns>byte[] Array</returns>
-        public byte[] ConvertDataToByteArray(string DisplayName, bool hasGameEnded, bool isPlayer1Turn, int X_Score, int O_Score, GameSymbolTypes[] gameboard)
+        public byte[] ConvertDataToByteArray(string DisplayName, bool hasGameEnded, bool isPlayer1Turn, GameSymbolTypes[] gameboard)
         {
             BinaryFormatter bf = new BinaryFormatter();
             MemoryStream ms = new MemoryStream();
