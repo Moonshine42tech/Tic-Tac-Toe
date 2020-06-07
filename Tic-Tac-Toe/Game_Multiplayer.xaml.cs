@@ -136,9 +136,14 @@ namespace Tic_Tac_Toe
         /// <param name="e"></param>
         private void Play_Button_Click(object sender, RoutedEventArgs e)
         {
+            #region Disabels some game settings. when going into a game
+
             ConnectToServer_Button.IsEnabled = false;       // so the user don't connect to the server again while in game
             PlayerDisplayName_textbox.IsEnabled = false;    // Disabels the users DisplayName input
+            ServerIpAddress_TextBox.IsEnabled = false;      // Ip address field
+            ServerPortNumber_TextBox.IsEnabled = false;     // port number field
 
+            #endregion 
 
             // Somthing More
 
@@ -175,8 +180,8 @@ namespace Tic_Tac_Toe
 
 
                 // Lisen to the server
-                Thread LisenForMessageFromServer = new Thread(LisenToServerMessage);
-                LisenForMessageFromServer.Start();
+                Thread LisenForMessageFromServer = new Thread(LisenToServerMessage);        // Makes a lisener on a new thread
+                LisenForMessageFromServer.Start();                                          // starts the new thread
             }
             catch (Exception)
             {
@@ -242,8 +247,32 @@ namespace Tic_Tac_Toe
                 clientDataString.Split('~');
                 switch (clientDataString[0])
                 {
-                    #region case 0: update gameboard data
-                    case '0':   // update gameboard
+                    #region case 0: Resive Opponent list
+                    case '0': // Resive Opponent list
+
+                        // • set the list of oponents equal to the UI listBox
+
+                        List<AvailableOpponent> ap = new List<AvailableOpponent>();
+
+                        string[] clientListString = Convert.ToString(clientDataString[1]).Split('#');   // Splits up the string of clients into a string[] array of clients
+                        foreach (var client in clientListString)
+                        {
+                            string[] clientInfo = client.Split(';');                                    // Split up the string of client info
+
+                            // Creates a new opponent
+                            AvailableOpponent newOp = new AvailableOpponent();
+                            newOp.ClientServerId = Convert.ToInt32(clientInfo[0]);
+                            newOp.DisplayName = clientInfo[1];
+
+                            ap.Add(newOp);                                                              // Adds the new opponent to the list of AvailableOpponent 'ap'
+                        }
+
+
+                        break;
+                    #endregion
+
+                    #region case 1: update gameboard data
+                    case '1':   // update gameboard
 
                         // variabels neded: 
                         //int serverMethosCallNumber, string DisplayName, bool hasGameEnded, bool isPlayer1Turn, GameSymbolTypes[] gameboard
@@ -264,8 +293,8 @@ namespace Tic_Tac_Toe
                         break;
                     #endregion
 
-                    #region case 1: Oponent left message & action
-                    case '1':   // Oponent left
+                    #region case 2: Oponent left message & action
+                    case '2':   // Oponent left
                         // variabels neded: 
                         //int serverMethosCallNumber, hasGameEnded
 
@@ -288,8 +317,8 @@ namespace Tic_Tac_Toe
                         break;
                     #endregion
 
-                    #region case 2: 
-                    case '2':
+                    #region case 3: 
+                    case '3':
 
                         // do somthing 
 
@@ -360,5 +389,41 @@ namespace Tic_Tac_Toe
                 this.DragMove();
         }
 
+
+        /// <summary>
+        /// Sets a list of opponents equal to Listbox items
+        /// </summary>
+        /// <param name="ap">List<AvailableOpponent></param>
+        string s;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="apList"></param>
+        /// <exception cref="NullReferenceException">Sets the List to "", and returns an errorbox the the UI</exception>
+        public void UpdateUiListOfOpponents(List<AvailableOpponent> apList)
+        {
+            try
+            {
+                foreach (var ap in apList)
+                {
+
+                    FreeOnlinePlayersList.ItemsSource = ap;
+                }
+                
+            }
+            catch (NullReferenceException)
+            {
+                // Sets the Listboc itemList to empty;
+                FreeOnlinePlayersList.ItemsSource = "Empty List";
+
+                // Sends an error MessageBox to the UI;
+                gameLogic.ErrorMessageBoxPopup("An empty or faulty oponentList was received. \nPlease contact the game manufacturer and let them know of this issue.");
+            }
+            catch (Exception)
+            {
+
+            }
+        }
     }
 }

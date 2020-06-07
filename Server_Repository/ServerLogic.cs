@@ -297,13 +297,20 @@ namespace Server_Repository
                 string ClientDisplayName = Client.ClientDisplayName;
 
                 // Connects the clientId and ClientDisplayName into one string (~ = end of every 'aClientAndConnection') 
-                aClientAndConnection = clientId + "#" + ClientDisplayName + "~";
+                aClientAndConnection = clientId + ";" + ClientDisplayName + "#";
 
                 allClientConnections = (allClientConnections += aClientAndConnection);         // Append 'aClientAndConnection' to the string 'allClientConnections'
             }
 
-            // piggyback data back to client after the client have connected
-            clientSocket.Send(Encoding.ASCII.GetBytes(allClientConnections.ToString()));    // Sendsa list of AllClients in form of one big string 'allClientConnections'
+            #region Calles back to the client with a methosd id of '0'
+
+            // Adds a methodId at the frone of the list of sorted clients
+            string methidIdAndDataString = '0' + "~" + allClientConnections;
+
+            // Send data back to client
+            clientSocket.Send(Encoding.ASCII.GetBytes(methidIdAndDataString.ToString()));    // Sendsa list of AllClients in form of one big string 'allClientConnections'
+
+            #endregion
 
             #endregion
         }
