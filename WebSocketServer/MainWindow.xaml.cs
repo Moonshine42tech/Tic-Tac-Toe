@@ -20,13 +20,14 @@ namespace WebSocketServer
     {
         LisenOn lisenOn = new LisenOn();
         ServerLogic serverLogic = new ServerLogic();
-        private static Socket masterSocket;
+        private static Socket masterSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
         public MainWindow()
         {
             InitializeComponent();
             StopListeningOnIpAndPort.IsEnabled = false;
         }
+
 
         #region START / STOP SERVER
 
@@ -35,16 +36,39 @@ namespace WebSocketServer
         /// </summary>
         /// <param name="sender">Button</param>
         /// <param name="e"></param>
+        /// <exception cref="NullReferenceException">Sets ListBox.ItemsSource to ""</exception>
         private void StopListeningOnIpAndPort_Click(object sender, RoutedEventArgs e)
         {
-            // Makes sure you can't see the list of clients if the Server is not connectet to an IPaddress and Port
-            foreach (var client in serverLogic.AllClients)
+            ServerStatus.Content = "Not Running";                   // Label on the UI
+
+            try
+            {
+                //Displays a list of all clients
+                if (serverLogic.AllClients != null)
+                {
+                    // Makes sure you can't see the list of clients if the Server is not connectet to an IPaddress and Port
+                    foreach (var client in serverLogic.AllClients)
+                    {
+                        ConnectionList_ListBox.ItemsSource = "";
+                    }
+                }
+                else
+                {
+                    // dont show anything on the listBox if the client list id null or empty
+                }
+
+
+                // Make A stop server method
+                serverLogic.StopServerConnection(masterSocket);
+            }
+            catch (NullReferenceException)
             {
                 ConnectionList_ListBox.ItemsSource = "";
             }
+            catch (Exception)
+            {
 
-            // Make A stop server method
-            serverLogic.StopServerConnection(masterSocket);
+            }
         }
 
 
@@ -55,20 +79,34 @@ namespace WebSocketServer
         /// <param name="e"></param>
         private void StartListeningOnIpAndPort_Click(object sender, RoutedEventArgs e)
         {
-            StopListeningOnIpAndPort.IsEnabled = true;
+            StopListeningOnIpAndPort.IsEnabled = true;                      // Alowes you to stop the server
+            StartListeningOnIpAndPort.IsEnabled = false;                    // you can't click start if the server is running already
+            ServerStatus.Content = "Server is Running";                     // Label on the UI
 
             try
             {
-                // Adds all DisplayNames in the 'AllClients' list to the the UI listbox 'ConnectionList_ListBox'
-                foreach (var client in serverLogic.AllClients)
+                //Displays a list of all clients
+                if (serverLogic.AllClients != null)
                 {
-                    ConnectionList_ListBox.ItemsSource = client.ClientDisplayName;
+                    // Adds all DisplayNames in the 'AllClients' list to the the UI listbox 'ConnectionList_ListBox'
+                    foreach (var client in serverLogic.AllClients)
+                    {
+                        ConnectionList_ListBox.Items.Add(client.ClientDisplayName);
+                    }
+                }
+                else
+                {
+                    // dont show anything on the listBox if the client list id null or empty
                 }
 
                 // Makes a web socket that can be lisend on
                 Socket liseningSocket = serverLogic.StartLiseningForConnections(ListenOnIPAddress.Text, Convert.ToInt32(ListenOnPortNumber.Text));
 
                 masterSocket = liseningSocket;
+            }
+            catch (NullReferenceException)
+            {
+                ConnectionList_ListBox.ItemsSource = "";
             }
             catch (Exception)
             {

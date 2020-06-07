@@ -56,7 +56,7 @@
                        VerticalAlignment="Center">
 
                 <Label Content="The server i currently: " />
-                <Label x:Name="ServerStatus" Content="Not Started" />
+                <Label x:Name="ServerStatus" Content="Not Running" />
             </StackPanel>
 
 

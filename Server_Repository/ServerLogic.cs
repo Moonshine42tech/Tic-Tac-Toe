@@ -8,6 +8,7 @@ using Server_Models;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
+using System.Windows;
 
 namespace Server_Repository
 {
@@ -44,12 +45,8 @@ namespace Server_Repository
             }
             catch (NullReferenceException e)
             {
-                Socket NewsocketListenner = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-                IPEndPoint ipEnd = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 8888);              // Ipadress and port number for the endpoint
-
-                NewsocketListenner.Bind(ipEnd);                                                     // Binds the endpint to the socket
-
-                return NewsocketListenner;                                                          // Returns a socket bound to the localhost on port 8888
+                MessageBox.Show("Ops!. Somthing went wrong. \nPlease restart the application and try again.");
+                throw e;
             }
             catch (Exception e)
             {
@@ -136,7 +133,8 @@ namespace Server_Repository
         {
             try
             {
-                while (true)
+                bool keepRunning = true;
+                while (keepRunning == true)
                 {
 
                     string clientDataString = ConvertByteArrayToData(resivedData);                      // Deserializees the data the client has send. | returns one big data string
@@ -148,10 +146,9 @@ namespace Server_Repository
 
                             clientSocket.Disconnect(false);
                             clientSocket.Dispose();
-                             
-                            // TODO:
-                            // • Kill currect tread
 
+                            // Let the current thread run out. by breaking out of the while loop
+                            keepRunning = false;
                             break;
                         #endregion
 
