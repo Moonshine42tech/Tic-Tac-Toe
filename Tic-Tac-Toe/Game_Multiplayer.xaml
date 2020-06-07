@@ -102,8 +102,9 @@
                         <Label Content="Your Name:"/>
                         <TextBox x:Name="PlayerDisplayName_textbox"  
                                  Width="122" 
-                                 Height="26"
-                                 FontSize="14"/>
+                                 FontSize="14" 
+                                 Height="27"
+                                 Margin="0, 0, 0, 2"/>
                     </TextBlock>
                 </StackPanel>
 

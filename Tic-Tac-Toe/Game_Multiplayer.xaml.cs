@@ -10,6 +10,7 @@ using System.Net.Sockets;
 using System.Net;
 using System.Linq;
 using System.Threading;
+using System.Windows.Media.Animation;
 
 namespace Tic_Tac_Toe
 {
@@ -20,6 +21,7 @@ namespace Tic_Tac_Toe
     {
         MultiplayerGameModel mpGame = new MultiplayerGameModel();
         GameLogic gameLogic = new GameLogic();
+        AvailableOpponent selectedAvailableOpponent = new AvailableOpponent();
 
         private readonly object objLock = new object();             // Used to by a lock statment
 
@@ -335,14 +337,39 @@ namespace Tic_Tac_Toe
 
 
         /// <summary>
-        /// Displays a list of oponents
+        /// Displays a list of oponents and changes a UI label based on selection
         /// </summary>
         /// <param name="sender">ListBox</param>
         /// <param name="e"></param>
         private void FreeOnlinePlayersList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            try
+            {
+                if (FreeOnlinePlayersList.SelectedItem != null)                     // Checks if the selectet item is null or not
+                {
+                    // Seperate DisplayName from selected item
+                    string[] opponentSplit = FreeOnlinePlayersList.SelectedItem.ToString().Split(':');
 
-            // Set oponent equal to selection
+                    SelectedOponentName_Label.Content = opponentSplit[0];           // Displays Selected opponent name on a UI Label
+
+                    // the selected item info equal to an instance of an 'AvailableOpponent'
+                    selectedAvailableOpponent.DisplayName = opponentSplit[0];
+                    selectedAvailableOpponent.ClientServerId = Convert.ToInt32(opponentSplit[1]);
+                }
+                else
+                {
+                    SelectedOponentName_Label.Content = "N/A";                      // if Selected opponent value is null set label to "N/A"
+                }
+            }
+            catch (NullReferenceException)
+            {
+                SelectedOponentName_Label.Content = "N/A";                          // if Selected opponent reference is null set label to "N/A"
+            }
+            catch (Exception)
+            {
+
+            }
+                             
 
         }
 
@@ -393,13 +420,7 @@ namespace Tic_Tac_Toe
         /// <summary>
         /// Sets a list of opponents equal to Listbox items
         /// </summary>
-        /// <param name="ap">List<AvailableOpponent></param>
-        string s;
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="apList"></param>
+        /// <param name="apList">List<AvailableOpponent></param>
         /// <exception cref="NullReferenceException">Sets the List to "", and returns an errorbox the the UI</exception>
         public void UpdateUiListOfOpponents(List<AvailableOpponent> apList)
         {
@@ -407,18 +428,17 @@ namespace Tic_Tac_Toe
             {
                 foreach (var ap in apList)
                 {
-
-                    FreeOnlinePlayersList.ItemsSource = ap;
+                    FreeOnlinePlayersList.Items.Add(ap.DisplayName + ":" + ap.ClientServerId);
                 }
                 
             }
             catch (NullReferenceException)
             {
                 // Sets the Listboc itemList to empty;
-                FreeOnlinePlayersList.ItemsSource = "Empty List";
+                FreeOnlinePlayersList.ItemsSource = "";
 
                 // Sends an error MessageBox to the UI;
-                gameLogic.ErrorMessageBoxPopup("An empty or faulty oponentList was received. \nPlease contact the game manufacturer and let them know of this issue.");
+                gameLogic.GenericMessageBoxPopup("The Available Opponent list is empty");
             }
             catch (Exception)
             {
