@@ -6,10 +6,6 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{BAF795E0-DAE6-45CB-B698-3CAAD1429B6F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Diagrams", "Diagrams", "{1334AB6C-D70E-46DF-81D2-7C1A85C0822E}"
-	ProjectSection(SolutionItems) = preProject
-		Documentation\Diagrams\Class Diagram\Tic-Tac-Toe - Class Diagram.png = Documentation\Diagrams\Class Diagram\Tic-Tac-Toe - Class Diagram.png
-		Documentation\Diagrams\Flowchart\Tic-Tac-Toe - Flowchart.png = Documentation\Diagrams\Flowchart\Tic-Tac-Toe - Flowchart.png
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E2180338-6043-4718-9892-46BDF0C79EA0}"
 EndProject
@@ -17,12 +13,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Mock-up", "Mock-up", "{7355
 	ProjectSection(SolutionItems) = preProject
 		Documentation\Mock-up\Tic-Tac-Toe - web - Mock-ups.png = Documentation\Mock-up\Tic-Tac-Toe - web - Mock-ups.png
 	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerAPI", "ServerAPI\ServerAPI.csproj", "{6FB2AF91-2D18-40C9-8CA0-7E5EF3ECF7FA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConectionTester", "ConectionTester\ConectionTester.csproj", "{9F75A8BB-15F0-442C-A4E5-E20C7BF8E2A3}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicTacToeWPF", "TicTacToeWPF\TicTacToeWPF.csproj", "{D0AED592-06D6-49DE-9C15-31446DDE045C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server Side", "Server Side", "{BD556912-BEDD-4AC9-AAA5-57AD9D82D505}"
 EndProject
@@ -36,24 +26,51 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server_Repository", "Server
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Server_Models", "Server_Models\Server_Models.csproj", "{4D53A707-C8D3-449F-B0A4-802FD5C266E4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{BEC8A287-0E97-4810-9E3D-E7725CB3D00B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Icons", "Icons", "{9BB5F623-0605-4CF2-A0CA-712FEF05B1C4}"
+	ProjectSection(SolutionItems) = preProject
+		Images\Icons\nordic_control_systems_logo_eMM_icon.ico = Images\Icons\nordic_control_systems_logo_eMM_icon.ico
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tic-Tac-Toe", "Tic-Tac-Toe\Tic-Tac-Toe.csproj", "{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebSocketServer", "WebSocketServer\WebSocketServer.csproj", "{8B786ED3-83E6-49A7-9C64-8A8142A5F2E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Client Site", "Client Site", "{13F7E483-B3C2-4EC2-A70A-0AA630BD8BD6}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Diagrams\Class Diagram\Client Site\Tic-Tac-Toe - Client Site - Class Diagram.png = Documentation\Diagrams\Class Diagram\Client Site\Tic-Tac-Toe - Client Site - Class Diagram.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server Site", "Server Site", "{752C1BEA-F240-4B4D-99FA-CE7A8DCF6857}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Diagrams\Class Diagram\Server Site\Tic-Tac-Toe - Server Site - Class Diagram.png = Documentation\Diagrams\Class Diagram\Server Site\Tic-Tac-Toe - Server Site - Class Diagram.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Class Diagrams", "Class Diagrams", "{CD101457-1484-4326-8101-374DC9F12538}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Flowscharts", "Flowscharts", "{E9254CC7-B04F-4AC5-97C0-44B980BBD716}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Singelplayer", "Singelplayer", "{B1CB1A91-E8ED-4FC4-97BB-9824BC9368C1}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Diagrams\Flowchart\Singelplayer\Tic-Tac-Toe - Flowchart.png = Documentation\Diagrams\Flowchart\Singelplayer\Tic-Tac-Toe - Flowchart.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Multiplayer", "Multiplayer", "{CD5004D0-0F71-4C42-B197-CA175AB0A0CA}"
+	ProjectSection(SolutionItems) = preProject
+		Documentation\Diagrams\Flowchart\Multiplayer\Tic-Tac-Toe - Multiplayer - Flowchart Diagram.png = Documentation\Diagrams\Flowchart\Multiplayer\Tic-Tac-Toe - Multiplayer - Flowchart Diagram.png
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServerTest", "ServerTest\ServerTest.csproj", "{E0C07EDE-EE41-410B-94AA-2910279F055F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientTest", "ClientTest\ClientTest.csproj", "{4088D1E2-B1FC-4986-B1C2-4DCBCDE5D816}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{6FB2AF91-2D18-40C9-8CA0-7E5EF3ECF7FA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6FB2AF91-2D18-40C9-8CA0-7E5EF3ECF7FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6FB2AF91-2D18-40C9-8CA0-7E5EF3ECF7FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6FB2AF91-2D18-40C9-8CA0-7E5EF3ECF7FA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9F75A8BB-15F0-442C-A4E5-E20C7BF8E2A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9F75A8BB-15F0-442C-A4E5-E20C7BF8E2A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9F75A8BB-15F0-442C-A4E5-E20C7BF8E2A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9F75A8BB-15F0-442C-A4E5-E20C7BF8E2A3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D0AED592-06D6-49DE-9C15-31446DDE045C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D0AED592-06D6-49DE-9C15-31446DDE045C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D0AED592-06D6-49DE-9C15-31446DDE045C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D0AED592-06D6-49DE-9C15-31446DDE045C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{539B3129-C1B8-466A-9286-EDA523891239}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{539B3129-C1B8-466A-9286-EDA523891239}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{539B3129-C1B8-466A-9286-EDA523891239}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -70,6 +87,22 @@ Global
 		{4D53A707-C8D3-449F-B0A4-802FD5C266E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D53A707-C8D3-449F-B0A4-802FD5C266E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D53A707-C8D3-449F-B0A4-802FD5C266E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3B37B5D-7D6A-4E14-9DEF-3037A139848A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B786ED3-83E6-49A7-9C64-8A8142A5F2E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B786ED3-83E6-49A7-9C64-8A8142A5F2E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B786ED3-83E6-49A7-9C64-8A8142A5F2E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B786ED3-83E6-49A7-9C64-8A8142A5F2E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0C07EDE-EE41-410B-94AA-2910279F055F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0C07EDE-EE41-410B-94AA-2910279F055F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0C07EDE-EE41-410B-94AA-2910279F055F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0C07EDE-EE41-410B-94AA-2910279F055F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4088D1E2-B1FC-4986-B1C2-4DCBCDE5D816}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4088D1E2-B1FC-4986-B1C2-4DCBCDE5D816}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4088D1E2-B1FC-4986-B1C2-4DCBCDE5D816}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4088D1E2-B1FC-4986-B1C2-4DCBCDE5D816}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,12 +111,20 @@ Global
 		{BAF795E0-DAE6-45CB-B698-3CAAD1429B6F} = {E2180338-6043-4718-9892-46BDF0C79EA0}
 		{1334AB6C-D70E-46DF-81D2-7C1A85C0822E} = {BAF795E0-DAE6-45CB-B698-3CAAD1429B6F}
 		{7355D094-19C5-4CC6-8E03-9DA885D81380} = {BAF795E0-DAE6-45CB-B698-3CAAD1429B6F}
-		{6FB2AF91-2D18-40C9-8CA0-7E5EF3ECF7FA} = {BD556912-BEDD-4AC9-AAA5-57AD9D82D505}
-		{D0AED592-06D6-49DE-9C15-31446DDE045C} = {78A44C06-3350-4EC7-AA9A-B0492F5D4A1C}
 		{539B3129-C1B8-466A-9286-EDA523891239} = {78A44C06-3350-4EC7-AA9A-B0492F5D4A1C}
 		{533B8871-3D7A-4615-B248-106898FF4F8A} = {78A44C06-3350-4EC7-AA9A-B0492F5D4A1C}
 		{0850EFE2-9335-40C0-8EFB-F06DCD444BB8} = {BD556912-BEDD-4AC9-AAA5-57AD9D82D505}
 		{4D53A707-C8D3-449F-B0A4-802FD5C266E4} = {BD556912-BEDD-4AC9-AAA5-57AD9D82D505}
+		{BEC8A287-0E97-4810-9E3D-E7725CB3D00B} = {E2180338-6043-4718-9892-46BDF0C79EA0}
+		{9BB5F623-0605-4CF2-A0CA-712FEF05B1C4} = {BEC8A287-0E97-4810-9E3D-E7725CB3D00B}
+		{A3B37B5D-7D6A-4E14-9DEF-3037A139848A} = {78A44C06-3350-4EC7-AA9A-B0492F5D4A1C}
+		{8B786ED3-83E6-49A7-9C64-8A8142A5F2E2} = {BD556912-BEDD-4AC9-AAA5-57AD9D82D505}
+		{13F7E483-B3C2-4EC2-A70A-0AA630BD8BD6} = {CD101457-1484-4326-8101-374DC9F12538}
+		{752C1BEA-F240-4B4D-99FA-CE7A8DCF6857} = {CD101457-1484-4326-8101-374DC9F12538}
+		{CD101457-1484-4326-8101-374DC9F12538} = {1334AB6C-D70E-46DF-81D2-7C1A85C0822E}
+		{E9254CC7-B04F-4AC5-97C0-44B980BBD716} = {1334AB6C-D70E-46DF-81D2-7C1A85C0822E}
+		{B1CB1A91-E8ED-4FC4-97BB-9824BC9368C1} = {E9254CC7-B04F-4AC5-97C0-44B980BBD716}
+		{CD5004D0-0F71-4C42-B197-CA175AB0A0CA} = {E9254CC7-B04F-4AC5-97C0-44B980BBD716}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8A7EC06E-B5C7-4FA5-B3CF-3144A8C97A6E}
