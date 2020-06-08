@@ -7,7 +7,11 @@ namespace TTT_Models
 {
     public class AvailableOpponent
     {
-        public int ClientServerId { get; set; }
+        public string ClientServerId { get; set; }
         public string DisplayName { get; set; }
+
+        public override string ToString() { 
+            return DisplayName; 
+        }
     }
 }

@@ -57,6 +57,12 @@
                          Height="182" 
                          Width="285"
                          SelectionChanged="FreeOnlinePlayersList_SelectionChanged">
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBox Text="{Binding DisplayName}"/>
+                        <TextBox Text="{Binding ClientServerId}"/>
+                    </StackPanel>
                 </ListBox>
 
             </StackPanel>
@@ -239,14 +245,14 @@
                 <StackPanel Grid.Column="0" Grid.Row="0">
 
                     <Label Content="Server Ip Address" />
-                    <TextBox x:Name="ServerIpAddress_TextBox" TextChanged="ServerIpAddress_TextBox_TextChanged"/>
+                    <TextBox x:Name="ServerIpAddress_TextBox" />
                 </StackPanel>
 
                 <!--Port Number-->
                 <StackPanel Grid.Column="1" Grid.Row="0">
 
                     <Label Content="Server Port Number" />
-                    <TextBox x:Name="ServerPortNumber_TextBox" TextChanged="ServerPortNumber_TextBox_TextChanged" />
+                    <TextBox x:Name="ServerPortNumber_TextBox" />
                 </StackPanel>
 
                 <!--Server status label-->

@@ -248,6 +248,12 @@ namespace Server_Repository
                             break;
                         #endregion
 
+                        #region Update Oponent Gameboard
+                        case "4":   // Update Oponent Gameboard
+
+                            break;
+                        #endregion
+
                         default: 
                             break;
                     }

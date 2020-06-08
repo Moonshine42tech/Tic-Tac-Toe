@@ -111,7 +111,7 @@ namespace Tic_Tac_Toe
                 }
                 else
                 {
-                    gameLogic.GenericMessageBoxPopup("You Lose");       // Costum messagebox method
+                    gameLogic.GenericMessageBoxOk("You Lose");       // Costum messagebox method
                     New_Game();
                 }
             }

@@ -446,12 +446,37 @@ namespace TTT_Repository
         }
 
         /// <summary>
-        /// Makes a costum generic MessageBox
+        /// Makes a costum generic OK MessageBox
         /// </summary>
         /// <param name="msg">costum string message</param>
-        public void GenericMessageBoxPopup(string msg)
+        public bool GenericMessageBoxOk(string msg)
         {
-            MessageBox.Show(msg);
+            MessageBoxResult result = MessageBox.Show(msg, "INFO:", MessageBoxButton.OK, MessageBoxImage.Question);
+            if (result == MessageBoxResult.OK)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Makes a costum generic YES / NO MessageBox
+        /// </summary>
+        /// <param name="msg">costum string message</param>
+        public bool GenericMessageBoxYesNo(string msg)
+        {
+            MessageBoxResult result = MessageBox.Show(msg, "INFO:", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         #endregion
@@ -553,7 +578,7 @@ namespace TTT_Repository
                 ms.Seek(0, SeekOrigin.Begin);                                           // sets memoryStream start point to '0'
                 object obj = (object)bf.Deserialize(ms);                                // Deserialize the memoryStream
 
-                return obj;                                                              // returns the Deserialized memoryStream as a string
+                return obj;                                                             // returns the Deserialized memoryStream as a string
             }
             catch (Exception e)
             {

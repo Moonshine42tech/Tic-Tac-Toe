@@ -11,6 +11,7 @@ using System.Net;
 using System.Linq;
 using System.Threading;
 using System.Windows.Media.Animation;
+using System.Windows.Threading;
 
 namespace Tic_Tac_Toe
 {
@@ -166,6 +167,9 @@ namespace Tic_Tac_Toe
         {
             try
             {
+                mpGame.PortNumber = Convert.ToInt32(ServerPortNumber_TextBox.Text);         // Sets the port number 
+                mpGame.IpAddress = ServerIpAddress_TextBox.Text;                            // Sets the Ip address
+
                 // Send a connection request to the server
                 gameLogic.ConnectToServer(mpGame.ClientSocket, mpGame.IpAddress, mpGame.PortNumber);
 
@@ -191,30 +195,6 @@ namespace Tic_Tac_Toe
             {
 
             }
-
-        }
-
-
-        /// <summary>
-        /// Sets the port number for later use
-        /// </summary>
-        /// <param name="sender">Textbox</param>
-        /// <param name="e"></param>
-        private void ServerPortNumber_TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            // Converts ServerPortNumber_TextBox.Text to a int
-            mpGame.PortNumber = Convert.ToInt32(ServerPortNumber_TextBox.Text);
-        }
-
-
-        /// <summary>
-        /// Sets the Ip address for later use
-        /// </summary>
-        /// <param name="sender">Textbox</param>
-        /// <param name="e"></param>
-        private void ServerIpAddress_TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            mpGame.IpAddress = ServerIpAddress_TextBox.Text;
         }
 
         #endregion
@@ -247,82 +227,132 @@ namespace Tic_Tac_Toe
 
                 #endregion
 
-                string clientDataString = gameLogic.ConvertByteArrayToData(resivedData).ToString();                      // Deserializees the data the client has send. | returns one big data string
-                clientDataString.Split('~');
-                switch (clientDataString[0])
+                string clientDataString = gameLogic.ConvertByteArrayToData(resivedData).ToString();                 // Deserializees the data the client has send. | returns one big data string
+                string[] resultData = clientDataString.Split('~');                                                  // Splits up the 'clientDataString'
+                resultData = resultData.Where(x => !string.IsNullOrEmpty(x)).ToArray();                             // Removes all empty entrys
+
+                switch (resultData[0])
                 {
                     #region case 0: Resive Opponent list
-                    case '0': // Resive Opponent list
+                    case "0": // Resive Opponent list
 
-                        // • set the list of oponents equal to the UI listBox
-
-                        List<AvailableOpponent> ap = new List<AvailableOpponent>();
-
-                        string[] clientListString = Convert.ToString(clientDataString[1]).Split('#');   // Splits up the string of clients into a string[] array of clients
-                        foreach (var client in clientListString)
+                        if (resultData.Length > 1)                                                                  // checks if there is data with the request
                         {
-                            string[] clientInfo = client.Split(';');                                    // Split up the string of client info
+                            List<AvailableOpponent> apList = new List<AvailableOpponent>();
 
-                            // Creates a new opponent
-                            AvailableOpponent newOp = new AvailableOpponent();
-                            newOp.ClientServerId = Convert.ToInt32(clientInfo[0]);
-                            newOp.DisplayName = clientInfo[1];
+                            string[] clientListString = Convert.ToString(resultData[1]).Split('#');                 // Splits up the string of clients into a string[] array of clients
+                            clientListString = clientListString.Where(x => !string.IsNullOrEmpty(x)).ToArray();     // Removes all empty entrys
 
-                            ap.Add(newOp);                                                              // Adds the new opponent to the list of AvailableOpponent 'ap'
+                            foreach (var client in clientListString)
+                            {
+                                string[] clientInfo = client.Split(';');                                            // Split up the string of client info
+                                clientInfo = clientInfo.Where(x => !string.IsNullOrEmpty(x)).ToArray();             // Removes all empty entrys
+
+                                // Creates a new opponent
+                                AvailableOpponent newOp = new AvailableOpponent();
+                                newOp.ClientServerId = clientInfo[0];
+                                newOp.DisplayName = clientInfo[1];
+
+                                apList.Add(newOp);                                                                  // Adds the new opponent to the list of AvailableOpponent 'ap'
+                            }
+
+
+                            // sets the list of oponents equal to the UI listBox
+                            //Creator: markmnl
+                            //Link: https://stackoverflow.com/a/4191440
+                            foreach (var ap in apList)
+                            {
+                                Dispatcher.BeginInvoke(new Action(delegate ()
+                                {
+                                    FreeOnlinePlayersList.Items.Add(ap);
+                                }));
+                            }
+
+
+                            //// Creator: nrod
+                            //// Link: https://stackoverflow.com/a/60206398
+                            //Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                            //    this.FreeOnlinePlayersList.ItemsSource = null)
+                            //);
+
+                            //Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                            //    this.FreeOnlinePlayersList.ItemsSource = apList)
+                            //);
+
                         }
-
-
                         break;
                     #endregion
 
                     #region case 1: update gameboard data
-                    case '1':   // update gameboard
+                    case "1":   // update gameboard
 
                         // variabels neded: 
                         //int serverMethosCallNumber, string DisplayName, bool hasGameEnded, bool isPlayer1Turn, GameSymbolTypes[] gameboard
 
-                        lock (objLock)
+                        if (resultData.Length > 1)                                                                  // checks if there is data with the request
                         {
-                            // Update Client Data
-                            mpGame.DisplayName = clientDataString[1].ToString();
-                            mpGame.HasGameEnded = Convert.ToBoolean(clientDataString[2]);
-                            mpGame.IsPlayer1Turn = Convert.ToBoolean(clientDataString[3]);
-                            
-                            // Concerts the gameboard in char format to an array of 'GameSymbolTypes'
-                            IEnumerable<GameSymbolTypes> gameboardSymbilsArray = clientDataString[4].ToString().Select(a => (GameSymbolTypes)Enum.Parse(typeof(GameSymbolTypes), a.ToString()));
-                            mpGame.GameboardFildsArray = (GameSymbolTypes[])gameboardSymbilsArray;
+                            lock (objLock)
+                            {
+                                // Update Client Data
+                                mpGame.DisplayName = resultData[1].ToString();
+                                mpGame.HasGameEnded = Convert.ToBoolean(resultData[2]);
+                                mpGame.IsPlayer1Turn = Convert.ToBoolean(resultData[3]);
 
-                            // Invokes??? 
+                                // Splits up all the game field values
+                                string[] gameboardValues = resultData[4].ToString().Split('#');
+
+                                // Asigns all gameboardValues to a GameSymbolTypes[] inside 'newClient'.
+                                for (int i = 0; i < gameboardValues.Length; i++)
+                                {
+                                    mpGame.GameboardFildsArray[i] = (GameSymbolTypes)Enum.Parse(typeof(GameSymbolTypes), gameboardValues[i]);
+                                }
+                            }
+                        }
+
+                        break;
+                    #endregion
+
+                    #region case 2: Oponent left the game - message & action
+                    case "2":   // Oponent left
+                        // variabels neded: 
+                        //int serverMethosCallNumber, hasGameEnded
+
+                        if (resultData.Length > 1)
+                        {
+                            mpGame.HasGameEnded = Convert.ToBoolean(clientDataString[1]);
+
+                            // Nitify the user.
+                            bool awnser = true;
+                            int counter = 0;
+                            do
+                            {
+                                awnser = gameLogic.GenericMessageBoxOk("The oponent left... You Win");
+
+                                #region backup break
+
+                                if (counter >= 10)
+                                {
+                                    awnser = false;
+                                }
+                                counter++;
+
+                                #endregion
+
+                            } while (awnser != true);
+
+                            // Kill the connection the the server.
+                            killLoop = false;                               // breaks out of outer while loop
+                            mpGame.ClientSocket.Disconnect(false);
+                            mpGame.ClientSocket.Dispose();
+
+                            // Kill the application
+                            App.Current.Shutdown();
                         }
                         break;
                     #endregion
 
-                    #region case 2: Oponent left message & action
-                    case '2':   // Oponent left
-                        // variabels neded: 
-                        //int serverMethosCallNumber, hasGameEnded
-
-                        mpGame.HasGameEnded = Convert.ToBoolean(clientDataString[1]);
-
-                        // Nitify the user.
-                        gameLogic.GenericMessageBoxPopup("The oponent left... You Win");
-
-                        // Sleep thred for x amount of time, so the user can read the messagebox. 
-                        Thread.Sleep(5000);         // 5 sec.
-
-                        // Kill the connection the the server.
-                        killLoop = false;
-                        mpGame.ClientSocket.Disconnect(false);
-                        mpGame.ClientSocket.Dispose();
-
-                        // Kill the application
-                        App.Current.Shutdown();
-
-                        break;
-                    #endregion
-
                     #region case 3: 
-                    case '3':
+                    case "3":
 
                         // do somthing 
 
@@ -356,7 +386,7 @@ namespace Tic_Tac_Toe
 
                     // the selected item info equal to an instance of an 'AvailableOpponent'
                     selectedAvailableOpponent.DisplayName = opponentSplit[0];
-                    selectedAvailableOpponent.ClientServerId = Convert.ToInt32(opponentSplit[1]);
+                    selectedAvailableOpponent.ClientServerId = opponentSplit[1];
                 }
                 else
                 {
@@ -440,7 +470,7 @@ namespace Tic_Tac_Toe
                 FreeOnlinePlayersList.ItemsSource = "";
 
                 // Sends an error MessageBox to the UI;
-                gameLogic.GenericMessageBoxPopup("The Available Opponent list is empty");
+                gameLogic.GenericMessageBoxOk("The Available Opponent list is empty");
             }
             catch (Exception)
             {
