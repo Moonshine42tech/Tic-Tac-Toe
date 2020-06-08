@@ -14,7 +14,7 @@ namespace Server_Repository
 {
     public class ServerLogic 
     {
-        public List<AClientConnection> AllClients { get; set; }                                     // A list of all the the connected clients
+        public List<AClientConnection> AllClients { get; set; } = new List<AClientConnection>();    // A list of all the the connected clients
 
         #region Private members
         // New empty socket
@@ -128,11 +128,11 @@ namespace Server_Repository
                 {
 
                     string clientDataString = ConvertByteArrayToData(resivedData);                      // Deserializees the data the client has send. | returns one big data string
-                    clientDataString.Split('~');
-                    switch (clientDataString[0])
+                    string[] resultData = clientDataString.Split('~');                                  // Splits up the clientDataString
+                    switch (resultData[0])
                     {
                         #region case 0: kill connection
-                        case '0':  // kill connection
+                        case "0":  // kill connection
 
                             clientSocket.Disconnect(false);
                             clientSocket.Dispose();
@@ -143,20 +143,27 @@ namespace Server_Repository
                         #endregion
 
                         #region case 1: Make a new client
-                        case '1':   // Make a new client
+                        case "1":   // Make a new client
                             AClientConnection newClient = new AClientConnection();
 
                             #region Data from the client
-                            newClient.ClientDisplayName = clientDataString[1].ToString();
-                            newClient.HasGameEnded = Convert.ToBoolean(clientDataString[2]);
-                            newClient.IsPlayer1Turn = Convert.ToBoolean(clientDataString[3]);
 
-                            // Concerts the gameboard in char format to an array of 'GameSymbolTypes'
-                            IEnumerable<GameSymbolTypes> gameboardSymbilsArray = clientDataString[4].ToString().Select(a => (GameSymbolTypes)Enum.Parse(typeof(GameSymbolTypes), a.ToString()));
-                            newClient.GameboardFildsList = (GameSymbolTypes[])gameboardSymbilsArray;
+                            newClient.ClientDisplayName = resultData[1].ToString();
+                            newClient.HasGameEnded = Convert.ToBoolean(resultData[2]);
+                            newClient.IsPlayer1Turn = Convert.ToBoolean(resultData[3]);
+
+                            // Splits up all the game field values
+                            string[] gameboardValues = resultData[4].ToString().Split('#');
+
+                            // Asigns all gameboardValues to a GameSymbolTypes[] inside 'newClient'.
+                            for (int i = 0; i < gameboardValues.Length; i++)
+                            {
+                                newClient.GameboardFildsArray[i] = (GameSymbolTypes)Enum.Parse(typeof(GameSymbolTypes), gameboardValues[i]);
+                            }
+
                             #endregion
 
-                            newClient.ClientId = RandomString(64);                                      // Generates a new 'ClientId' that is a random string with 64 characters in it
+                            newClient.ClientId = RandomString(64);                                      // Generates a new 'ClientId' that is a random numeric string with 64 characters in it
                             newClient.ClientSocket = clientSocket;                                      // Asign the acceptet socked to the client
                             newClient.InGameStatus = false;                                             // Not curently in game
 
@@ -186,7 +193,7 @@ namespace Server_Repository
                         #endregion
 
                         #region case 2: Connect two players 
-                        case '2':       
+                        case "2":       
                             // Takes two values:
                             // 1, oponentId
 
@@ -222,7 +229,7 @@ namespace Server_Repository
                         #endregion
 
                         #region case 3: Update oponent HasGameEnded status
-                        case '3': // Update oponent HasGameEnded status
+                        case "3": // Update oponent HasGameEnded status
 
                             AClientConnection myself = new AClientConnection();                 // A placholder for my own client object
 
@@ -259,47 +266,76 @@ namespace Server_Repository
         /// <param name="clientSocket">A System.Net.Sockets Socket</param>
         public void ReturnClientList(Socket clientSocket)
         {
-            #region Sort what Clients is not currently in game
-
-            List<AClientConnection> AllSortedClients = new List<AClientConnection>();       // placeholder for sorted data
-
-            foreach (var Client in AllClients)                                              // Sort data by InGameStatus
+            try
             {
-                if (Client.InGameStatus == false)
+                #region Sort what Clients is not currently in game
+
+                List<AClientConnection> AllSortedClients = new List<AClientConnection>();       // placeholder for sorted data
+
+                if (AllClients != null)                                                         // Checks if the AllClients list is null
                 {
-                    AllSortedClients.Add(Client);
+                    #region find my own instance of 'AClientConnection'
+                    AClientConnection me = new AClientConnection();
+
+                    foreach (var client in AllClients)
+                    {
+                        if (client.ClientSocket == clientSocket)                // find myself
+                        {
+                            me = client;                                        // set my client object = AClientConnection me
+                        }
+                    }
+                    #endregion
+
+                    #region Filters the list of 'AllClients' befor sending it back
+
+                    foreach (var Client in AllClients)                                          // Sort data by InGameStatus
+                    {
+                        if (Client.InGameStatus == false || Client.ClientId == me.ClientId)
+                        {
+                            AllSortedClients.Add(Client);
+                        }
+                    }
+
+                    #endregion
+
+                    #region Sends all sorted Client list back to the Client as one big string
+
+                    string allClientConnections = "";
+                    foreach (var Client in AllSortedClients)                                            // Runs thrugh all sorted clients
+                    {
+                        string aClientAndConnection;
+                        string clientId = Client.ClientId.ToString();
+                        string ClientDisplayName = Client.ClientDisplayName;
+
+                        // Connects the clientId and ClientDisplayName into one string (~ = end of every 'aClientAndConnection') 
+                        aClientAndConnection = clientId + ";" + ClientDisplayName + "#";
+
+                        allClientConnections = (allClientConnections += aClientAndConnection);         // Append 'aClientAndConnection' to the string 'allClientConnections'
+                    }
+                    #endregion
+
+                    #region Calles back to the client with a methosd id of '0'
+                    // Adds a methodId at the frone of the list of sorted clients
+                    string methidIdAndDataString = '0' + "~" + allClientConnections;
+
+                    // Send data back to client
+                    clientSocket.Send(ConvertDataToByteArray(methidIdAndDataString));                   // Sendsa list of AllClients in form of one big string 'allClientConnections'
+
+                    #endregion
+
                 }
-                else { }
+                else 
+                {
+                    
+                }
+
+                #endregion
             }
-
-            #endregion
-
-            #region Sends all sorted Client list back to the Client as one big string
-
-            string allClientConnections = "";
-            foreach (var Client in AllSortedClients)
+            catch (Exception e)
             {
-                string aClientAndConnection;
-                string clientId = Client.ClientId.ToString();
-                string ClientDisplayName = Client.ClientDisplayName;
-
-                // Connects the clientId and ClientDisplayName into one string (~ = end of every 'aClientAndConnection') 
-                aClientAndConnection = clientId + ";" + ClientDisplayName + "#";
-
-                allClientConnections = (allClientConnections += aClientAndConnection);         // Append 'aClientAndConnection' to the string 'allClientConnections'
+                throw e;
             }
-
-            #region Calles back to the client with a methosd id of '0'
-
-            // Adds a methodId at the frone of the list of sorted clients
-            string methidIdAndDataString = '0' + "~" + allClientConnections;
-
-            // Send data back to client
-            clientSocket.Send(Encoding.ASCII.GetBytes(methidIdAndDataString.ToString()));    // Sendsa list of AllClients in form of one big string 'allClientConnections'
-
-            #endregion
-
-            #endregion
+            
         }
 
 
@@ -345,6 +381,21 @@ namespace Server_Repository
         }
 
         /// <summary>
+        /// Serializes a string into a byte[] array
+        /// </summary>
+        /// <param name="aBoolValue">string</param>
+        /// <returns>byte[] Array</returns>
+        public byte[] ConvertDataToByteArray(string aStringValue)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            MemoryStream ms = new MemoryStream();
+
+            // Serialize the dataString and returns is in form of a array 
+            bf.Serialize(ms, aStringValue);
+            return ms.ToArray();
+        }
+
+        /// <summary>
         /// Serializes Game data into a byte[] array
         /// </summary>
         /// <param name="aBoolValue">bool</param>
@@ -363,6 +414,7 @@ namespace Server_Repository
         }
 
 
+
         /// <summary>
         /// Deserializees a serialized string
         /// </summary>
@@ -370,15 +422,23 @@ namespace Server_Repository
         /// <returns>A deserialized string</returns>
         public string ConvertByteArrayToData(byte[] serializedDataString)
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            MemoryStream ms = new MemoryStream();
+            try
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                MemoryStream ms = new MemoryStream();
 
-            // Deserialize the dataString and returns is to a string
-            ms.Write(serializedDataString, 0, serializedDataString.Length);         // Insert 'serializedDataString' into the memoryStream
-            ms.Seek(0, SeekOrigin.Begin);                                           // sets memoryStream start point to '0'
-            object obj = (object)bf.Deserialize(ms);                                // Deserialize the memoryStream
+                // Deserialize the dataString and returns is to a string
+                ms.Write(serializedDataString, 0, serializedDataString.Length);         // Insert 'serializedDataString' into the memoryStream
+                ms.Seek(0, SeekOrigin.Begin);                                           // sets memoryStream start point to '0'
+                object obj = (object)bf.Deserialize(ms);                                // Deserialize the memoryStream
 
-            return obj.ToString();                                                  // returns the Deserialized memoryStream as a string
+                return obj.ToString();                                                  // returns the Deserialized memoryStream as a string
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
         }
 
         #endregion

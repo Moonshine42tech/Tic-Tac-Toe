@@ -11,6 +11,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 using System.Net.Sockets;
 using System.Net;
+using System.Net.WebSockets;
 
 namespace TTT_Repository
 {
@@ -474,7 +475,14 @@ namespace TTT_Repository
             MemoryStream ms = new MemoryStream();
 
             // Make one big datastring
-            string dataString = (serverMethosCallNumber + "~" + DisplayName + "~" + hasGameEnded + "~" + isPlayer1Turn + "~" + gameboard);
+            string dataString = (serverMethosCallNumber + "~" + DisplayName + "~" + hasGameEnded + "~" + isPlayer1Turn + "~");
+
+            // Adds all gameboard values tu the 'dataString'
+            foreach (var field in gameboard)
+            {
+                dataString += field + "#";
+            }
+            dataString = dataString.Remove(dataString.Length - 1);
 
             // Serialize the dataString and returns is in form of a array 
             bf.Serialize(ms, dataString);
@@ -495,7 +503,14 @@ namespace TTT_Repository
             MemoryStream ms = new MemoryStream();
 
             // Make one big datastring
-            string dataString = (serverMethosCallNumber + "~" + hasGameEnded + "~" + isPlayer1Turn + "~" + gameboard);
+            string dataString = (serverMethosCallNumber + "~" + hasGameEnded + "~" + isPlayer1Turn + "~");
+
+            // Adds all gameboard values tu the 'dataString'
+            foreach (var field in gameboard)
+            {
+                dataString += field + "#";
+            }
+            dataString = dataString.Remove(dataString.Length - 1);
 
             // Serialize the dataString and returns is in form of a array 
             bf.Serialize(ms, dataString);
@@ -528,15 +543,23 @@ namespace TTT_Repository
         /// <returns>A deserialized string</returns>
         public object ConvertByteArrayToData(byte[] serializedDataString)
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            MemoryStream ms = new MemoryStream();
+            try
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                MemoryStream ms = new MemoryStream();
 
-            // Deserialize the dataString and returns is to a string
-            ms.Write(serializedDataString, 0, serializedDataString.Length);         // Insert 'serializedDataString' into the memoryStream
-            ms.Seek(0, SeekOrigin.Begin);                                           // sets memoryStream start point to '0'
-            object obj = (object)bf.Deserialize(ms);                                // Deserialize the memoryStream
+                // Deserialize the dataString and returns is to a string
+                ms.Write(serializedDataString, 0, serializedDataString.Length);         // Insert 'serializedDataString' into the memoryStream
+                ms.Seek(0, SeekOrigin.Begin);                                           // sets memoryStream start point to '0'
+                object obj = (object)bf.Deserialize(ms);                                // Deserialize the memoryStream
 
-            return obj;                                                  // returns the Deserialized memoryStream as a string
+                return obj;                                                              // returns the Deserialized memoryStream as a string
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
         }
 
         #endregion 
@@ -574,7 +597,7 @@ namespace TTT_Repository
             try
             {
                 // Send a data in form of a byte[] array
-                master.Send(Encoding.ASCII.GetBytes(SeriliesedDataString.ToString()));
+                master.Send(SeriliesedDataString);
             }
             catch (Exception e)
             {

@@ -171,10 +171,11 @@ namespace Tic_Tac_Toe
 
 
                 // Serilize all necessary data to byte[] 
-                byte[] serilizedDataString_ToServer = gameLogic.ConvertDataToByteArray(0, mpGame.DisplayName = PlayerDisplayName_textbox.Text, mpGame.HasGameEnded, mpGame.IsPlayer1Turn, mpGame.GameboardFildsArray); 
+                // '1' = index of a server method;
+                byte[] serilizedDataString_ToServer = gameLogic.ConvertDataToByteArray(1, mpGame.DisplayName = PlayerDisplayName_textbox.Text, mpGame.HasGameEnded, mpGame.IsPlayer1Turn, mpGame.GameboardFildsArray);
 
 
-                // Send Data to the server
+                //// Send Data to the server
                 gameLogic.SendDataToServer(mpGame.ClientSocket, serilizedDataString_ToServer);
 
 

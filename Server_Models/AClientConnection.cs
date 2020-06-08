@@ -16,7 +16,7 @@ namespace Server_Models
         public bool InGameStatus { get; set; }                      // true = in-Game | false = Free to play
         public bool IsPlayer1Turn { get; set; }                     // used for knowing whos tyrn is is
 
-        public GameSymbolTypes[] GameboardFildsList { get; set; } = new GameSymbolTypes[9];   // gameboard
+        public GameSymbolTypes[] GameboardFildsArray { get; set; } = new GameSymbolTypes[9];   // gameboard
 
         public Socket ClientSocket { get; set; }                    // My connection 
 

@@ -39,7 +39,7 @@
                         Margin="10, 5">
 
                 <Label Content="listen on Ip Address:"/>
-                <TextBox x:Name="ListenOnIPAddress" TextChanged="ListenOnIPAddress_TextChanged"></TextBox>
+                <TextBox x:Name="ListenOnIPAddress"></TextBox>
             </StackPanel>
 
             <!--Port Number-->
@@ -47,7 +47,7 @@
                         Margin="10, 5">
 
                 <Label Content="listen on Port Number:"/>
-                <TextBox x:Name="ListenOnPortNumber" TextChanged="ListenOnPortNumber_TextChanged"></TextBox>
+                <TextBox x:Name="ListenOnPortNumber"></TextBox>
             </StackPanel>
 
             <!--Current Status-->

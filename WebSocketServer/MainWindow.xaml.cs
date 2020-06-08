@@ -87,6 +87,12 @@ namespace WebSocketServer
 
             try
             {
+                // Sets the given Ip address to lisenOn.IpAddress
+                lisenOn.IpAddress = ListenOnIPAddress.Text;
+
+                // Sets the given port number to lisenOn.PortNumber
+                lisenOn.PortNumber = Convert.ToInt32(ListenOnPortNumber.Text);
+
                 //Displays a list of all clients
                 if (serverLogic.AllClients != null)
                 {
@@ -126,34 +132,6 @@ namespace WebSocketServer
         }
 
         #endregion
-
-
-        #region SERVER SETTINGS
-
-        /// <summary>
-        /// Sets the given port number to lisenOn.PortNumber
-        /// </summary>
-        /// <param name="sender">Textbox fild value</param>
-        /// <param name="e"></param>
-        private void ListenOnPortNumber_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            // Sets the given port number to lisenOn.PortNumber
-            lisenOn.PortNumber = Convert.ToInt32(ListenOnPortNumber.Text);
-        }
-
-
-        /// <summary>
-        /// Sets the given Ip address to lisenOn.IpAddress
-        /// </summary>
-        /// <param name="sender">Textbox fild value</param>
-        /// <param name="e"></param>
-        private void ListenOnIPAddress_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            // Sets the given Ip address to lisenOn.IpAddress
-            lisenOn.IpAddress = ListenOnIPAddress.Text;
-        }
-
-        #endregion 
 
     }
 }
